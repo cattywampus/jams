@@ -6,3 +6,5 @@
   <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
 <% end %>
 <%= render "devise/shared/links" %>
+<%= link_to "Sign in with Google", user_omniauth_authorize_path(:open_id, :openid_url => "https://www.google.com/accounts/o8/id") %>
+<%= link_to "Sign in with MyOpenID", user_omniauth_authorize_path(:open_id, :openid_url => "https://kwalters.myopenid.com") %>
