@@ -1,0 +1,33 @@
+<h3>FIRST Programs</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @programs.each do |program| %>
+    <tr>
+      <td><%= image_tag program.logo_url(:thumb) %></td>
+      <td><%= program.name %></td>
+      <td><%= link_to "Show", program %></td>
+      <td><%= link_to "Edit", edit_program_path(program) %></td>
+      <td>
+        <%= link_to "Destroy", program, 
+                    confirm: "Are you sure?", 
+                    method: :delete %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "New Program", new_program_path %>

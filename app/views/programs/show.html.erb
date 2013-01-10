@@ -1,0 +1,9 @@
+<h3><%= @program.name %> (<%= @program.abbr %>)</h3>
+
+<%= image_tag @program.icon_url(:medium) %>
+<%= image_tag @program.logo_url(:medium) %>
+
+<br>
+
+<%= link_to "Back", programs_path %> |
+<%= link_to "Edit", edit_program_path(@program) %>

@@ -8,4 +8,5 @@ Jams::Application.routes.draw do
   #   match '/users/auth/:action/callback(.format)' => 'omniauth_callbacks#(?-mix:openid)', method: :post, as: :user_omniauth_callback
   # end
   resources :users
+  resources :programs
 end

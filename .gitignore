@@ -20,6 +20,9 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+# don't save carrierwave uploads
+/public/uploads
+
 # various artifacts
 **.war
 *.rbc
