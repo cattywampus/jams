@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110080438) do
+ActiveRecord::Schema.define(:version => 20130110085646) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "game_id"
+    t.string   "name"
+    t.string   "venue"
+    t.string   "street1"
+    t.string   "street2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.date     "begins_on"
+    t.date     "ends_on"
+    t.string   "logo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "events", ["game_id"], :name => "index_events_on_game_id"
 
   create_table "games", :force => true do |t|
     t.string   "name"

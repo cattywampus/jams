@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Game:</b>
+  <%= @event.game %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Logo:</b>
+  <%= image_tag @event.logo_url(:thumb) %>
+</p>
+
+<p>
+  <b>Venue:</b>
+  <%= @event.venue %>
+</p>
+
+<p>
+  <b>Street1:</b>
+  <%= @event.street1 %>
+</p>
+
+<p>
+  <b>Street2:</b>
+  <%= @event.street2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @event.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @event.state %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%= @event.zip %>
+</p>
+
+<p>
+  <b>Begins on:</b>
+  <%= @event.begins_on %>
+</p>
+
+<p>
+  <b>Ends on:</b>
+  <%= @event.ends_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

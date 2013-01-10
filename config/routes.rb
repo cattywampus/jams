@@ -1,4 +1,6 @@
 Jams::Application.routes.draw do
+  resources :events
+
   resources :games
 
   authenticated :user do
