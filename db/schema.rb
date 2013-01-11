@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110093225) do
+ActiveRecord::Schema.define(:version => 20130111044525) do
 
   create_table "events", :force => true do |t|
     t.integer  "game_id"
@@ -41,6 +41,25 @@ ActiveRecord::Schema.define(:version => 20130110093225) do
   end
 
   add_index "games", ["program_id"], :name => "index_games_on_program_id"
+
+  create_table "judges", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "event_id"
+    t.string   "status"
+    t.string   "role"
+    t.text     "biography"
+    t.boolean  "rookie"
+    t.boolean  "needs_shirt"
+    t.boolean  "completed_vims"
+    t.boolean  "provided_consent"
+    t.boolean  "provided_conflict"
+    t.boolean  "received_event_info"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "judges", ["event_id"], :name => "index_judges_on_event_id"
+  add_index "judges", ["person_id"], :name => "index_judges_on_person_id"
 
   create_table "people", :force => true do |t|
     t.string   "first_name"

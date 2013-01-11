@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= @judge.person %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @judge.event %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @judge.status %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%= @judge.role %>
+</p>
+
+<p>
+  <b>Biography:</b>
+  <%= @judge.biography %>
+</p>
+
+<p>
+  <b>Rookie:</b>
+  <%= @judge.rookie %>
+</p>
+
+<p>
+  <b>Needs shirt:</b>
+  <%= @judge.needs_shirt %>
+</p>
+
+<p>
+  <b>Completed vims:</b>
+  <%= @judge.completed_vims %>
+</p>
+
+<p>
+  <b>Provided consent:</b>
+  <%= @judge.provided_consent %>
+</p>
+
+<p>
+  <b>Provided conflict:</b>
+  <%= @judge.provided_conflict %>
+</p>
+
+<p>
+  <b>Received event info:</b>
+  <%= @judge.received_event_info %>
+</p>
+
+
+<%= link_to 'Edit', edit_judge_path(@judge) %> |
+<%= link_to 'Back', judges_path %>

@@ -1,0 +1,21 @@
+<%= simple_form_for(@judge, html: {class: "form-horizontal"}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :person, label_method: :full_name %>
+    <%= f.association :event %>
+    <%= f.input :status, as: :enum_select, input_html: {class: "input-medium"} %>
+    <%= f.input :role, as: :enum_select, input_html: {class: "input-small"} %>
+    <%= f.input :biography,  %>
+    <%= f.input :rookie %>
+    <%= f.input :needs_shirt %>
+    <%= f.input :completed_vims %>
+    <%= f.input :provided_consent %>
+    <%= f.input :provided_conflict %>
+    <%= f.input :received_event_info %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

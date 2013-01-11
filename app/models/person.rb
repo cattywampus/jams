@@ -16,6 +16,14 @@ class Person < ActiveRecord::Base
   validate :must_provide_full_name
   validates :email, presence: true, format: { with: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i }
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  
+  def to_s
+    full_name
+  end
+  
   private
 
   def must_provide_full_name
@@ -29,4 +37,5 @@ class Person < ActiveRecord::Base
 
     invalid
   end
+
 end

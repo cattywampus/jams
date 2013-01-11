@@ -1,4 +1,6 @@
 Jams::Application.routes.draw do
+  resources :judges
+
   resources :people
 
   resources :events
