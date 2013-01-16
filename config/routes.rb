@@ -3,7 +3,9 @@ Jams::Application.routes.draw do
 
   resources :people
 
-  resources :events
+  resources :events do
+    resources :judges
+  end
 
   resources :games
 

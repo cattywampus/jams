@@ -1,43 +1,24 @@
 <h1>Listing judges</h1>
 
-<table>
-  <tr>
-    <th>Person</th>
-    <th>Event</th>
-    <th>Status</th>
-    <th>Role</th>
-    <th>Biography</th>
-    <th>Rookie</th>
-    <th>Needs shirt</th>
-    <th>Completed vims</th>
-    <th>Provided consent</th>
-    <th>Provided conflict</th>
-    <th>Received event info</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h3>Invited</h3>
+<ul>
+  <% @judges.where({status: :invited}).each do |judge| %>
+  <li><%= judge.person.full_name %></li>
+  <% end %>
+</ul>
 
-<% @judges.each do |judge| %>
-  <tr>
-    <td><%= judge.person %></td>
-    <td><%= judge.event %></td>
-    <td><%= judge.status %></td>
-    <td><%= judge.role %></td>
-    <td><%= judge.biography %></td>
-    <td><%= judge.rookie %></td>
-    <td><%= judge.needs_shirt %></td>
-    <td><%= judge.completed_vims %></td>
-    <td><%= judge.provided_consent %></td>
-    <td><%= judge.provided_conflict %></td>
-    <td><%= judge.received_event_info %></td>
-    <td><%= link_to 'Show', judge %></td>
-    <td><%= link_to 'Edit', edit_judge_path(judge) %></td>
-    <td><%= link_to 'Destroy', judge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<h3>Confirmed</h3>
+<ol>
+  <% @judges.where({status: :confirmed}).each do |judge| %>
+  <li><%= judge.person.full_name %></li>
+  <% end %>
+</ol>
 
-<br />
+<h3>Declined</h3>
+<ul>
+  <% @judges.where({status: :declined}).each do |judge| %>
+  <li><%= judge.person.full_name %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'New Judge', new_judge_path %>

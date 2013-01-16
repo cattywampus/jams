@@ -2,7 +2,12 @@ class JudgesController < ApplicationController
   # GET /judges
   # GET /judges.json
   def index
-    @judges = Judge.all
+    if params[:event_id]
+      @event = Event.find params[:event_id]
+      @judges = @event.judges.joins(:person).order("first_name ASC, last_name ASC")
+    else
+      @judges = Judge.joins(:person).order("first_name ASC, last_name ASC")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +31,11 @@ class JudgesController < ApplicationController
   def new
     @judge = Judge.new
     @person = Person.new
+
+    if params[:event_id]
+      @event = Event.find params[:event_id]
+      @judge.event = @event
+    end
 
     respond_to do |format|
       format.html # new.html.erb

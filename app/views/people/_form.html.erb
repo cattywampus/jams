@@ -9,6 +9,7 @@
     <%= f.input :email %>
     <%= f.input :company %>
     <%= f.input :title %>
+    <%= f.association :assistant, label_method: :full_name %>
     <%= f.input :gender, as: :enum_select, input_html: {class: "input-small"} %>
     <%= f.input :shirt_size, as: :enum_select, input_html: {class: "input-small"} %>
   </div>

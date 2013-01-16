@@ -1,7 +1,17 @@
 class Person < ActiveRecord::Base
+  belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
+
   default_scope order("LOWER(first_name) ASC, LOWER(last_name) ASC")
 
-  attr_accessible :company, :email, :first_name, :gender, :last_name, :middle_name, :shirt_size, :title
+  attr_accessible :assistant_id, 
+                  :company, 
+                  :email, 
+                  :first_name, 
+                  :gender, 
+                  :last_name, 
+                  :middle_name, 
+                  :shirt_size, 
+                  :title
 
   enum_attr :gender, %w(male female)
   enum_attr :shirt_size, %w(s m l xl xxl xxxl) do 
