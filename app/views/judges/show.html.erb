@@ -32,7 +32,7 @@
 
 <p>
   <b>Needs shirt:</b>
-  <%= @judge.needs_shirt %>
+  <%= @judge.needs_shirt.nil? ? "Not indicated" : @judge.needs_shirt? %>
 </p>
 
 <p>
@@ -53,6 +53,11 @@
 <p>
   <b>Received event info:</b>
   <%= @judge.received_event_info %>
+</p>
+
+<p>
+  <b>Attending dinner:</b>
+  <%= @judge.attending_dinner.nil? ? "No RSVP" : @judge.attending_dinner? %>
 </p>
 
 

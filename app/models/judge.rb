@@ -2,7 +2,8 @@ class Judge < ActiveRecord::Base
   belongs_to :person
   belongs_to :event
 
-  attr_accessible :biography, 
+  attr_accessible :attending_dinner,
+                  :biography, 
                   :completed_vims, 
                   :event_id,
                   :needs_shirt, 
