@@ -10,7 +10,13 @@
 <h3>Confirmed</h3>
 <ol>
   <% @judges.where({status: :confirmed}).each do |judge| %>
-  <li><%= judge.person.full_name %></li>
+  <li>
+  	<%= judge.person.full_name %>
+  	<% if judge.received_event_info? %>
+	  	<i class="icon-envelope"></i>
+  	<% end %>
+  	<%= link_to "Edit", edit_event_judge_path(@event, judge), class: "btn btn-mini btn-info" %>
+  </li>
   <% end %>
 </ol>
 
