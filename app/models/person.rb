@@ -1,5 +1,7 @@
 class Person < ActiveRecord::Base
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
+  has_many :attendees
+  has_many :dinner_events, through: :attendees
 
   default_scope order("LOWER(first_name) ASC, LOWER(last_name) ASC")
 
