@@ -1,4 +1,6 @@
 Jams::Application.routes.draw do
+  resources :dinner_events
+
   resources :judges
 
   resources :people

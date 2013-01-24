@@ -1,0 +1,2 @@
+module DinnerEventsHelper
+end

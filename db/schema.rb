@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111060340) do
+ActiveRecord::Schema.define(:version => 20130124011553) do
+
+  create_table "dinner_events", :force => true do |t|
+    t.string   "venue"
+    t.string   "room"
+    t.string   "street1"
+    t.string   "street2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dinner_events", ["event_id"], :name => "index_dinner_events_on_event_id"
 
   create_table "events", :force => true do |t|
     t.integer  "game_id"

@@ -1,0 +1,20 @@
+<%= simple_form_for(@dinner_event) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :venue %>
+    <%= f.input :room %>
+    <%= f.input :street1 %>
+    <%= f.input :street2 %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :begins_at %>
+    <%= f.input :ends_at %>
+    <%= f.association :event %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

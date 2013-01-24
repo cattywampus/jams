@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Venue:</b>
+  <%= @dinner_event.venue %>
+</p>
+
+<p>
+  <b>Street1:</b>
+  <%= @dinner_event.street1 %>
+</p>
+
+<p>
+  <b>Street2:</b>
+  <%= @dinner_event.street2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @dinner_event.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @dinner_event.state %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%= @dinner_event.zip %>
+</p>
+
+<p>
+  <b>Begins at:</b>
+  <%= @dinner_event.begins_at %>
+</p>
+
+<p>
+  <b>Ends at:</b>
+  <%= @dinner_event.ends_at %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @dinner_event.event %>
+</p>
+
+
+<%= link_to 'Edit', edit_dinner_event_path(@dinner_event) %> |
+<%= link_to 'Back', dinner_events_path %>

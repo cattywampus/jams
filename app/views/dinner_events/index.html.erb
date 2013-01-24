@@ -1,0 +1,39 @@
+<h1>Listing dinner_events</h1>
+
+<table>
+  <tr>
+    <th>Venue</th>
+    <th>Street1</th>
+    <th>Street2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Begins at</th>
+    <th>Ends at</th>
+    <th>Event</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dinner_events.each do |dinner_event| %>
+  <tr>
+    <td><%= dinner_event.venue %></td>
+    <td><%= dinner_event.street1 %></td>
+    <td><%= dinner_event.street2 %></td>
+    <td><%= dinner_event.city %></td>
+    <td><%= dinner_event.state %></td>
+    <td><%= dinner_event.zip %></td>
+    <td><%= dinner_event.begins_at %></td>
+    <td><%= dinner_event.ends_at %></td>
+    <td><%= dinner_event.event %></td>
+    <td><%= link_to 'Show', dinner_event %></td>
+    <td><%= link_to 'Edit', edit_dinner_event_path(dinner_event) %></td>
+    <td><%= link_to 'Destroy', dinner_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dinner event', new_dinner_event_path %>
