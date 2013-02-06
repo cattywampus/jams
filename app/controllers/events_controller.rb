@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    @judges = @event.judges.joins(:person).order("first_name ASC, last_name ASC")
 
     respond_to do |format|
       format.html # show.html.erb

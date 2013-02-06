@@ -9,6 +9,16 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :game_id
 
+  def location
+    if city.present? && state.present?
+      "#{city}, #{state}"
+    elsif state.present?
+      state
+    elsif city.present?
+      city
+    end
+  end
+
   def to_s
     name
   end

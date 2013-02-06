@@ -1,15 +1,11 @@
 <h1>Listing people</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>First name</th>
-    <th>Middle name</th>
-    <th>Last name</th>
+    <th>Name</th>
     <th>Email</th>
     <th>Company</th>
     <th>Title</th>
-    <th>Gender</th>
-    <th>Shirt size</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,14 +13,10 @@
 
 <% @people.each do |person| %>
   <tr>
-    <td><%= person.first_name %></td>
-    <td><%= person.middle_name %></td>
-    <td><%= person.last_name %></td>
-    <td><%= person.email %></td>
+    <td><%= person.full_name %></td>
+    <td><%= mail_to person.email %></td>
     <td><%= person.company %></td>
     <td><%= person.title %></td>
-    <td><%= person.gender %></td>
-    <td><%= person.shirt_size %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
     <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>

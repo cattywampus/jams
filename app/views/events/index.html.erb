@@ -1,16 +1,11 @@
 <h1>Listing events</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Game</th>
     <th>Venue</th>
-    <th>Street1</th>
-    <th>Street2</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Zip</th>
-    <th>Begins on</th>
-    <th>Ends on</th>
+    <th>Location</th>
+    <th>Occurs</th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,13 +15,8 @@
   <tr>
     <td><%= event.game %></td>
     <td><%= event.venue %></td>
-    <td><%= event.street1 %></td>
-    <td><%= event.street2 %></td>
-    <td><%= event.city %></td>
-    <td><%= event.state %></td>
-    <td><%= event.zip %></td>
-    <td><%= event.begins_on %></td>
-    <td><%= event.ends_on %></td>
+    <td><%= event.location %></td>
+    <td><%= l event.begins_on, format: :short %> - <%= l event.ends_on, format: :short %></td>
     <td><%= link_to 'Show', event %></td>
     <td><%= link_to 'Edit', edit_event_path(event) %></td>
     <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

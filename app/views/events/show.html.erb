@@ -1,60 +1,81 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Game:</b>
-  <%= @event.game %>
-</p>
+<%= image_tag @event.game.logo_url(:medium), class: "pull-right" %>
+<h1><%= image_tag @event.logo_url(:thumb) %><%= @event.name %></h1>
 
 <p>
-  <b>Name:</b>
-  <%= @event.name %>
-</p>
-
-<p>
-  <b>Logo:</b>
-  <%= image_tag @event.logo_url(:thumb) %>
-</p>
-
-<p>
-  <b>Venue:</b>
-  <%= @event.venue %>
-</p>
-
-<p>
-  <b>Street1:</b>
-  <%= @event.street1 %>
-</p>
-
-<p>
-  <b>Street2:</b>
-  <%= @event.street2 %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @event.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @event.state %>
-</p>
-
-<p>
-  <b>Zip:</b>
-  <%= @event.zip %>
+  <address>
+    <%= @event.venue %><br>
+    <%= @event.street1 %><br>
+    <% if @event.street1.present? %>
+      <%= @event.street2 %><br>
+    <% end %>
+    <%= @event.location %>  
+  </address>
 </p>
 
 <p>
   <b>Begins on:</b>
-  <%= @event.begins_on %>
+  <%= l @event.begins_on, format: :long %>
 </p>
 
 <p>
   <b>Ends on:</b>
-  <%= @event.ends_on %>
+  <%= l @event.ends_on, format: :long %>
 </p>
 
+<ul class="nav nav-pills">
+  <li>
+    <%= link_to 'Edit', edit_event_path(@event) %>
+  </li>
+  <li>
+    <%= link_to 'Back', events_path %>
+  </li>
+</ul>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "Status", @event %>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="offset1 span3">
+
+    <h3>Confirmed</h3>
+    <ol>
+      <% @judges.where({status: :confirmed}).each do |judge| %>
+      <li>
+        <%= link_to judge.person.full_name, edit_event_judge_path(@event, judge) %>
+        <% if judge.received_event_info? %>
+          <i class="icon-envelope"></i>
+        <% end %>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="span3">
+    <h3>Invited</h3>
+    <ul>
+      <% @judges.where({status: :invited}).each do |judge| %>
+      <li><%= link_to judge.person.full_name, edit_event_judge_path(@event, judge) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="span3">
+    <h3>Declined</h3>
+    <ul>
+      <% @judges.where({status: :declined}).each do |judge| %>
+      <li><%= link_to judge.person.full_name, edit_event_judge_path(@event, judge) %></li>
+      <% end %>
+    </ul>
+
+    <h3>Withdrew</h3>
+    <ul>
+      <% @judges.where({status: :withdrew}).each do |judge| %>
+      <li><%= link_to judge.person.full_name, edit_event_judge_path(@event, judge) %></li>
+      <% end %>
+  </div>
+</div>
