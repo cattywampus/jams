@@ -1,0 +1,19 @@
+<h2>
+	<%= @event.name %> Judge Roster<br>
+	<small><%= l DateTime.now %></small>
+</h2>
+
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Title</th>
+		<th>Company</th>
+	</tr>
+	<% @judges.each do |judge| %>
+		<tr>
+			<td><%= judge.person.full_name %></td>
+			<td><%= judge.person.title %></td>
+			<td><%= judge.person.company %></td>
+		</tr>
+	<% end %>
+</table>

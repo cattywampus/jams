@@ -9,6 +9,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :game_id
 
+  def confirmed_judges
+    judges.joins(:person).where({:status => :confirmed}).order("last_name ASC, first_name ASC")
+  end
+
   def location
     if city.present? && state.present?
       "#{city}, #{state}"

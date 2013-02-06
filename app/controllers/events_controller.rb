@@ -81,4 +81,14 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def roster
+    @event = Event.find params[:event_id]
+    @judges = @event.confirmed_judges
+
+    respond_to do |format|
+      format.html
+      format.json { render json: [@event, @judges] }
+    end
+  end
 end

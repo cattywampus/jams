@@ -7,6 +7,7 @@ Jams::Application.routes.draw do
 
   resources :events do
     resources :judges
+    get :roster
   end
 
   resources :games
