@@ -20,6 +20,12 @@
   <%= @person.shirt_size %>
 </p>
 
+<% if @person.assistant.present? %>
+	<p>
+		<b>Assistant:</b>
+		<%= mail_to @person.assistant.email,  @person.assistant.full_name %>
+	</p>
+<% end %>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

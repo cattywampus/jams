@@ -18,3 +18,8 @@ body { padding-top: 60px; }
     background-color: $white;
 }
 
+@media print {
+    header {
+        display: none;
+    }
+}
