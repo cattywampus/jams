@@ -39,4 +39,5 @@ gem "simple_form", ">= 2.0.4"
 gem "figaro", ">= 0.5.0"
 gem "carrierwave"
 gem "rmagick"
+gem "select2-rails", :git => "https://github.com/argerim/select2-rails"
 gem "enumerated_attribute", :git => 'git://github.com/jeffp/enumerated_attribute.git'
