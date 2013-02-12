@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @event.game.logo_url(:medium), class: "pull-right" %>
+<%= link_to @event.game do %>
+  <%= image_tag @event.game.logo_url(:medium), border: "0", class: "pull-right" %>
+<% end %>
 <h1><%= image_tag @event.logo_url(:thumb) %><%= @event.name %></h1>
 
 <p>

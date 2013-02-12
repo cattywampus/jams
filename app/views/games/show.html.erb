@@ -1,25 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%= image_tag @game.program.logo_url(:medium), style: "float: right;" %>
 
-<p>
-  <b>Name:</b>
-  <%= @game.name %>
-</p>
+<%= image_tag @game.logo_url(:medium) %>
 
-<p>
-  <b>Season:</b>
-  <%= @game.season %>
-</p>
+<h1>
+	<%= "#{@game.name} (#{@game.season})" %><br>
+	<small><%= @game.active? ? "Active" : "Inactive" %></small>
+</h1>
 
-<p>
-  <b>Logo:</b>
-  <%= image_tag @game.logo_url(:medium) %>
-</p>
+<h3>
+	Events
+	<span class="pull-right">
+		<%= link_to "New Event", new_event_path(game_id: @game.id), class: "btn btn-primary" %>
+	</span>
+</h3>
 
-<p>
-  <b>Program:</b>
-  <%= @game.program %>
-</p>
-
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Venue</th>
+		<th>Location</th>
+		<th>Date</th>
+	</tr>
+	<% @game.events.each do |event| %>
+	<tr>
+		<td><%= link_to event.name, event %></td>
+		<td><%= event.venue %></td>
+		<td><%= event.location %></td>
+		<td><%= l event.begins_on, format: :short %> - <%= l event.ends_on, format: :short %></td>
+	</tr>
+	<% end %>
+</table>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

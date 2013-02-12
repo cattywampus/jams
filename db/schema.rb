@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124031557) do
+ActiveRecord::Schema.define(:version => 20130212194203) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "person_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130124031557) do
     t.integer  "program_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "active"
   end
 
   add_index "games", ["program_id"], :name => "index_games_on_program_id"

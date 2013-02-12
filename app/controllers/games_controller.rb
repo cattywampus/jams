@@ -2,7 +2,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @active_games = Game.active
+    @past_games = Game.inactive
 
     respond_to do |format|
       format.html # index.html.erb
