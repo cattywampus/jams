@@ -7,6 +7,11 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
       can :manage, :all
+    elsif user.has_role? :coordinator
+      can :manage, [Judge, Event]
+      can :read, Game
+    elsif user.persisted?
+      can :read, [Event, Game]
     end
     #   else
     #     can :read, :all
