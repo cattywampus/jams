@@ -17,6 +17,7 @@ class Person < ActiveRecord::Base
                   :middle_name, 
                   :phone_numbers_attributes,
                   :shirt_size, 
+                  :suffix,
                   :title
 
   enum_attr :gender, %w(male female)
@@ -37,10 +38,25 @@ class Person < ActiveRecord::Base
   validate :must_provide_full_name
   validates :email, presence: true, format: { with: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i }
 
-  def full_name
+  def self.suffixes 
+    [
+      "D.M.D.",
+      "D.O.",
+      "D.S.W.",
+      "Eng.D.",
+      "J.D.",
+      "LL.D.",
+      "M.D.",
+      "O.D.",
+      "Ph.D.",
+      "Pharm.D."
+    ]
+  end
+
+  def full_name(formal=false)
     "#{first_name} #{last_name}"
   end
-  
+
   def to_s
     full_name
   end

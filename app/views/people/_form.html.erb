@@ -3,9 +3,14 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :middle_name %>
-    <%= f.input :last_name %>
+    <%= f.input :name do %>
+      <div class="controls-row">
+        <%= f.text_field :first_name, class: "span2", placeholder: "First" %>
+        <%= f.text_field :middle_name, class: "span1", placeholder: "" %>
+        <%= f.text_field :last_name, class: "span2", placeholder: "Last" %>
+      </div>
+    <% end %>
+    <%= f.input :suffix, as: :select, collection: Person.suffixes, input_html: {class: "input-small"} %>
     <%= f.input :email %>
     <%= f.input :company %>
     <%= f.input :title %>
