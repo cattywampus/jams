@@ -16,6 +16,7 @@ class Person < ActiveRecord::Base
                   :last_name, 
                   :middle_name, 
                   :phone_numbers_attributes,
+                  :position,
                   :shirt_size, 
                   :suffix,
                   :title
@@ -53,8 +54,17 @@ class Person < ActiveRecord::Base
     ]
   end
 
+  def self.titles
+    [
+      "Mr.",
+      "Mrs.",
+      "Ms.",
+      "Sir"
+    ]
+  end
+
   def full_name(formal=false)
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}#{', ' + suffix if formal && suffix.present?}"
   end
 
   def to_s
