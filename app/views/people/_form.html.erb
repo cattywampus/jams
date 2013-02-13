@@ -1,7 +1,7 @@
 <%= simple_form_for(@person, 
                     html: {class: "form-horizontal"}) do |f| %>
   <%= f.error_notification %>
-  
+
   <div class="form-inputs">
     <%= f.input :first_name %>
     <%= f.input :middle_name %>
@@ -22,6 +22,19 @@
 
         <div class="links">
           <%= link_to_add_association 'add phone', f, :phone_numbers %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Addresses</legend>
+      <div id="addresses">
+        <%= f.simple_fields_for :addresses do |address| %>
+          <%= render "address_fields", :f => address %>
+        <% end %>
+
+        <div class="links">
+          <%= link_to_add_association 'add address', f, :addresses %>
         </div>
       </div>
     </fieldset>

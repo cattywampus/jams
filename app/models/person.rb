@@ -1,12 +1,14 @@
 class Person < ActiveRecord::Base
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
+  has_many :addresses
   has_many :phone_numbers
   has_many :attendees
   has_many :dinner_events, through: :attendees
 
   default_scope order("LOWER(first_name) ASC, LOWER(last_name) ASC")
 
-  attr_accessible :assistant_id, 
+  attr_accessible :addresses_attributes,
+                  :assistant_id, 
                   :company, 
                   :email, 
                   :first_name, 
@@ -27,6 +29,9 @@ class Person < ActiveRecord::Base
     label xxxl: '3XL'
   end
 
+  accepts_nested_attributes_for :addresses, 
+                                :reject_if => proc { |a| a["street1"].blank? && a["city"].blank? && a["state"].blank? && a["zip"].blank? },
+                                :allow_destroy => true
   accepts_nested_attributes_for :phone_numbers, :reject_if => :all_blank, :allow_destroy => true
 
   validate :must_provide_full_name
