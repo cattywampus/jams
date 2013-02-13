@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212194203) do
+ActiveRecord::Schema.define(:version => 20130213173059) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "person_id"
@@ -103,6 +103,17 @@ ActiveRecord::Schema.define(:version => 20130212194203) do
     t.datetime "updated_at",   :null => false
     t.integer  "assistant_id"
   end
+
+  create_table "phone_numbers", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "phone_type"
+    t.string   "phone_number"
+    t.boolean  "primary"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "phone_numbers", ["person_id"], :name => "index_phone_numbers_on_person_id"
 
   create_table "programs", :force => true do |t|
     t.string   "name"

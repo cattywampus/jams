@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
+  has_many :phone_numbers
   has_many :attendees
   has_many :dinner_events, through: :attendees
 
@@ -12,6 +13,7 @@ class Person < ActiveRecord::Base
                   :gender, 
                   :last_name, 
                   :middle_name, 
+                  :phone_numbers_attributes,
                   :shirt_size, 
                   :title
 
@@ -24,6 +26,8 @@ class Person < ActiveRecord::Base
     label xxl: '2XL'
     label xxxl: '3XL'
   end
+
+  accepts_nested_attributes_for :phone_numbers, :reject_if => :all_blank, :allow_destroy => true
 
   validate :must_provide_full_name
   validates :email, presence: true, format: { with: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i }

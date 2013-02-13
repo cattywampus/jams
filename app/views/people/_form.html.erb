@@ -1,7 +1,7 @@
 <%= simple_form_for(@person, 
                     html: {class: "form-horizontal"}) do |f| %>
   <%= f.error_notification %>
-
+  
   <div class="form-inputs">
     <%= f.input :first_name %>
     <%= f.input :middle_name %>
@@ -12,6 +12,19 @@
     <%= f.association :assistant, label_method: :full_name %>
     <%= f.input :gender, as: :enum_select, input_html: {class: "input-small"} %>
     <%= f.input :shirt_size, as: :enum_select, input_html: {class: "input-small"} %>
+
+    <fieldset>
+      <legend>Phone numbers</legend>
+      <div id="phone_numbers">
+        <%= f.simple_fields_for :phone_numbers do |phone| %>
+          <%= render "phone_number_fields", :f => phone %>
+        <% end %>
+
+        <div class="links">
+          <%= link_to_add_association 'add phone', f, :phone_numbers %>
+        </div>
+      </div>
+    </fieldset>
   </div>
 
   <div class="form-actions">

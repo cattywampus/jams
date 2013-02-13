@@ -31,6 +31,7 @@ end
 
 gem "bootstrap-sass", ">= 2.2.2.0"
 gem "capistrano"
+gem "cocoon"
 gem "devise", ">= 2.1.2"
 gem "devise_invitable", ">= 1.1.4"
 gem "omniauth-openid", ">= 1.0.1"

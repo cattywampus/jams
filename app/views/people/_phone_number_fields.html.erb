@@ -1,0 +1,18 @@
+<div class="nested-fields">
+	<div class="control-group <%= "error" if f.object.invalid? %>">
+		<div class="controls controls-row">
+			<%= f.select :phone_type, options_for_select(PhoneNumber.types, f.object.phone_type), {include_blank: "type"}, { class: "span2"} %>
+			<%= f.text_field :phone_number, class: "span2", value: number_to_phone(f.object.phone_number, area_code: true) %>
+			<%= f.label :primary, class: "checkbox span2" do %>
+				<%= f.check_box :primary %> Primary?
+				<%= link_to_remove_association f, {class: "btn btn-mini btn-danger"} do %>
+					<i class="icon-remove icon-white"></i>
+				<% end %>
+			<% end %>
+			<% if f.object.invalid? %>
+				<div class="clearfix"></div>
+				<span class="help-block"><%= f.object.errors.full_messages.join(", ") %></span>
+			<% end %>
+		</div>
+	</div>
+</div>
