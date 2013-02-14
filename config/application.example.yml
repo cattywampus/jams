@@ -11,3 +11,8 @@ ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: please
 ROLES: [admin, coordinator, recruiter, user]
+
+MAILER_INTERCEPTOR: kwalters@taphere.com
+MAILER_USERNAME: jams@cattywamp.us
+MAILER_PASSWORD: p@ssw0rd
+MAILER_SMTP_ADDRESS: mail.cattywamp.us
