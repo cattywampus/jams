@@ -12,13 +12,18 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
 
-  def self.from_omniauth(auth, attributes)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+  def self.from_omniauth(auth, token=nil)
+    if token.present?
+      user = User.accept_invitation!({
+        invitation_token: token,
+        name: (auth.info.name if auth.info.name.present?),
+        email: (auth.info.email if auth.info.email.present?)
+      })
       user.provider = auth.provider
       user.uid = auth.uid
-      user.name = attributes[:name]
-      user.email = attributes[:email]
+      user.save!
     end
+    user || where(auth.slice(:provider, :uid)).first
   end
 
   def self.new_with_session(params, session)

@@ -1,22 +1,18 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def all(auth, attributes={})
-    user = User.from_omniauth(auth, attributes)
-    if user.persisted?
+  def all
+    # raise request.env["omniauth.auth"].to_yaml
+    token = request.env["omniauth.params"]["invitation_token"]
+    user = User.from_omniauth(request.env["omniauth.auth"], token)
+
+    if user.present?
       flash.notice = "Signed in!"
       sign_in_and_redirect user
     else
-      session["devise.user_attributes"] = user.attributes
-      redirect_to new_user_registration_url
+      flash.alert = "Unable to sign in."
+      redirect_to root_path
     end
   end
 
-  def open_id
-    auth = env["omniauth.auth"]
-    attributes = {
-      :name => auth.info.name,
-      :email => auth.info.email
-    }
-    all(auth, attributes)
-  end
-
+  alias_method :google_oauth2, :all
+  alias_method :open_id, :all
 end
