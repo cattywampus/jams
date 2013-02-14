@@ -18,6 +18,11 @@ body { padding-top: 60px; }
     background-color: $white;
 }
 
+a:hover.zocial {
+  color: white;
+  text-decoration: none;
+}
+
 @media print {
     header {
         display: none;

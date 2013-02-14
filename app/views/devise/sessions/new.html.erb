@@ -1,11 +1,29 @@
 <h2>Sign in</h2>
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
-  <%= f.input :email, :autofocus => true %>
-  <%= f.input :password %>
-  <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
-<% end %>
-<%= render "devise/shared/links" %>
-<%= link_to "Sign in with Google", 
-            user_omniauth_authorize_path(:google_oauth2), 
-            class: "zocial google" %>
+
+<div class="row">
+  <div class="offset1 span4">
+    <%= link_to "Sign in with Google", 
+                user_omniauth_authorize_path(:google_oauth2), 
+                class: "zocial google" %><br>
+    <br>
+    <%= link_to "Sign in with Yahoo",
+                user_omniauth_authorize_path(:open_id, 
+                                             :openid_url => "http://me.yahoo.com"), 
+                class: "zocial yahoo" %>
+  </div>
+
+  <div class="span2">
+    <h2>...or...</h2>
+  </div>
+
+  <div class="span4">
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+      <%= f.input :email, :autofocus => true %>
+      <%= f.input :password %>
+      <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+      <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+
