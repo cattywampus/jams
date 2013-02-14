@@ -21,7 +21,7 @@
       <div class="container">
         <div class="content">
           <%= render 'layouts/messages' %>
-          <%= yield %>
+          <%= content_for?(:content) ? yield(:content) : yield %>
           <footer>
           </footer>
         </div>

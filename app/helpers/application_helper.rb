@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
@@ -10,6 +10,23 @@ module ApplicationHelper
     </div>
     HTML
     html.html_safe
+  end
+
+  def display_yes_no(value, nil_value=nil)
+    if nil_value.present?
+      if value.nil?
+        content = nil_value
+        emphasis = "text-error"
+      else
+        content = value ? "Yes" : "No"
+        emphasis = value ? "text-success" : ""
+      end
+    else
+      content = value ? "Yes" : "No"
+      emphasis = value ? "text-success" : "text-error"
+    end
+
+    content_tag :span, content, class: emphasis
   end
 
 end

@@ -1,63 +1,117 @@
-<p>
-  <b>Person:</b>
-  <%= @judge.person %>
-</p>
+<div class="row">
+  <div class="span6">
+    <h1>
+      <%= @judge.person.full_name(true) %><br>
+      <small><%= @judge.role %></small>
+    </h1>
 
-<p>
-  <b>Event:</b>
-  <%= @judge.event %>
-</p>
+    <ul class="nav nav-pills">
+      <li>
+        <%= link_to "<- Back", event_judges_path(@event) %>
+      </li>
+      <li>
+        <%= link_to "Edit", edit_event_judge_path(@event, @judge) %>
+      </li>
+    </ul>
 
-<p>
-  <b>Status:</b>
-  <%= @judge.status %>
-</p>
+    <dl class="dl-horizontal">
+      <dt>Status:</dt>
+      <dd>
+        <span class="<%= status_class(@judge.status) %>"><%= @judge.status %></span>
+      </dd>
 
-<p>
-  <b>Role:</b>
-  <%= @judge.role %>
-</p>
+      <% if @judge.rookie? %>
+        <dt>Rookie:</dt>
+        <dd><i class="icon-check"></i></dd>
+      <% end %>
 
-<p>
-  <b>Biography:</b>
-  <%= @judge.biography %>
-</p>
+      <dt>Received event info?</dt>
+      <dd>
+        <%= display_yes_no @judge.received_event_info? %>
+      </dd>
 
-<p>
-  <b>Rookie:</b>
-  <%= @judge.rookie %>
-</p>
+      <dt>Needs shirt?</dt>
+      <dd>
+        <%= display_yes_no @judge.needs_shirt?, "Not indicated" %>
+      </dd> 
 
-<p>
-  <b>Needs shirt:</b>
-  <%= @judge.needs_shirt.nil? ? "Not indicated" : @judge.needs_shirt? %>
-</p>
+      <dt>Completed VIMS?</dt>
+      <dd>
+        <%= display_yes_no @judge.completed_vims? %>
+      </dd>
 
-<p>
-  <b>Completed vims:</b>
-  <%= @judge.completed_vims %>
-</p>
+      <dt>Attending dinner?</dt>
+      <dd>
+        <%= display_yes_no @judge.attending_dinner?, "No RSVP" %>
+      </dd>
 
-<p>
-  <b>Provided consent:</b>
-  <%= @judge.provided_consent %>
-</p>
+      <dt>Provided consent?</dt>
+      <dd>
+        <%= display_yes_no @judge.provided_consent? %>
+      </dd>
 
-<p>
-  <b>Provided conflict:</b>
-  <%= @judge.provided_conflict %>
-</p>
+      <dt>Provided conflict?</dt>
+      <dd>
+        <%= display_yes_no @judge.provided_conflict? %>
+      </dd>
 
-<p>
-  <b>Received event info:</b>
-  <%= @judge.received_event_info %>
-</p>
+    </dl>
 
-<p>
-  <b>Attending dinner:</b>
-  <%= @judge.attending_dinner.nil? ? "No RSVP" : @judge.attending_dinner? %>
-</p>
+    <p>
+      <b>Biography:</b><br>
+      <span class="span6">
+        <%= @judge.biography.present? ? @judge.biography : content_tag(:em, "Not provided", class: "text-warning") %>
+      </span>
+    </p>
+  </div>
+
+  <div class="span6">
+
+    <div class="well">
+        <%= link_to edit_person_path(@judge.person), class: "btn btn-mini btn-info pull-right", id: "edit-profile" do %>
+          <i class="icon-pencil icon-white"></i> Edit
+        <% end %>
+      <div class="row">
+        <div class="span5">
+          <h4>
+            <%= @judge.person.company %>
+            <small><%= @judge.person.position %></small>
+          </h4>
+        </div>
+      </div>
+
+      <dl class="dl-horizontal">
+        <dt>Email: </dt>
+        <dd><%= mail_to @judge.person.email %></dd>
+
+        <% if @judge.person.assistant.present? %>
+          <dt>Assistant: </dt>
+          <dd><%= mail_to @judge.person.assistant.email, @judge.person.assistant.full_name %></dd>
+        <% end %>
+
+        <%= "<br>".html_safe if @judge.person.phone_numbers.present? %>
+
+        <% @judge.person.phone_numbers.each do |phone| %>
+          <dt><%= phone.phone_type %></dt>
+          <dd><%= number_to_phone phone.phone_number, area_code: true %></dd>
+        <% end %>
+
+        <%= "<br>".html_safe if @judge.person.addresses.present? %>
+
+        <% @judge.person.addresses.each do |address| %>
+          <dt><%= address.address_type %></dt>
+          <dd>
+            <address>
+              <%= address.street1 %><br>
+              <%= "#{address.street2}<br>".html_safe if address.street2.present? %>
+              <%= "#{address.city}, #{address.state} #{address.zip}" %>
+            </address>
+          </dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+
+</div>
 
 
-<%= link_to 'Edit', edit_judge_path(@judge) %> |
-<%= link_to 'Back', judges_path %>

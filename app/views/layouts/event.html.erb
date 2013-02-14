@@ -1,0 +1,56 @@
+<% content_for :content do %>
+
+<p id="notice"><%= notice %></p>
+
+<%= link_to @event.game do %>
+  <%= image_tag @event.game.logo_url(:medium), border: "0", class: "pull-right" %>
+<% end %>
+<h1><%= image_tag @event.logo_url(:thumb) %><%= @event.name %></h1>
+
+<p>
+  <address>
+    <%= @event.venue %><br>
+    <%= @event.street1 %><br>
+    <% if @event.street1.present? %>
+      <%= @event.street2 %><br>
+    <% end %>
+    <%= @event.location %>  
+  </address>
+</p>
+
+<p>
+  <b>Begins on:</b>
+  <%= l @event.begins_on, format: :long %>
+</p>
+
+<p>
+  <b>Ends on:</b>
+  <%= l @event.ends_on, format: :long %>
+</p>
+
+<ul class="nav nav-pills">
+  <li>
+    <%= link_to 'Edit', edit_event_path(@event) %>
+  </li>
+  <li>
+    <%= link_to 'Back', events_path %>
+  </li>
+</ul>
+
+<ul class="nav nav-tabs">
+  <li class="<%= active_tab? 'events' %>">
+    <%= link_to "Status", @event %>
+  </li>
+  <li class="<%= active_tab? 'judges' %>">
+    <%= link_to "Judges", event_judges_path(@event) %>
+  </li>
+  <li>
+    <%= link_to "Roster", event_roster_path(@event) %>
+  </li>
+</ul>
+
+<%= yield %>
+
+<% end %>
+
+<%= render file: "layouts/application" %>

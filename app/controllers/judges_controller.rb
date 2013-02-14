@@ -1,4 +1,5 @@
 class JudgesController < ApplicationController
+  layout "event"
   # GET /judges
   # GET /judges.json
   def index
@@ -19,9 +20,10 @@ class JudgesController < ApplicationController
   # GET /judges/1.json
   def show
     @judge = Judge.find(params[:id])
+    @event = @judge.event
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render layout: "event" }
       format.json { render json: @judge }
     end
   end
@@ -46,6 +48,7 @@ class JudgesController < ApplicationController
   # GET /judges/1/edit
   def edit
     @judge = Judge.find(params[:id])
+    @event = @judge.event
   end
 
   # POST /judges
@@ -68,10 +71,11 @@ class JudgesController < ApplicationController
   # PUT /judges/1.json
   def update
     @judge = Judge.find(params[:id])
+    @event = @judge.event
 
     respond_to do |format|
       if @judge.update_attributes(params[:judge])
-        format.html { redirect_to @judge, notice: 'Judge was successfully updated.' }
+        format.html { redirect_to [@event, @judge], notice: 'Judge was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

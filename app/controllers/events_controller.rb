@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     @judges = @event.judges.joins(:person).order("first_name ASC, last_name ASC")
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render layout: "event" }
       format.json { render json: @event }
     end
   end
