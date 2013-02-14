@@ -3,8 +3,9 @@ ActionMailer::Base.smtp_settings = {
   :port => 587,
   :user_name => ENV["MAILER_USERNAME"],
   :password => ENV["MAILER_PASSWORD"],
-  :authentication => 'plain',
-  :enable_starttls_auto => true
+  :authentication => :login,
+  :enable_starttls_auto => false,
+  :openssl_verify_mode => false
 }
 
 ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
