@@ -3,7 +3,9 @@ Jams::Application.routes.draw do
 
   resources :judges
 
-  resources :people
+  resources :people do 
+    resources :comments
+  end
 
   resources :events do
     resources :judges

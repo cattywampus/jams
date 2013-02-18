@@ -7,3 +7,8 @@ en:
       default: "%b %d, %Y"
       short: "%b %d"
       long: "%a, %B %d, %Y"
+
+  time:
+    formats:
+      default: '%a, %b %d %Y %H:%M %z'
+      time: '%I:%M %P'

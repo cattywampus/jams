@@ -1,0 +1,12 @@
+<p class="muted">
+  <%= comment.author.name %>
+  <em><%= l comment.updated_at %></em>
+  <%= link_to [comment.commentable, comment], method: :delete, confirm: "Are you sure?" do %>
+    <i class="icon-trash"></i>
+  <% end %>
+</p>
+
+<blockquote>
+  <%= simple_format comment.body %>
+</blockquote>
+<hr>

@@ -1,7 +1,7 @@
 <h1><%= @person.full_name(true) %></h1>
 
 <div class="row">
-  <div class="span8">
+  <div class="span7">
     <h3>
       <%= @person.company %><br>
       <small><%= @person.position %></small>
@@ -36,7 +36,7 @@
 
       </div>
 
-      <div class="span4">
+      <div class="span3">
         <dl>
         <% @person.addresses.each do |address| %>
           <dt><%= address.address_type %><dt>
@@ -92,6 +92,18 @@
       </tr>
       <% end %>
     </table>
+  </div>
+
+  <div class="span5">
+    <h3>Comments</h3>
+    <%= simple_form_for [@person, @comment] do |f| %>
+      <%= f.input :body, as: :text, label: false, input_html: {rows: 4, class: "span5"} %>
+      <div class="form-actions">
+        <%= f.submit "Add comment", class: "btn btn-info" %>
+      </div>
+    <% end %>
+
+    <%= render @person.comments %>
   </div>
 </div>
 
