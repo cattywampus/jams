@@ -39,7 +39,12 @@
       </tr>
       <% @event.judges_without_shirts(:female).order("first_name ASC, last_name ASC").each do |judge| %>
       <tr>
-        <td><%= judge.person.full_name %></td>
+        <td>
+          <%= link_to judge.person.full_name, [@event, judge] %>
+          <% if judge.needs_shirt.nil? %>
+            <span class="text-error">*</span>
+          <% end %>
+        </td>
         <td><%= judge.person.shirt_size_label %></td>
       </tr>
       <% end %>
