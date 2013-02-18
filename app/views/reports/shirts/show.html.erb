@@ -1,0 +1,43 @@
+
+<div class="row">
+  <div class="span6">
+
+    <div class="graph">
+      <h3>Men's shirts</h3>
+      <div id="mens-shirts-graph" data-shirts="<%= @event.shirts_needed(:male).to_json %>"></div>
+    </div>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Size needed</th>
+      </tr>
+      <% @event.judges_without_shirts(:male).each do |judge| %>
+      <tr>
+        <td><%= judge.person.full_name %></td>
+        <td><%= judge.person.shirt_size_label %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="span6">
+    <div class="graph">
+      <h3>Women's shirts</h3>
+      <div id="womens-shirts-graph" data-shirts="<%= @event.shirts_needed(:female).to_json %>"></div>
+    </div>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Size needed</th>
+      </tr>
+      <% @event.judges_without_shirts(:female).each do |judge| %>
+      <tr>
+        <td><%= judge.person.full_name %></td>
+        <td><%= judge.person.shirt_size_label %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

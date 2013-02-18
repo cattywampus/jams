@@ -13,6 +13,10 @@ class Event < ActiveRecord::Base
     judges.joins(:person).where({:status => :confirmed}).order("last_name ASC, first_name ASC")
   end
 
+  def judges_without_shirts(gender)
+    judges.joins(:person).where({needs_shirt: true, people: {gender: gender}})
+  end
+
   def location
     if city.present? && state.present?
       "#{city}, #{state}"
@@ -21,6 +25,18 @@ class Event < ActiveRecord::Base
     elsif city.present?
       city
     end
+  end
+
+  def shirts_needed(gender)
+    shirtless = judges_without_shirts(gender).group(:shirt_size).count
+    sizes = Person.new.enums(:shirt_size).hash
+    sorted = ActiveSupport::OrderedHash.new
+    sizes.each do |key, label|
+      sorted[label] = shirtless[key.to_s]
+      shirtless.delete(key.to_s)
+    end
+
+    sorted.merge(shirtless).map { |k,v| {size: k.nil? ? "Unknown" : k, count: v} }
   end
 
   def to_s

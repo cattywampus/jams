@@ -10,6 +10,8 @@ Jams::Application.routes.draw do
   resources :events do
     resources :judges
     get :roster
+
+    resource :shirts, only: [:show], controller: "reports/shirts"
   end
 
   resources :games

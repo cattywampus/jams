@@ -47,6 +47,9 @@
   <li>
     <%= link_to "Roster", event_roster_path(@event) %>
   </li>
+  <li class="<%= active_tab? 'shirts' %>">
+    <%= link_to "Shirts", event_shirts_path(@event) %>
+  </li>
 </ul>
 
 <%= yield %>

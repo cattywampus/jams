@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require select2
 //= require cocoon
+//= require raphael
+//= require morris
 //= require_tree .
