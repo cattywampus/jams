@@ -1,5 +1,7 @@
 require 'bundler/capistrano'
 
+load 'config/recipes/rails.rb'
+
 set :address, "50.116.32.251"
 
 server "#{address}", :web, :app, :db, primary: true
