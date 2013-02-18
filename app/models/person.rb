@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
   has_many :addresses
   has_many :phone_numbers
+  has_many :judge_history, class_name: "Judge"
   has_many :attendees
   has_many :dinner_events, through: :attendees
 

@@ -1,31 +1,97 @@
 <h1><%= @person.full_name(true) %></h1>
-<h2>
-  <%= @person.company %><br>
-  <small><%= @person.position %></small>
-</h2>
 
+<div class="row">
+  <div class="span8">
+    <h3>
+      <%= @person.company %><br>
+      <small><%= @person.position %></small>
+    </h3>
 
-<p>
-  <b>Email:</b>
-  <%= mail_to @person.email %>
-</p>
+    <div class="row">
+      <div class="span4">
+        <p>
+          <b>Email:</b>
+          <%= mail_to @person.email %>
+        </p>
 
-<p>
-  <b>Gender:</b>
-  <%= @person.gender %>
-</p>
+        <p>
+          <% @person.phone_numbers.each do |phone| %>
+          <strong><%= phone.phone_type %>:</strong>
+          <%= number_to_phone phone.phone_number, area_code: true %><br>
+          <% end %>
+        </p>
 
-<p>
-  <b>Shirt size:</b>
-  <%= @person.shirt_size %>
-</p>
+        <p>
+          <b>Gender:</b>
+          <%= @person.gender %>
+        </p>
 
-<% if @person.assistant.present? %>
-	<p>
-		<b>Assistant:</b>
-		<%= mail_to @person.assistant.email,  @person.assistant.full_name %>
-	</p>
-<% end %>
+        <p>
+          <b>Shirt size:</b>
+          <%= @person.shirt_size %>
+        </p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+        <%= link_to 'Edit', edit_person_path(@person) %> |
+        <%= link_to 'Back', people_path %>
+
+      </div>
+
+      <div class="span4">
+        <dl>
+        <% @person.addresses.each do |address| %>
+          <dt><%= address.address_type %><dt>
+          <dd>
+            <address>
+              <%= address.street1 %><br>
+              <%= "#{address.street2}<br>".html_safe if address.street2.present? %>
+              <%= "#{address.city}, #{address.state} #{address.zip}" %>
+            </addres>
+          </dd>
+        <% end %>
+        </dl>
+      </div>
+    </div>
+
+    <% if @person.assistant.present? %>
+    	<p>
+    		<b>Assistant:</b>
+    		<%= mail_to @person.assistant.email,  @person.assistant.full_name %>
+    	</p>
+    <% end %>
+
+    <h3>Judging History</h3>
+    <table class="table table-striped">
+      <tr>
+        <th>Season</th>
+        <th>Event</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% @person.judge_history.each do |judge| %>
+      <tr>
+        <td><%= judge.event.game.season %></td>
+        <td><%= link_to judge.event, judge.event %></td>
+        <td><%= judge.status %></td>
+        <th>
+          <%= link_to [judge.event, judge], class: "btn btn-success btn-small" do %>
+            <i class="icon-user icon-white"></i> Show
+          <% end %>
+        <td>
+          <%= link_to edit_event_judge_path(judge.event, judge), 
+                      class: "btn btn-info btn-small" do %>
+          <i class="icon-pencil icon-white"></i> Edit
+          <% end %>
+        </td>
+        <td>
+          <%= link_to [judge.event, judge], class: "btn btn-danger btn-small", method: :delete, confirm: "Are you sure?" do %>
+            <i class="icon-trash icon-white"></i> Delete
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+

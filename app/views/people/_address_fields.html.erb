@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <div class="control-group <%= "error" if f.object.invalid? %>">
     <div class="address-label">
-      <%= f.select :address_type, options_for_select(Address.types), {include_blank: "type"}, {class: "input-small"} %>
+      <%= f.select :address_type, options_for_select(Address.types, f.object.address_type), {include_blank: "type"}, {class: "input-small"} %>
     </div>
     <div class="controls controls-row">
       <%= f.text_field :street1, placeholder: "Street", class: "span5" %>
