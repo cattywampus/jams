@@ -1,5 +1,7 @@
 class JudgesController < ApplicationController
+  before_filter :authenticate_user!
   layout "event"
+  
   # GET /judges
   # GET /judges.json
   def index

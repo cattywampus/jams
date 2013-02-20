@@ -1,4 +1,6 @@
 class DinnerEventsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /dinner_events
   # GET /dinner_events.json
   def index
