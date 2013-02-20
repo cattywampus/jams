@@ -1,0 +1,6 @@
+<% if @person.persisted? %>
+$("#judge_person_id").select2("data", {id: <%= @person.id %>, text: "<%= @person.full_name %>"});
+$("#new-person-modal").modal("hide");
+<% else %>
+
+<% end %>

@@ -21,7 +21,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @person }
+      format.json { render json: {id: @person.id, text: @person.full_name} }
     end
   end
 
@@ -46,10 +46,15 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(params[:person])
 
+    if params[:event_id].present?
+      @event = Event.find params[:event_id]
+    end
+
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render json: @person, status: :created, location: @person }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @person.errors, status: :unprocessable_entity }

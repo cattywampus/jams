@@ -2,7 +2,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :person, label_method: :full_name, input_html: {class: "input-large"} %>
+    <%= f.input :person do %>
+      <% people_data = @event.possible_judges.map { |p| {id: p.id, text: p.full_name}} %>
+      <%= f.hidden_field :person_id, 
+                         class: "input-large", 
+                         data: {
+                            people: people_data, 
+                            query: event_candidates_path(@event, format: :json),
+                            person: person_path(id: f.object.person_id || 0, format: :json) 
+                         } %>
+      <%= link_to "New Person", "#new-person-modal", class: "btn btn-small btn-info", data: {toggle: "modal"} %>
+    <% end %>
     <%= f.association :event, input_html: {class: "input-large"} %>
     <%= f.input :status, as: :enum_select, input_html: {class: "input-medium"} %>
     <%= f.input :role, as: :enum_select, input_html: {class: "input-small"} %>
@@ -17,6 +27,27 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<div id="new-person-modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>New Person</h3>
+  </div>
+
+  <%= simple_form_for Person.new, remote: true do |f| %>
+    <%= hidden_field_tag :event_id, @event.id %>
+    <div class="modal-body">
+      <%= f.error_notification %>
+      <%= render "people/form_fields", f: f %>
+    </div>  
+
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <%= f.submit "Create person", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
+</div>

@@ -94,4 +94,18 @@ class EventsController < ApplicationController
       format.json { render json: [@event, @judges] }
     end
   end
+
+  def candidates
+    @event = Event.find params[:id]
+    if params[:name].present?
+      @candidates = @event.possible_judges.where("lower(first_name) like ? or lower(last_name) like ?", 
+                    "%#{params[:name].downcase}%", "%#{params[:name].downcase}%")
+    else
+      @candidates = @event.possible_judges
+    end
+
+    respond_to do |format|
+      format.json { render json: @candidates.map { |c| {id: c.id, text: c.full_name} } }
+    end
+  end
 end

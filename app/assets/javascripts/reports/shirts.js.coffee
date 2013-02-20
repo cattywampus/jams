@@ -3,18 +3,20 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-    Morris.Bar({
-        element: "mens-shirts-graph",
-        data: $("#mens-shirts-graph").data("shirts"),
-        xkey: 'size',
-        ykeys: ['count'],
-        labels: ['Shirts']
-        })
+    if $("#mens-shirts-graph").length > 0
+        Morris.Bar({
+            element: "mens-shirts-graph",
+            data: $("#mens-shirts-graph").data("shirts"),
+            xkey: 'size',
+            ykeys: ['count'],
+            labels: ['Shirts']
+            })
 
-    Morris.Bar({
-        element: 'womens-shirts-graph',
-        data: $('#womens-shirts-graph').data('shirts'),
-        xkey: 'size',
-        ykeys: ['count'],
-        labels: ['Shirts']
-        })
+    if $("#womens-shirts-graph").length > 0
+        Morris.Bar({
+            element: 'womens-shirts-graph',
+            data: $('#womens-shirts-graph').data('shirts'),
+            xkey: 'size',
+            ykeys: ['count'],
+            labels: ['Shirts']
+            })

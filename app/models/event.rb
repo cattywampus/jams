@@ -11,6 +11,11 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :game_id
 
+  def possible_judges
+    judge_ids = judges.map { |j| j.person_id }
+    Person.where("id not in (?)", judge_ids)
+  end
+
   def confirmed_judges
     judges.joins(:person).where({:status => :confirmed}).order("last_name ASC, first_name ASC")
   end
@@ -28,6 +33,7 @@ class Event < ActiveRecord::Base
       city
     end
   end
+
 
   def shirts_needed(gender)
     shirtless = judges_without_shirts(gender).group(:shirt_size).count

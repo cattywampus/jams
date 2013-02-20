@@ -13,6 +13,7 @@ Jams::Application.routes.draw do
 
     resource :shirts, only: [:show], controller: "reports/shirts"
   end
+  get "/events/:id/candidates" => "events#candidates", as: "event_candidates"
 
   resources :games
 
