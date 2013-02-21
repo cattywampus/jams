@@ -11,6 +11,8 @@ class Ability
       can :manage, [Judge, People]
       can [:read, :update], Event
       can :read, Game
+    elsif user.has_role? :recruiter
+      can :read, [Event, Game, People, Judge]
     elsif user.persisted?
       can :read, [Event, Game]
     end
