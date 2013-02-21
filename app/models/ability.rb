@@ -8,11 +8,11 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :coordinator
-      can :manage, [Judge, People]
+      can :manage, [Judge, Person]
       can [:read, :update], Event
       can :read, Game
     elsif user.has_role? :recruiter
-      can :read, [Event, Game, People, Judge]
+      can :read, [Event, Game, Person, Judge]
     elsif user.persisted?
       can :read, [Event, Game]
     end
