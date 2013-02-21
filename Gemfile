@@ -25,7 +25,7 @@ group :development, :test do
   gem 'rb-inotify', :require => false
   gem 'rb-fchange', :require => false
   gem 'guard-rspec'
-  gem 'growl', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'growl', :require => false
 end
 
 group :test do
