@@ -6,7 +6,13 @@ FactoryGirl.define do
     email 'example@example.com'
     password 'please'
     password_confirmation 'please'
-    # required if the Devise Confirmable module is used
-    confirmed_at Time.now
+
+    factory :admin do
+      after(:create) { |u| u.add_role(:admin) }
+    end
+
+    factory :coordinator do
+      after(:create) { |u| u.add_role(:coordinator) }
+    end
   end
 end

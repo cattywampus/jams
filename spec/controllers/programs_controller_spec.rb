@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe ProgramsController do
-
+  login :admin
+  
   before (:each) do
     @program = FactoryGirl.create(:program)
   end
 
   describe "GET index" do
-    it "should be successful" do
+    it "should be successful for admins" do
       get 'index'
       response.should be_success
     end

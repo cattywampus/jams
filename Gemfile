@@ -21,7 +21,9 @@ end
 group :development, :test do
   gem "rspec-rails", ">= 2.11.4"
   gem "factory_girl_rails", ">= 4.1.0"
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false
+  gem 'rb-inotify', :require => false
+  gem 'rb-fchange', :require => false
   gem 'guard-rspec'
   gem 'growl', :require => false if RUBY_PLATFORM =~ /darwin/i
 end

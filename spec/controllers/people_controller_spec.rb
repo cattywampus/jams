@@ -19,7 +19,8 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe PeopleController do
-
+  login :admin
+  
   # This should return the minimal set of attributes required to create a valid
   # Person. As you add validations to Person, be sure to
   # update the return value of this method accordingly.
@@ -31,17 +32,10 @@ describe PeopleController do
     FactoryGirl.attributes_for(:invalid_person)
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # PeopleController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all people as @people" do
       person = Person.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:people).should eq([person])
     end
   end
@@ -49,14 +43,14 @@ describe PeopleController do
   describe "GET show" do
     it "assigns the requested person as @person" do
       person = Person.create! valid_attributes
-      get :show, {:id => person.to_param}, valid_session
+      get :show, {:id => person.to_param}
       assigns(:person).should eq(person)
     end
   end
 
   describe "GET new" do
     it "assigns a new person as @person" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:person).should be_a_new(Person)
     end
   end
@@ -64,7 +58,7 @@ describe PeopleController do
   describe "GET edit" do
     it "assigns the requested person as @person" do
       person = Person.create! valid_attributes
-      get :edit, {:id => person.to_param}, valid_session
+      get :edit, {:id => person.to_param}
       assigns(:person).should eq(person)
     end
   end
@@ -73,18 +67,18 @@ describe PeopleController do
     describe "with valid params" do
       it "creates a new Person" do
         expect {
-          post :create, {:person => valid_attributes}, valid_session
+          post :create, {:person => valid_attributes}
         }.to change(Person, :count).by(1)
       end
 
       it "assigns a newly created person as @person" do
-        post :create, {:person => valid_attributes}, valid_session
+        post :create, {:person => valid_attributes}
         assigns(:person).should be_a(Person)
         assigns(:person).should be_persisted
       end
 
       it "redirects to the created person" do
-        post :create, {:person => valid_attributes}, valid_session
+        post :create, {:person => valid_attributes}
         response.should redirect_to(Person.last)
       end
     end
@@ -93,14 +87,14 @@ describe PeopleController do
       it "assigns a newly created but unsaved person as @person" do
         # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
-        post :create, {:person => invalid_attributes}, valid_session
+        post :create, {:person => invalid_attributes}
         assigns(:person).should be_a_new(Person)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
-        post :create, {:person => invalid_attributes}, valid_session
+        post :create, {:person => invalid_attributes}
         response.should render_template("new")
       end
     end
@@ -115,18 +109,18 @@ describe PeopleController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Person.any_instance.should_receive(:update_attributes).with({ "first_name" => "MyString" })
-        put :update, {:id => person.to_param, :person => { "first_name" => "MyString" }}, valid_session
+        put :update, {:id => person.to_param, :person => { "first_name" => "MyString" }}
       end
 
       it "assigns the requested person as @person" do
         person = Person.create! valid_attributes
-        put :update, {:id => person.to_param, :person => valid_attributes}, valid_session
+        put :update, {:id => person.to_param, :person => valid_attributes}
         assigns(:person).should eq(person)
       end
 
       it "redirects to the person" do
         person = Person.create! valid_attributes
-        put :update, {:id => person.to_param, :person => valid_attributes}, valid_session
+        put :update, {:id => person.to_param, :person => valid_attributes}
         response.should redirect_to(person)
       end
     end
@@ -136,7 +130,7 @@ describe PeopleController do
         person = Person.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
-        put :update, {:id => person.to_param, :person => invalid_attributes}, valid_session
+        put :update, {:id => person.to_param, :person => invalid_attributes}
         assigns(:person).should eq(person)
       end
 
@@ -144,7 +138,7 @@ describe PeopleController do
         person = Person.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
-        put :update, {:id => person.to_param, :person => invalid_attributes}, valid_session
+        put :update, {:id => person.to_param, :person => invalid_attributes}
         response.should render_template("edit")
       end
     end
@@ -154,13 +148,13 @@ describe PeopleController do
     it "destroys the requested person" do
       person = Person.create! valid_attributes
       expect {
-        delete :destroy, {:id => person.to_param}, valid_session
+        delete :destroy, {:id => person.to_param}
       }.to change(Person, :count).by(-1)
     end
 
     it "redirects to the people list" do
       person = Person.create! valid_attributes
-      delete :destroy, {:id => person.to_param}, valid_session
+      delete :destroy, {:id => person.to_param}
       response.should redirect_to(people_url)
     end
   end

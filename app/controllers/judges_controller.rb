@@ -93,7 +93,7 @@ class JudgesController < ApplicationController
     @judge.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to event_judges_path(@judge.event) }
       format.json { head :no_content }
     end
   end
