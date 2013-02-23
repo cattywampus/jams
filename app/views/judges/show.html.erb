@@ -32,7 +32,7 @@
 
       <dt>Needs shirt?</dt>
       <dd>
-        <%= display_yes_no @judge.needs_shirt?, "Not indicated" %>
+        <%= display_yes_no @judge.needs_shirt, "Not indicated" %>
       </dd> 
 
       <dt>Completed VIMS?</dt>
@@ -42,7 +42,7 @@
 
       <dt>Attending dinner?</dt>
       <dd>
-        <%= display_yes_no @judge.attending_dinner?, "No RSVP" %>
+        <%= display_yes_no @judge.attending_dinner, "No RSVP" %>
       </dd>
 
       <dt>Provided consent?</dt>
