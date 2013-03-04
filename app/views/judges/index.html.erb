@@ -1,6 +1,18 @@
+<div class="pull-right">
+  <%= form_tag event_judges_path(@event), method: :get, class: 'form-inline' do %>
+    <%= label_tag :status %>
+    <% e = Judge.new.enums(:status) %>
+    <%= select_tag :status, options_for_select(e.select_options, params[:status]), prompt: "All" %>
+    <%= submit_tag 'Filter', class: "btn" %>
+  <% end %>
+  Export: <%= link_to "CSV", event_judges_path(@event, params.merge(format: :csv)) %> | <%= link_to "Excel", event_judges_path(@event, params.merge(format: :xls)) %>
+</div>
+
 <h1>Listing judges</h1>
 
-<%= link_to 'New Judge', new_event_judge_path(@event) %>
+<%= link_to 'New Judge', new_event_judge_path(@event) %><br>
+
+<br>
 
 <table class="table">
   <tr>

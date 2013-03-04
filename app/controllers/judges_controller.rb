@@ -7,14 +7,22 @@ class JudgesController < ApplicationController
   def index
     if params[:event_id]
       @event = Event.find params[:event_id]
-      @judges = @event.judges.joins(:person).order("first_name ASC, last_name ASC")
+      @judges = @event.judges.joins(:person)
     else
-      @judges = Judge.joins(:person).order("first_name ASC, last_name ASC")
+      @judges = Judge.joins(:person)
     end
+
+    if params[:status].present?
+      @judges = @judges.where({status: params[:status]})
+    end
+
+    @judges = @judges.order("first_name ASC, last_name ASC")
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @judges }
+      format.csv { render text: @judges.to_csv }
+      format.xls 
     end
   end
 

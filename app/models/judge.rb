@@ -20,4 +20,21 @@ class Judge < ActiveRecord::Base
 
   validates_presence_of :person_id
   validates_presence_of :event_id
+
+  def self.to_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << ["#", "Name", "Position", "Organization", "Email", "Status"]
+      all.each_with_index do |judge, index|
+        csv << [
+          index + 1, 
+          judge.person.full_name(true), 
+          judge.person.position, 
+          judge.person.company, 
+          judge.person.email, 
+          judge.status
+        ]
+      end
+    end
+  end
+  
 end

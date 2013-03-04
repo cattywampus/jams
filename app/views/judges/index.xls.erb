@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Judges">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Position</Data></Cell>
+        <Cell><Data ss:Type="String">Organization</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+      </Row>
+    <% @judges.each_with_index do |judge, index| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= index+1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= judge.person.full_name(true) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= judge.person.position %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= judge.person.company %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= judge.person.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= judge.status %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
