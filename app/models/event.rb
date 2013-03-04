@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
   end
 
   def judges_without_shirts(gender)
-    judges.joins(:person).where({needs_shirt: [true, nil], people: {gender: gender}})
+    judges.joins(:person).where({needs_shirt: [true, nil], status: :confirmed, people: {gender: gender}})
   end
 
   def location
