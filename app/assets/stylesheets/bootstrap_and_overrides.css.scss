@@ -27,4 +27,13 @@ a:hover.zocial {
     header {
         display: none;
     }
+
+
+  .nav {
+    display: none;
+  }
+  
+  a:link:after, a:visited:after {
+      content: "";
+  }
 }

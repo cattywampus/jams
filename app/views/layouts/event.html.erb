@@ -9,27 +9,6 @@
   <%= image_tag @event.logo_url(:thumb) if @event.logo.present? %><%= @event.name %>
 </h1>
 
-<p>
-  <address>
-    <%= @event.venue %><br>
-    <%= @event.street1 %><br>
-    <% if @event.street1.present? %>
-      <%= @event.street2 %><br>
-    <% end %>
-    <%= @event.location %>  
-  </address>
-</p>
-
-<p>
-  <b>Begins on:</b>
-  <%= l @event.begins_on, format: :long %>
-</p>
-
-<p>
-  <b>Ends on:</b>
-  <%= l @event.ends_on, format: :long %>
-</p>
-
 <ul class="nav nav-pills">
   <li>
     <%= link_to 'Edit', edit_event_path(@event) %>
