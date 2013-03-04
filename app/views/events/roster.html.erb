@@ -13,7 +13,7 @@
 	<% @judges.each_with_index do |judge, index| %>
 		<tr>
 			<td><%= index+1 %>.</td>
-			<td><%= judge.person.full_name %></td>
+			<td><%= judge.person.full_name(true) %></td>
 			<td><%= judge.person.position %></td>
 			<td><%= judge.person.company %></td>
 		</tr>
