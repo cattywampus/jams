@@ -21,6 +21,10 @@ class Judge < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :event_id
 
+  scope :judges, where({role: :judge})
+  scope :advisors, where({role: :advisor})
+  scope :assistants, where({role: :assistant})
+
   def self.to_csv(options={})
     CSV.generate(options) do |csv|
       csv << ["#", "Name", "Position", "Organization", "Email", "Status"]

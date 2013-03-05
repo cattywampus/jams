@@ -17,11 +17,15 @@ class Event < ActiveRecord::Base
   end
 
   def confirmed_judges
-    judges.joins(:person).where({:status => :confirmed}).order("last_name ASC, first_name ASC")
+    judges.joins(:person).where({:status => :confirmed}).order("first_name ASC, last_name ASC")
   end
 
   def judges_without_shirts(gender)
-    judges.joins(:person).where({needs_shirt: [true, nil], status: :confirmed, people: {gender: gender}})
+    judges.joins(:person).where({
+      needs_shirt: [true, nil], 
+      status: :confirmed, 
+      role: [:advisor, :judge],
+      people: {gender: gender}})
   end
 
   def location

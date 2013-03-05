@@ -1,21 +1,52 @@
 <h2>
-	<%= @event.name %> Judge Roster<br>
-	<small><%= l DateTime.now %></small>
+  <%= @event.name %> Judge Roster<br>
+  <small><%= l DateTime.now %></small>
 </h2>
 
 <table class="table table-striped">
-	<tr>
-		<th></th>
-		<th>Name</th>
-		<th>Position</th>
-		<th>Company</th>
-	</tr>
-	<% @judges.each_with_index do |judge, index| %>
-		<tr>
-			<td><%= index+1 %>.</td>
-			<td><%= judge.person.full_name(true) %></td>
-			<td><%= judge.person.position %></td>
-			<td><%= judge.person.company %></td>
-		</tr>
-	<% end %>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Company</th>
+  </tr>
+  <tr>
+    <td class="role-title" colspan="4">
+      <%= "Judge Advisor".pluralize @judges.advisors.count %>
+    </td>
+  </tr>
+  <% @judges.advisors.each do |judge| %>
+  <tr>
+    <td></td>
+    <td><%= judge.person.full_name(true) %></td>
+    <td><%= judge.person.position %></td>
+    <td><%= judge.person.company %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td class="role-title" colspan="4">
+      <%= "Judge".pluralize @judges.advisors.count %>
+    </td>
+  </tr>
+  <% @judges.judges.each_with_index do |judge, index| %>
+  <tr>
+    <td><%= index+1 %>.</td>
+    <td><%= judge.person.full_name(true) %></td>
+    <td><%= judge.person.position %></td>
+    <td><%= judge.person.company %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td class="role-title" colspan="4">
+      <%= "Judge Assistants".pluralize @judges.advisors.count %>
+    </td>
+  </tr>
+  <% @judges.assistants.each do |judge| %>
+  <tr>
+    <td></td>
+    <td><%= judge.person.full_name(true) %></td>
+    <td><%= judge.person.position %></td>
+    <td><%= judge.person.company %></td>
+  </tr>
+  <% end %>
 </table>
