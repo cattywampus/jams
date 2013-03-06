@@ -25,6 +25,9 @@ class Judge < ActiveRecord::Base
   scope :advisors, where({role: :advisor})
   scope :assistants, where({role: :assistant})
 
+  delegate :email, to: :person
+  delegate :full_name, to: :person
+
   def self.to_csv(options={})
     CSV.generate(options) do |csv|
       csv << ["#", "Name", "Position", "Organization", "Email", "Status"]

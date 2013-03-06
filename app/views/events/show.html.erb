@@ -1,40 +1,18 @@
 <div class="row">
-  <div class="offset1 span3">
-
-    <h3>Confirmed</h3>
-    <ol>
-      <% @judges.where({status: :confirmed}).each do |judge| %>
-      <li>
-        <%= link_to judge.person.full_name, [@event, judge] %>
-        <% if judge.received_event_info? %>
-          <i class="icon-envelope"></i>
-        <% end %>
-      </li>
+  <div class="span4">
+      <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_rsvp], "Judge"} need to RSVP for dinner"} do |judge| %>
+        <%= judge.attending_dinner.nil? %>
       <% end %>
-    </ol>
-  </div>
 
-  <div class="span3">
-    <h3>Invited</h3>
-    <ul>
-      <% @judges.where({status: :invited}).each do |judge| %>
-      <li><%= link_to judge.person.full_name, [@event, judge] %></li>
+      <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_vims], "Judge"} are not in VIMS"} do |judge| %>
+        <%= !judge.completed_vims? %>
       <% end %>
-    </ul>
-  </div>
 
-  <div class="span3">
-    <h3>Declined</h3>
-    <ul>
-      <% @judges.where({status: :declined}).each do |judge| %>
-      <li><%= link_to judge.person.full_name, [@event, judge] %></li>
+      <%= render layout: "judge_accordion", 
+          locals: {title: "#{pluralize(@counts[:missing_bio], "Judge")} are missing biographies"} do |judge| %>
+        <%= judge.biography.blank? %>
       <% end %>
-    </ul>
+    </div>
 
-    <h3>Withdrew</h3>
-    <ul>
-      <% @judges.where({status: :withdrew}).each do |judge| %>
-      <li><%= link_to judge.person.full_name, [@event, judge] %></li>
-      <% end %>
   </div>
 </div>
