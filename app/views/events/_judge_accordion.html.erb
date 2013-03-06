@@ -1,13 +1,13 @@
 <div class="accordion-group">
   <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-notices" href="#missing-bio">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= parent %>" href="#<%= id %>">
       <%= title -%>
     </a>
   </div>
-  <div id="missing-bio" class="accordion-body collapse">
+  <div id="<%= id %>" class="accordion-body collapse">
     <div class="accordion-inner">
       <ul class="unstyled">
-        <% @judges.each do |judge| %>
+        <% judges.each do |judge| %>
           <% show_judge = yield(judge).to_s.strip == "true" %>
           <% if show_judge %>
             <li>
@@ -15,7 +15,7 @@
               <% mail_content = capture do %>
                 <i class="icon-envelope"></i>
               <% end %>
-              <%= mail_to judge.email, mail_content, subject: "[#{@event.game.season} #{@event.game.program.abbr} #{@event.state}] Judge Biography" %>
+              <%= mail_to judge.email, mail_content, subject: "[#{@event.game.season} #{@event.game.program.abbr} #{@event.state}] #{subject}" %>
             </li>
           <% end %>
         <% end %>

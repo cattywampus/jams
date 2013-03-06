@@ -1,18 +1,38 @@
 <div class="row">
   <div class="span4">
-      <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_rsvp], "Judge"} need to RSVP for dinner"} do |judge| %>
-        <%= judge.confirmed? && judge.attending_dinner.nil? %>
-      <% end %>
-
-      <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_vims], "Judge"} are not in VIMS"} do |judge| %>
-        <%= judge.confirmed? && !judge.completed_vims? %>
+    <div class="accordion" id="judge-notices">
+      <%= render layout: "judge_accordion", 
+              locals: {
+                title: "#{pluralize @counts[:missing_rsvp], "Judge"} need to RSVP for dinner",
+                judges: @judges.confirmed,
+                parent: "judge-notices",
+                id: "missing-rsvp",
+                subject: "Judges Dinner"
+              } do |judge| %>
+        <%= judge.attending_dinner.nil? %>
       <% end %>
 
       <%= render layout: "judge_accordion", 
-          locals: {title: "#{pluralize(@counts[:missing_bio], "Judge")} are missing biographies"} do |judge| %>
-        <%= judge.confirmed? && judge.biography.blank? %>
+              locals: {
+                title: "#{pluralize @counts[:missing_vims], "Judge"} are not in VIMS",
+                judges: @judges.confirmed,
+                parent: "judge-notices",
+                id: "incomplete-vims",
+                subject: "VIMS Registration"
+              } do |judge| %>
+        <%= !judge.completed_vims? %>
+      <% end %>
+
+      <%= render layout: "judge_accordion", 
+              locals: {
+                title: "#{pluralize(@counts[:missing_bio], "Judge")} are missing biographies",
+                judges: @judges.confirmed,
+                parent: "judge-notices",
+                id: "missing-bio",
+                subject: "Judge Biography"
+              } do |judge| %>
+        <%= judge.biography.blank? %>
       <% end %>
     </div>
-
   </div>
 </div>

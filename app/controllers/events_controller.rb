@@ -20,9 +20,9 @@ class EventsController < ApplicationController
     @judges = @event.judges.joins(:person).order("first_name ASC, last_name ASC")
 
     @counts = {}
-    @counts[:missing_vims] = @judges.where({completed_vims: [false, nil]}).count
-    @counts[:missing_rsvp] = @judges.where({attending_dinner: nil}).count
-    @counts[:missing_bio] = @judges.where({biography: [nil, ""]}).count
+    @counts[:missing_vims] = @judges.confirmed.where({completed_vims: [false, nil]}).count
+    @counts[:missing_rsvp] = @judges.confirmed.where({attending_dinner: nil}).count
+    @counts[:missing_bio] = @judges.confirmed.where({biography: [nil, ""]}).count
 
     respond_to do |format|
       format.html { render layout: "event" }
