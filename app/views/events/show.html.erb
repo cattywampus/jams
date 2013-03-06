@@ -5,7 +5,7 @@
       <% end %>
 
       <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_vims], "Judge"} are not in VIMS"} do |judge| %>
-        <%= judge.confirmed && !judge.completed_vims? %>
+        <%= judge.confirmed? && !judge.completed_vims? %>
       <% end %>
 
       <%= render layout: "judge_accordion", 
