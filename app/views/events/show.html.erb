@@ -1,16 +1,16 @@
 <div class="row">
   <div class="span4">
       <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_rsvp], "Judge"} need to RSVP for dinner"} do |judge| %>
-        <%= judge.attending_dinner.nil? %>
+        <%= judge.confirmed? && judge.attending_dinner.nil? %>
       <% end %>
 
       <%= render layout: "judge_accordion", locals: {title: "#{pluralize @counts[:missing_vims], "Judge"} are not in VIMS"} do |judge| %>
-        <%= !judge.completed_vims? %>
+        <%= judge.confirmed && !judge.completed_vims? %>
       <% end %>
 
       <%= render layout: "judge_accordion", 
           locals: {title: "#{pluralize(@counts[:missing_bio], "Judge")} are missing biographies"} do |judge| %>
-        <%= judge.biography.blank? %>
+        <%= judge.confirmed? && judge.biography.blank? %>
       <% end %>
     </div>
 
