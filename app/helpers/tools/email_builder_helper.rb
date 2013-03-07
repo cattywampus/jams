@@ -1,0 +1,2 @@
+module Tools::EmailBuilderHelper
+end

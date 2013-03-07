@@ -69,6 +69,10 @@ class Person < ActiveRecord::Base
     "#{first_name} #{last_name}#{', ' + suffix if formal && suffix.present?}"
   end
 
+  def primary_email
+    assistant.present? ? assistant.email : email
+  end
+
   def shirt_size_label
     enums(:shirt_size).label(shirt_size)
   end

@@ -12,6 +12,9 @@ Jams::Application.routes.draw do
     get :roster
 
     resource :shirts, only: [:show], controller: "reports/shirts"
+    scope module: "tools" do
+      resource :email_builder, only: [:show], controller: "email_builder"
+    end
   end
   get "/events/:id/candidates" => "events#candidates", as: "event_candidates"
 

@@ -1,0 +1,78 @@
+<h2>
+  Mass Email Builder
+  <% if @people.count > 0 %>
+    <small><%= pluralize @people.count, "person" %></small>
+  <% end %>
+</h2>
+<p class="lead">
+  Copy and paste these email addresses into the BCC field of your message.
+</p>
+
+<p>
+  Note: This will automatically substitute a person's email address for their 
+  assistant if they have one
+</p>
+
+<div class="row">
+  <div class="span12">
+    <% emails = @people.map(&:primary_email).join('; ') %>
+    <textarea rows="10" class="span12"><%= emails %></textarea>
+  </div>
+</div>
+
+
+  <% judge = Judge.new %>
+<%= form_tag event_email_builder_path(@event), method: :get do %>
+  <div class="row">
+    <div class="span3">
+      <h3>Status</h3>
+      <% e = judge.enums(:status) %>
+      <% e.select_options.each do |label, value| %>
+        <%= label_tag "status[#{value}]", class: "checkbox" do %>
+          <%= check_box_tag "status[#{value}]", value, params["status"][value] %> <%= label %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="span3">
+      <h3>Role</h3>
+      <% e = judge.enums(:role) %>
+      <% e.select_options.each do |label, value| %>
+        <%= label_tag "role[#{value}]", class: "checkbox" do %>
+          <%= check_box_tag "role[#{value}]", value, params["role"][value] %> <%= label %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="span3">
+      <h3>VIMS</h3>
+      <%= label_tag "vims_", class: "radio" do %>
+        <%= radio_button_tag :vims, nil, params[:vims].nil? %> Doesn't Matter
+      <% end %>
+      <%= label_tag "vims_true", class: "radio" do %>
+        <%= radio_button_tag :vims, true, params[:vims] == 'true' %> Complete
+      <% end %>
+      <%= label_tag "vims_false", class: "radio" do %>
+        <%= radio_button_tag :vims, false, params[:vims] == 'false' %> Incomplete
+      <% end %>
+    </div>
+
+    <div class="span3">
+      <h3>Judges Dinner</h3>
+      <% [["Doesn't Matter", "ignore"], ["No RSVP", "rsvp"], ["Attending", true], ["Declined", false]].each do |label, value| %>
+        <%= label_tag "attending_dinner_#{value}", class: "radio" do %>
+          <%= radio_button_tag :attending_dinner, value, params[:attending_dinner] == value.to_s %> <%= label %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="form-actions">
+        <%= submit_tag "Update", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

@@ -29,6 +29,14 @@
   <li class="<%= active_tab? 'shirts' %>">
     <%= link_to "Shirts", event_shirts_path(@event) %>
   </li>
+  <li class="dropdown <%= active_tab? 'tools' %>">
+    <%= link_to "#", class: "dropdown-toggle", data: {toggle: "dropdown"} do %>
+      Tools <b class="caret"></b>
+    <% end %>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Email Blast", event_email_builder_path(@event) %></li>
+    </uL>
+  </li>
 </ul>
 
 <%= yield %>
