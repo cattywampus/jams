@@ -30,7 +30,7 @@ private
   end
 
   def vims
-    if params[:vims] != 'true' && params[:vims] != false
+    if params[:vims] != 'true' && params[:vims] != 'false'
       params[:vims] = nil
     end
     params[:vims] || [true, false, nil]
