@@ -1,0 +1,28 @@
+
+<ul class="unstyled card-list">
+
+  <% @judges.each do |judge| %>
+    <li class="card-item">
+      <div class="card center">
+        <div class="filling">
+          <%= image_tag @event.game.program.icon_url(:thumb), class: "upside-down" %>
+          <h1 class="upside-down">
+            <%= judge.person.first_name %><br>
+            <%= judge.person.last_name %>
+          </h1>
+        </div>
+      </div>
+      <hr>
+      <div class="card">
+        <div class="filling">
+          <%= image_tag @event.logo, height: "50", class: "left-logo" %>
+          <%= image_tag @event.game.logo, height: "50", class: "right-logo" %>
+          <h2 class="name center">
+            <%= judge.person.full_name %><br>
+            <small><%= judge.person.company %></small>
+          </h2>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

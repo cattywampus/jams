@@ -1,0 +1,2 @@
+module Reports::DinnerNamecardsHelper
+end

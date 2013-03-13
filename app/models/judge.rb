@@ -21,6 +21,7 @@ class Judge < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :event_id
 
+  scope :attending_dinner, where({attending_dinner: true})
   scope :confirmed, where({status: :confirmed})
   scope :judges, where({role: :judge})
   scope :advisors, where({role: :advisor})
