@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
   end
 
   def confirmed_judges
-    judges.joins(:person).where({:status => :confirmed}).order("first_name ASC, last_name ASC")
+    judges.joins(:person).where({:status => :confirmed}).order("last_name ASC, first_name ASC")
   end
 
   def judges_without_shirts(gender)
