@@ -35,4 +35,31 @@
       <% end %>
     </div>
   </div>
+
+  <div class="span4">
+    <div class="accordion" id="event-notices">
+      <%= render layout: "judge_accordion",
+              locals: {
+                title: "#{pluralize @counts[:missing_consent], "Judge"} need to provide FIRST Consent",
+                judges: @judges.confirmed,
+                parent: "event-notices",
+                id: "missing-consent",
+                subject: "FIRST Consent Form"
+              } do |judge| %>
+        <%= !judge.provided_consent? %>
+      <% end %>
+
+      <%= render layout: "judge_accordion",
+              locals: {
+                title: "#{pluralize @counts[:missing_consent], "Judge"} need to provide team conflicts",
+                judges: @judges.confirmed,
+                parent: "event-notices",
+                id: "missing-conflict",
+                subject: "FIRST Conflict Form"
+              } do |judge| %>
+        <%= !judge.provided_conflict? %>
+      <% end %>
+    </div>
+  </div>
+
 </div>

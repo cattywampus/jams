@@ -23,6 +23,8 @@ class EventsController < ApplicationController
     @counts[:missing_vims] = @judges.confirmed.where({completed_vims: [false, nil]}).count
     @counts[:missing_rsvp] = @judges.confirmed.where({attending_dinner: nil}).count
     @counts[:missing_bio] = @judges.confirmed.where({biography: [nil, ""]}).count
+    @counts[:missing_conflict] = @judges.confirmed.where({provided_conflict: [false, nil]}).count
+    @counts[:missing_consent] = @judges.confirmed.where({provided_consent: [false, nil]}).count
 
     respond_to do |format|
       format.html { render layout: "event" }
