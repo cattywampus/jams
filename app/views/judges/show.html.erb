@@ -14,48 +14,60 @@
       </li>
     </ul>
 
-    <dl class="dl-horizontal">
-      <dt>Status:</dt>
-      <dd>
-        <span class="<%= status_class(@judge.status) %>"><%= @judge.status %></span>
-      </dd>
+    <div class="row">
+      <div class="span3">
 
-      <% if @judge.rookie? %>
-        <dt>Rookie:</dt>
-        <dd><i class="icon-check"></i></dd>
-      <% end %>
+        <dl class="dl-horizontal">
+          <dt>Status:</dt>
+          <dd>
+            <span class="<%= status_class(@judge.status) %>"><%= @judge.status %></span>
+          </dd>
 
-      <dt>Received event info?</dt>
-      <dd>
-        <%= display_yes_no @judge.received_event_info? %>
-      </dd>
+          <% if @judge.rookie? %>
+            <dt>Rookie:</dt>
+            <dd><i class="icon-check"></i></dd>
+          <% end %>
 
-      <dt>Needs shirt?</dt>
-      <dd>
-        <%= display_yes_no @judge.needs_shirt, "Not indicated" %>
-      </dd> 
+          <dt>Received event info?</dt>
+          <dd>
+            <%= display_yes_no @judge.received_event_info? %>
+          </dd>
 
-      <dt>Completed VIMS?</dt>
-      <dd>
-        <%= display_yes_no @judge.completed_vims? %>
-      </dd>
+          <dt>Needs shirt?</dt>
+          <dd>
+            <%= display_yes_no @judge.needs_shirt, "Not indicated" %>
+          </dd> 
 
-      <dt>Attending dinner?</dt>
-      <dd>
-        <%= display_yes_no @judge.attending_dinner, "No RSVP" %>
-      </dd>
+          <dt>Completed VIMS?</dt>
+          <dd>
+            <%= display_yes_no @judge.completed_vims? %>
+          </dd>
 
-      <dt>Provided consent?</dt>
-      <dd>
-        <%= display_yes_no @judge.provided_consent? %>
-      </dd>
+          <dt>Attending dinner?</dt>
+          <dd>
+            <%= display_yes_no @judge.attending_dinner, "No RSVP" %>
+          </dd>
 
-      <dt>Provided conflict?</dt>
-      <dd>
-        <%= display_yes_no @judge.provided_conflict? %>
-      </dd>
+          <dt>Provided consent?</dt>
+          <dd>
+            <%= display_yes_no @judge.provided_consent? %>
+          </dd>
 
-    </dl>
+          <dt>Provided conflict?</dt>
+          <dd>
+            <%= display_yes_no @judge.provided_conflict? %>
+          </dd>
+
+        </dl>
+      </div>
+
+      <div class="span3">
+        <h3>Actions</h3>
+        <%= link_to_unless @judge.biography_approved?, "Approve Bio", event_biography_approved_path(@event, @judge), class: "btn btn-info", method: :put do %>
+          
+        <% end %>
+      </div>
+    </div>
 
     <p>
       <b>Biography:</b><br>

@@ -26,6 +26,8 @@ class Judge < ActiveRecord::Base
   scope :judges, where({role: :judge})
   scope :advisors, where({role: :advisor})
   scope :assistants, where({role: :assistant})
+  scope :with_bio, where("biography IS NOT NULL AND biography NOT IN ('', ' ')")
+  scope :without_bio, where({biography: [nil, '', ' ']})
 
   delegate :email, to: :person
   delegate :full_name, to: :person

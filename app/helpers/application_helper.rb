@@ -29,4 +29,7 @@ module ApplicationHelper
     content_tag :span, content, class: emphasis
   end
 
+  def word_count(value)
+    value.scan(/[\w-]+/).size
+  end
 end

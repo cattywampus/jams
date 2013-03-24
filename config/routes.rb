@@ -13,6 +13,9 @@ Jams::Application.routes.draw do
 
     resource :shirts, only: [:show], controller: "reports/shirts"
     resource :name_cards, only: [:show], controller: "reports/dinner_namecards"
+    resources :biographies, controller: "reports/biographies" do
+      put :approved
+    end
     
     scope module: "tools" do
       resource :email_builder, only: [:show], controller: "email_builder"

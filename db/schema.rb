@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218034817) do
+ActiveRecord::Schema.define(:version => 20130324151618) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "person_id"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20130218034817) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.boolean  "attending_dinner"
+    t.boolean  "biography_approved"
   end
 
   add_index "judges", ["event_id"], :name => "index_judges_on_event_id"
