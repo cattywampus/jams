@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
   has_many :addresses
   has_many :phone_numbers
