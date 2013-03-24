@@ -12,7 +12,7 @@ Jams::Application.routes.draw do
     get :roster
 
     resource :shirts, only: [:show], controller: "reports/shirts"
-    resource :name_cards, only: [:show], controller: "reports/dinner_namecards"
+    resource :name_cards, only: [:show], controller: "reports/namecards"
     resources :biographies, controller: "reports/biographies" do
       put :approved
     end

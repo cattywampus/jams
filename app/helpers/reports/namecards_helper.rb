@@ -1,0 +1,2 @@
+module Reports::NamecardsHelper
+end
