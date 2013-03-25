@@ -10,4 +10,9 @@ class DinnerEvent < ActiveRecord::Base
 
   validates_presence_of :event_id
   validates_presence_of :venue
+
+  def missing_rsvp
+    attending_ids = attendees.map { |a| a.person_id }
+    event.judges.confirmed.where("person_id NOT IN (?)", attending_ids)
+  end
 end

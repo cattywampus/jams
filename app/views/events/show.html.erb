@@ -1,6 +1,7 @@
 <div class="row">
   <div class="span4">
     <div class="accordion" id="judge-notices">
+      <% if @event.dinner.present? %>
       <%= render layout: "judge_accordion", 
               locals: {
                 title: "#{pluralize @counts[:missing_rsvp], "Judge"} need to RSVP for dinner",
@@ -9,7 +10,8 @@
                 id: "missing-rsvp",
                 subject: "Judges Dinner"
               } do |judge| %>
-        <%= judge.attending_dinner.nil? %>
+        <%= judge.dinner_rsvp.nil? %>
+      <% end %>
       <% end %>
 
       <%= render layout: "judge_accordion", 
