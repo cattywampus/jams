@@ -22,7 +22,7 @@
   </tr>
   <% @judges.each do |judge| %>
   <tr>
-    <td><%= link_to judge.person.full_name, [@event, judge] %></td>
+    <td><%= link_to judge.person.full_name, event_judge_path(@event, judge, status: params[:status]) %></td>
     <td><%= mail_to judge.person.email %></td>
     <td><%= judge.status %></td>
   </tr>

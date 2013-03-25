@@ -7,7 +7,7 @@
 
     <ul class="nav nav-pills">
       <li>
-        <%= link_to "<- Back", event_judges_path(@event) %>
+        <%= link_to "<- Back", event_judges_path(@event, status: params[:status]) %>
       </li>
       <li>
         <%= link_to "Edit", edit_event_judge_path(@event, @judge) %>
