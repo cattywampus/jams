@@ -1,6 +1,4 @@
 Jams::Application.routes.draw do
-  resources :dinner_events
-
   resources :judges
 
   resources :people do 
@@ -11,6 +9,9 @@ Jams::Application.routes.draw do
     resources :judges
     get :roster
 
+    resource :dinner, controller: "dinner_events" do 
+      post :rsvp
+    end
     resource :shirts, only: [:show], controller: "reports/shirts"
     resource :name_cards, only: [:show], controller: "reports/namecards"
     resources :biographies, controller: "reports/biographies" do

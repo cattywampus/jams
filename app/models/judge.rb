@@ -34,6 +34,10 @@ class Judge < ActiveRecord::Base
   delegate :email, to: :person
   delegate :full_name, to: :person
 
+  def dinner_rsvp
+    event.dinner.attendees.find_by_person_id person_id
+  end
+
   def self.to_csv(options={})
     CSV.generate(options) do |csv|
       csv << ["#", "Name", "Position", "Organization", "Email", "Status"]

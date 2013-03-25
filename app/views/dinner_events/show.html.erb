@@ -1,50 +1,72 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h2>Judge's Dinner</h2>
+</div>
 
-<p>
-  <b>Venue:</b>
-  <%= @dinner_event.venue %>
-</p>
+<div class="row">
+  <div class="span4">
+    <p>
+      <address>
+        <h3><%= @dinner_event.venue %></h3>
+        <%= @dinner_event.street1 %><br>
+        <%= @dinner_event.street2 %><br>
+        <%= @dinner_event.city %>, <%= @dinner_event.state %> <%= @dinner_event.zip %>
+      </address>
+    </p>
 
-<p>
-  <b>Street1:</b>
-  <%= @dinner_event.street1 %>
-</p>
+    <p>
+      <b>Begins at:</b>
+      <%= l @dinner_event.begins_at %>
+    </p>
 
-<p>
-  <b>Street2:</b>
-  <%= @dinner_event.street2 %>
-</p>
+    <p>
+      <b>Ends at:</b>
+      <%= l @dinner_event.ends_at %>
+    </p>
 
-<p>
-  <b>City:</b>
-  <%= @dinner_event.city %>
-</p>
+    <dl>
+      <% @dinner_event.entrees.each do |entree| %>
+        <dt><%= entree.name %></dt>
+        <dd><%= entree.description %></dd>
+      <% end %>
+    </dl>
+  </div>
 
-<p>
-  <b>State:</b>
-  <%= @dinner_event.state %>
-</p>
+  <div class="span4">
+    <h3>
+      Guest List 
+      <small>(<%= @dinner_event.attendees.attending.size %>)</small>
+    </h3>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <% if @dinner_event.entrees.size > 0 %>
+          <th>Entree</th>
+        <% end %>
+      </tr>
+      <% @dinner_event.attendees.attending.each do |attendee| %>
+        <tr>
+          <td><%= attendee.person.full_name %></td>
+          <% if @dinner_event.entrees.size > 0 %>
+            <td><%= attendee.entree.protein %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
-<p>
-  <b>Zip:</b>
-  <%= @dinner_event.zip %>
-</p>
+  <div class="span3">
+    <h4>
+      Declined
+      <small>(<%= @dinner_event.attendees.declined.size %>)</small>
+    </h4>
 
-<p>
-  <b>Begins at:</b>
-  <%= @dinner_event.begins_at %>
-</p>
+    <ul class="unstyled">
+      <% @dinner_event.attendees.declined.each do |attendee| %>
+        <li><%= attendee.person.full_name %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<p>
-  <b>Ends at:</b>
-  <%= @dinner_event.ends_at %>
-</p>
-
-<p>
-  <b>Event:</b>
-  <%= @dinner_event.event %>
-</p>
-
-
-<%= link_to 'Edit', edit_dinner_event_path(@dinner_event) %> |
-<%= link_to 'Back', dinner_events_path %>
+<%= link_to 'Edit', edit_event_dinner_path(@event) %> |
+<%= link_to 'Back', event_dinner_path(@event) %>

@@ -1,4 +1,4 @@
-<%= simple_form_for(@dinner_event) do |f| %>
+<%= simple_form_for(@dinner_event, url: event_dinner_path(@event), html: {class: "form-horizontal"}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -11,7 +11,12 @@
     <%= f.input :zip %>
     <%= f.input :begins_at %>
     <%= f.input :ends_at %>
-    <%= f.association :event %>
+    <%= f.simple_fields_for :entrees do |entree| %>
+      <%= render 'entree_fields', :f => entree %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add entree', f, :entrees %>
+    </div>
   </div>
 
   <div class="form-actions">

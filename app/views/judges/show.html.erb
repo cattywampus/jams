@@ -45,7 +45,12 @@
 
           <dt>Attending dinner?</dt>
           <dd>
-            <%= display_yes_no @judge.attending_dinner, "No RSVP" %>
+            <% rsvp = @judge.dinner_rsvp %>
+            <% if rsvp.nil? %>
+              <span class="text-danger">No RSVP</span>
+            <% else %>
+              <%= display_yes_no rsvp.status == :attending %>
+            <% end %>
           </dd>
 
           <dt>Provided consent?</dt>
@@ -65,6 +70,10 @@
         <h3>Actions</h3>
         <%= link_to_unless @judge.biography_approved?, "Approve Bio", event_biography_approved_path(@event, @judge), class: "btn btn-info", method: :put do %>
           
+        <% end %>
+
+        <% if @judge.dinner_rsvp.nil? %>
+          <%= link_to "RSVP", "#judge_dinner_rsvp", class: "btn btn-info", data: {toggle: "modal"} %>
         <% end %>
       </div>
     </div>
@@ -127,3 +136,32 @@
 </div>
 
 
+<div id="judge_dinner_rsvp" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Judge's Dinner</h3>
+  </div>
+
+  <% dinner = @event.dinner %>
+  <%= simple_form_for Attendee.new, url: rsvp_event_dinner_url(@event), method: :post, html: {class: "form-horizontal"} do |f| %>
+    <%= hidden_field_tag :event_id, @event.id %>
+    <%= f.hidden_field :person_id, value: @judge.person_id %>
+    <%= f.hidden_field :dinner_event_id, value: dinner.id %>
+    <div class="modal-body">
+      <%= f.error_notification %>
+      <%= f.input :status, as: :enum_select, input_html: {class: "input-medium"} %>
+      <% if dinner.entrees.size > 0 %>
+        <fieldset>
+          <legend>Menu Choice</legend>
+          <%= f.input :entree_id, as: :radio_buttons, collection: dinner.entrees %>
+        </fieldset>
+      <% end %>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <%= submit_tag "Submit RSVP", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
+</div>
