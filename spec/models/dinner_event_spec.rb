@@ -6,12 +6,12 @@ describe DinnerEvent do
   end
 
   it "should require venue" do
-    no_venue = DinnerEvent.new valid_attributes.merge(venue: "")
+    no_venue = FactoryGirl.build :dinner_event, venue: ""
     no_venue.should_not be_valid
   end
 
   it "should require event_id" do
-    no_event = DinnerEvent.new valid_attributes.merge(event_id: nil)
+    no_event = FactoryGirl.build :dinner_event, event: nil
     no_event.should_not be_valid
   end
 end

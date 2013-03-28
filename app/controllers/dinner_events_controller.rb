@@ -98,12 +98,13 @@ class DinnerEventsController < ApplicationController
   # DELETE /dinner_events/1.json
   def destroy
     @dinner_event = @event.dinner
-    @dinner_event.destroy
 
     authorize! :destroy, @dinner_event
 
+    @dinner_event.destroy
+
     respond_to do |format|
-      format.html { redirect_to dinner_events_url }
+      format.html { redirect_to event_dinner_path(@event) }
       format.json { head :no_content }
     end
   end

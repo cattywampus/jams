@@ -20,6 +20,9 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  # Allow short hand for FactoryGirl methods
+  config.include FactoryGirl::Syntax::Methods
+
   config.extend ControllerMacros, :type => :controller
   config.extend RequestMacros, :type => :request
   

@@ -20,45 +20,27 @@ require 'spec_helper'
 
 describe DinnerEventsController do
   login :admin
-  
-  # This should return the minimal set of attributes required to create a valid
-  # DinnerEvent. As you add validations to DinnerEvent, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    FactoryGirl.attributes_for(:dinner_event).merge(event_id: FactoryGirl.create(:event).id)
-  end
 
-  def invalid_attributes
-    FactoryGirl.attributes_for(:invalid_dinner_event)
-  end
-
-  describe "GET index" do
-    it "assigns all dinner_events as @dinner_events" do
-      dinner_event = DinnerEvent.create! valid_attributes
-      get :index
-      assigns(:dinner_events).should eq([dinner_event])
-    end
-  end
+  let(:dinner_event) { FactoryGirl.create :dinner_event }
+  let(:event) { dinner_event.event }
 
   describe "GET show" do
     it "assigns the requested dinner_event as @dinner_event" do
-      dinner_event = DinnerEvent.create! valid_attributes
-      get :show, {:id => dinner_event.to_param}
+      get :show, {:event_id => event.to_param}
       assigns(:dinner_event).should eq(dinner_event)
     end
   end
 
   describe "GET new" do
     it "assigns a new dinner_event as @dinner_event" do
-      get :new, {}
+      get :new, {:event_id => event.to_param}
       assigns(:dinner_event).should be_a_new(DinnerEvent)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested dinner_event as @dinner_event" do
-      dinner_event = DinnerEvent.create! valid_attributes
-      get :edit, {:id => dinner_event.to_param}
+      get :edit, {:event_id => event.to_param}
       assigns(:dinner_event).should eq(dinner_event)
     end
   end
@@ -66,20 +48,31 @@ describe DinnerEventsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new DinnerEvent" do
+        event = create :event
         expect {
-          post :create, {:dinner_event => valid_attributes}
+          post :create, {
+            :event_id => event.to_param, 
+            :dinner_event => attributes_for(:dinner_event)
+          }
         }.to change(DinnerEvent, :count).by(1)
       end
 
       it "assigns a newly created dinner_event as @dinner_event" do
-        post :create, {:dinner_event => valid_attributes}
+        event = create :event
+        post :create, {
+          :event_id => event.to_param, 
+          :dinner_event => attributes_for(:dinner_event)
+        }
         assigns(:dinner_event).should be_a(DinnerEvent)
         assigns(:dinner_event).should be_persisted
       end
 
       it "redirects to the created dinner_event" do
-        post :create, {:dinner_event => valid_attributes}
-        response.should redirect_to(DinnerEvent.last)
+        post :create, {
+          :event_id => event.to_param, 
+          :dinner_event => attributes_for(:dinner_event)
+        }
+        response.should redirect_to(event_dinner_path(event))
       end
     end
 
@@ -87,14 +80,20 @@ describe DinnerEventsController do
       it "assigns a newly created but unsaved dinner_event as @dinner_event" do
         # Trigger the behavior that occurs when invalid params are submitted
         DinnerEvent.any_instance.stub(:save).and_return(false)
-        post :create, {:dinner_event => invalid_attributes}
+        post :create, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:invalid_dinner_event)
+        }
         assigns(:dinner_event).should be_a_new(DinnerEvent)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         DinnerEvent.any_instance.stub(:save).and_return(false)
-        post :create, {:dinner_event => invalid_attributes}
+        post :create, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:invalid_dinner_event)
+        }
         response.should render_template("new")
       end
     end
@@ -103,42 +102,52 @@ describe DinnerEventsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested dinner_event" do
-        dinner_event = DinnerEvent.create! valid_attributes
         # Assuming there are no other dinner_events in the database, this
         # specifies that the DinnerEvent created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         DinnerEvent.any_instance.should_receive(:update_attributes).with({ "venue" => "MyString" })
-        put :update, {:id => dinner_event.to_param, :dinner_event => { "venue" => "MyString" }}
+        put :update, {
+          :event_id => event.to_param,
+          :dinner_event => { "venue" => "MyString" }
+        }
       end
 
       it "assigns the requested dinner_event as @dinner_event" do
-        dinner_event = DinnerEvent.create! valid_attributes
-        put :update, {:id => dinner_event.to_param, :dinner_event => valid_attributes}
+        put :update, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:dinner_event)
+        }
         assigns(:dinner_event).should eq(dinner_event)
       end
 
       it "redirects to the dinner_event" do
-        dinner_event = DinnerEvent.create! valid_attributes
-        put :update, {:id => dinner_event.to_param, :dinner_event => valid_attributes}
-        response.should redirect_to(dinner_event)
+        put :update, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:dinner_event)
+        }
+        response.should redirect_to(event_dinner_path(event))
       end
     end
 
     describe "with invalid params" do
       it "assigns the dinner_event as @dinner_event" do
-        dinner_event = DinnerEvent.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         DinnerEvent.any_instance.stub(:save).and_return(false)
-        put :update, {:id => dinner_event.to_param, :dinner_event => invalid_attributes}
+        put :update, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:invalid_dinner_event)
+        }
         assigns(:dinner_event).should eq(dinner_event)
       end
 
       it "re-renders the 'edit' template" do
-        dinner_event = DinnerEvent.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         DinnerEvent.any_instance.stub(:save).and_return(false)
-        put :update, {:id => dinner_event.to_param, :dinner_event => invalid_attributes}
+        put :update, {
+          :event_id => event.to_param,
+          :dinner_event => attributes_for(:invalid_dinner_event)
+        }
         response.should render_template("edit")
       end
     end
@@ -146,16 +155,15 @@ describe DinnerEventsController do
 
   describe "DELETE destroy" do
     it "destroys the requested dinner_event" do
-      dinner_event = DinnerEvent.create! valid_attributes
+      dinner = create :dinner_event
       expect {
-        delete :destroy, {:id => dinner_event.to_param}
+        delete :destroy, {:event_id => dinner.event.to_param}
       }.to change(DinnerEvent, :count).by(-1)
     end
 
     it "redirects to the dinner_events list" do
-      dinner_event = DinnerEvent.create! valid_attributes
-      delete :destroy, {:id => dinner_event.to_param}
-      response.should redirect_to(dinner_events_url)
+      delete :destroy, {:id => dinner_event.to_param, :event_id => event.to_param}
+      response.should redirect_to(event_dinner_path(event))
     end
   end
 
