@@ -12,4 +12,9 @@ class Attendee < ActiveRecord::Base
 
   scope :attending, where({status: :attending})
   scope :declined, where({status: :declined})
+
+  delegate :full_name, to: :person
+  delegate :first_name, to: :person
+  delegate :last_name, to: :person
+  delegate :company, to: :person
 end

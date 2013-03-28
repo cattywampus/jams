@@ -33,6 +33,9 @@ class Judge < ActiveRecord::Base
 
   delegate :email, to: :person
   delegate :full_name, to: :person
+  delegate :first_name, to: :person
+  delegate :last_name, to: :person
+  delegate :company, to: :person
 
   def dinner_rsvp
     event.dinner.attendees.find_by_person_id person_id

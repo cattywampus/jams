@@ -47,7 +47,7 @@
         <tr>
           <td><%= attendee.person.full_name %></td>
           <% if @dinner_event.entrees.size > 0 %>
-            <td><%= attendee.entree.protein %></td>
+            <td><%= attendee.entree.protein if attendee.entree.present? %></td>
           <% end %>
         </tr>
       <% end %>
