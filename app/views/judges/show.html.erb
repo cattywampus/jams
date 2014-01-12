@@ -72,7 +72,9 @@
           
         <% end %>
 
-        <% if @judge.dinner_rsvp.nil? %>
+        <% if @event.dinner.nil? %>
+          <span>Cannot RSVP: Event does not have a dinner planned</span>
+        <% elsif @judge.dinner_rsvp.nil? %>
           <%= link_to "RSVP", "#judge_dinner_rsvp", class: "btn btn-info", data: {toggle: "modal"} %>
         <% end %>
       </div>
@@ -136,32 +138,34 @@
 </div>
 
 
-<div id="judge_dinner_rsvp" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Judge's Dinner</h3>
+<% dinner = @event.dinner %>
+<% if dinner.present? %>
+  <div id="judge_dinner_rsvp" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Judge's Dinner</h3>
+    </div>
+
+    <%= simple_form_for Attendee.new, url: rsvp_event_dinner_url(@event), method: :post, html: {class: "form-horizontal"} do |f| %>
+      <%= hidden_field_tag :event_id, @event.id %>
+      <%= f.hidden_field :person_id, value: @judge.person_id %>
+      <%= f.hidden_field :dinner_event_id, value: dinner.id %>
+      <div class="modal-body">
+        <%= f.error_notification %>
+        <%= f.input :status, as: :enum_select, input_html: {class: "input-medium"} %>
+        <% if dinner.entrees.size > 0 %>
+          <fieldset>
+            <legend>Menu Choice</legend>
+            <%= f.input :entree_id, as: :radio_buttons, collection: dinner.entrees %>
+          </fieldset>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <%= submit_tag "Submit RSVP", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    
   </div>
-
-  <% dinner = @event.dinner %>
-  <%= simple_form_for Attendee.new, url: rsvp_event_dinner_url(@event), method: :post, html: {class: "form-horizontal"} do |f| %>
-    <%= hidden_field_tag :event_id, @event.id %>
-    <%= f.hidden_field :person_id, value: @judge.person_id %>
-    <%= f.hidden_field :dinner_event_id, value: dinner.id %>
-    <div class="modal-body">
-      <%= f.error_notification %>
-      <%= f.input :status, as: :enum_select, input_html: {class: "input-medium"} %>
-      <% if dinner.entrees.size > 0 %>
-        <fieldset>
-          <legend>Menu Choice</legend>
-          <%= f.input :entree_id, as: :radio_buttons, collection: dinner.entrees %>
-        </fieldset>
-      <% end %>
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <%= submit_tag "Submit RSVP", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-  
-</div>
+<% end %>
