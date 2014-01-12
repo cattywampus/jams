@@ -3,9 +3,13 @@ upstream unicorn_<%= application %> {
 }
 
 server {
-  listen 80;
+  listen 443;
   server_name jams.cattywamp.us;
   root <%= current_path %>/public;
+
+  ssl on;
+  ssl_certificate /etc/nginx/ssl/jams.cattywamp.us/server.crt;
+  ssl_certificate_key /etc/nginx/ssl/jams.cattywamp.us/server.key.nopass;
 
   location ^~ /assets/ {
     gzip_static on;
