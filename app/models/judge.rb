@@ -38,7 +38,7 @@ class Judge < ActiveRecord::Base
   delegate :company, to: :person
 
   def dinner_rsvp
-    event.dinner.attendees.find_by_person_id person_id
+    event.dinner.attendees.find_by_person_id(person_id) if event.dinner.present?
   end
 
   def self.to_csv(options={})
