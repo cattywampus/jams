@@ -36,7 +36,7 @@ group :test do
   gem "email_spec", ">= 1.4.0"
 end
 
-gem "bootstrap-sass", ">= 2.2.2.0"
+gem "bootstrap-sass", "~> 2.2"
 gem "capistrano"
 gem "cocoon"
 gem "devise", ">= 2.1.2"
