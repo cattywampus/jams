@@ -3,11 +3,11 @@ upstream unicorn_<%= application %> {
 }
 
 server {
-  listen 443;
+  listen 80 default deferred;
+  listen 443 ssl default;
   server_name jams.cattywamp.us;
   root <%= current_path %>/public;
 
-  ssl on;
   ssl_certificate /etc/nginx/ssl/jams.cattywamp.us/server.crt;
   ssl_certificate_key /etc/nginx/ssl/jams.cattywamp.us/server.key.nopass;
 
@@ -20,6 +20,7 @@ server {
   try_files $uri/index.html $uri @unicorn;
   location @unicorn {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header Host $http_host;
     proxy_redirect off;
     proxy_pass http://unicorn_<%= application %>;
