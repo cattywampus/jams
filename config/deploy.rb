@@ -19,7 +19,7 @@ set :use_sudo, false
 set :shared_children, shared_children + %w{public/uploads}
 
 set :scm, "git"
-set :repository, "git@bitbucket.org:cattywampus/jams.git"
+set :repository, "git@github.com:cattywampus/jams.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
