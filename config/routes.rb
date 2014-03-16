@@ -10,6 +10,7 @@ Jams::Application.routes.draw do
     get :roster
 
     resource :dinner, controller: "dinner_events" do 
+      resources :attendees
       post :rsvp
     end
     resource :shirts, only: [:show], controller: "reports/shirts"

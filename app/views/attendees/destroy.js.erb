@@ -1,0 +1,6 @@
+$("#rsvp_<%= @attendee.id %>").effect("fade", function() { $(this).remove(); });
+<% if @attendee.attending? %>
+    $("#attending_guest_count").html("(<%= @dinner.attendees.attending.count %>)");
+<% else %>
+    $("#declined_guest_count").html("(<%= @dinner.attendees.declined.count %>)");
+<% end %>

@@ -10,7 +10,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.0'
+gem 'jquery-ui-rails', '~> 4.2.0'
 gem "thin", ">= 1.5.0"
 gem "pg", ">= 0.14.1"
 
@@ -36,6 +37,7 @@ group :test do
   gem "email_spec", ">= 1.4.0"
 end
 
+gem 'active_model_serializers', '~> 0.9.0.alpha'
 gem "bootstrap-sass", "~> 2.2"
 gem "capistrano"
 gem "cocoon"

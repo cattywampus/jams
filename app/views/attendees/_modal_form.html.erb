@@ -1,0 +1,38 @@
+<div id="attendee_modal_form" class="hide modal fade" role="dialog" aria-labelledby="attendee_modal_label" aria-hidden="true">
+  <%= simple_form_for attendee, url: [dinner.event, 'dinner', attendee], html: { class: 'form-horizontal' }, remote: true do |f| %>
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="attendee_modal_label">
+        <%= attendee.new_record? ? "New" : "Edit" %> Guest Reservation
+      </h3>
+    </div>
+
+    <div class="modal-body">
+      <%= f.error_notification %>
+
+      <%= f.input :person_id, label: "Guest" do %>
+        <% if attendee.new_record? %>
+          <%= f.hidden_field :person_id, class: 'select2 input-large', data: { remote: people_path, lookup: person_path(id: f.object.person_id || 0, format: :json) } %>
+        <% else %>
+          <h4><%= attendee.full_name %></h4>
+        <% end %>
+      <% end %>
+
+      <%= f.input :status, as: :enum_select, input_html: { class: 'input-medium' } %>
+
+      <% if dinner.entrees.size > 0 %>
+        <fieldset>
+          <legend>Menu Selection</legend>
+          <%= f.input :entree_id, as: :radio_buttons, collection: dinner.entrees %>
+        </fieldset>
+      <% end %>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    </div>
+
+  <% end %>
+</div>

@@ -1,4 +1,5 @@
 <div class="page-header">
+  <%= link_to 'Add Guest', new_event_dinner_attendee_path(@event), class: 'btn btn-primary pull-right', remote: true %>
   <h2>Judge's Dinner</h2>
 </div>
 
@@ -34,39 +35,36 @@
   <div class="span4">
     <h3>
       Guest List 
-      <small>(<%= @dinner_event.attendees.attending.size %>)</small>
+      <small id="attending_guest_count">(<%= @dinner_event.attendees.attending.size %>)</small>
     </h3>
-    <table class="table">
-      <tr>
-        <th>Name</th>
-        <% if @dinner_event.entrees.size > 0 %>
-          <th>Entree</th>
-        <% end %>
-      </tr>
-      <% @dinner_event.attendees.attending.each do |attendee| %>
+    <table id="guest_list" class="table">
+      <thead>
         <tr>
-          <td><%= attendee.person.full_name %></td>
+          <th>Name</th>
           <% if @dinner_event.entrees.size > 0 %>
-            <td><%= attendee.entree.protein if attendee.entree.present? %></td>
+            <th>Entree</th>
           <% end %>
+          <th></th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <%= render partial: 'attending_rsvp', collection: @dinner_event.attendees.attending, as: :rsvp %>
+      </tbody>
     </table>
   </div>
 
   <div class="span3">
     <h4>
       Declined
-      <small>(<%= @dinner_event.attendees.declined.size %>)</small>
+      <small id="declined_guest_count">(<%= @dinner_event.attendees.declined.size %>)</small>
     </h4>
 
-    <ul class="unstyled">
-      <% @dinner_event.attendees.declined.each do |attendee| %>
-        <li><%= attendee.person.full_name %></li>
-      <% end %>
+    <ul id="declined_reservations" class="unstyled">
+      <%= render partial: 'declined_rsvp', collection: @dinner_event.attendees.declined, as: :rsvp %>
     </ul>
   </div>
 </div>
 
 <%= link_to 'Edit', edit_event_dinner_path(@event) %> |
 <%= link_to 'Back', event_dinner_path(@event) %>
+

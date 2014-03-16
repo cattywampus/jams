@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @people }
+      format.json { render json: @people, root: false }
     end
   end
 
@@ -21,7 +21,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {id: @person.id, text: @person.full_name} }
+      format.json { render json: @person, root: false }
     end
   end
 

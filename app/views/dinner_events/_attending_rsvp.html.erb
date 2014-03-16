@@ -1,0 +1,11 @@
+<tr id="rsvp_<%= rsvp.id %>">
+  <td><%= link_to rsvp.person.full_name, ['edit', rsvp.dinner_event.event, 'dinner', rsvp], remote: true %></td>
+  <% if rsvp.dinner_event.entrees.size > 0 %>
+    <td><%= rsvp.entree.protein if rsvp.entree.present? %></td>
+  <% end %>
+  <td>
+    <%= link_to [rsvp.dinner_event.event, 'dinner', rsvp], method: :delete, confirm: "Are you sure you want to delete #{rsvp.person.first_name}'s RSVP?", remote: true do %>
+      <i class="icon-trash"></i>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,19 @@
+$(function() {
+
+<% if @attendee.persisted? %>
+    $("#attendee_modal_form").modal('hide');
+    <% if @attendee.attending? %>
+        $("#guest_list tbody").html("<%=j render partial: "dinner_events/attending_rsvp", collection: @dinner.attendees.attending, as: :rsvp %>");
+        $("#attending_guest_count").html("(<%= @dinner.attendees.attending.count %>)");
+    <% else %>
+        $("#declined_reservations").html("<%=j render partial: "dinner_events/declined_rsvp", collection: @dinner.attendees.declined, as: :rsvp %>");
+        $("#declined_guest_count").html("(<%= @dinner.attendees.declined.count %>)");
+    <% end %>
+    $("#rsvp_<%= @attendee.id %>").effect('highlight', {color: '#88AAFF'}, 1500);
+<% else %>
+    var modal = "<%=j render "modal_form", attendee: @attendee, dinner: @dinner %>";
+    $("#attendee_modal_form .modal-body").replaceWith($(modal).find(".modal-body"));
+    initialize_select2("#attendee_modal_form");
+<% end %>
+
+});

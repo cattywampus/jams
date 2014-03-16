@@ -1,0 +1,5 @@
+$(function() {
+    var modal = $("<%=j render "modal_form", attendee: @attendee, dinner: @dinner %>").appendTo("body").modal('show');
+    initialize_select2(modal);
+});
+

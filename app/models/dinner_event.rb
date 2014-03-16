@@ -13,6 +13,6 @@ class DinnerEvent < ActiveRecord::Base
 
   def missing_rsvp
     attending_ids = attendees.map { |a| a.person_id }
-    event.judges.confirmed.where("person_id NOT IN (?)", attending_ids)
+    attending_ids.present? ? Person.where("id not in (?)", attending_ids) : Person.scoped
   end
 end

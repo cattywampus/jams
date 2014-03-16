@@ -9,9 +9,11 @@ class Attendee < ActiveRecord::Base
 
   validates_presence_of :dinner_event_id
   validates_presence_of :person_id
+  validates :person_id, uniqueness: { scope: :dinner_event_id, message: "is already invited" }
+  validates_presence_of :status
 
-  scope :attending, where({status: :attending})
-  scope :declined, where({status: :declined})
+  scope :attending, includes(:person).where({status: :attending}).order("people.first_name ASC, people.last_name ASC")
+  scope :declined, includes(:person).where({status: :declined}).order("people.first_name ASC, people.last_name ASC")
 
   delegate :full_name, to: :person
   delegate :first_name, to: :person
