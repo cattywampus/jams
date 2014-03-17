@@ -39,7 +39,7 @@ end
 
 gem 'active_model_serializers', '~> 0.9.0.alpha'
 gem "bootstrap-sass", "~> 2.2"
-gem "capistrano"
+gem "capistrano", '~> 2.15.0'
 gem "cocoon"
 gem "devise", ">= 2.1.2"
 gem "devise_invitable", ">= 1.1.4"
