@@ -135,6 +135,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (4.2.0)
       railties (>= 3.2.16)
+    jquery_mobile_rails (1.4.1)
+      railties (>= 3.1.0)
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
@@ -314,6 +316,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 4.2.0)
+  jquery_mobile_rails
   omniauth-google-oauth2
   omniauth-openid (>= 1.0.1)
   paper_trail

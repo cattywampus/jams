@@ -1,0 +1,10 @@
+<div data-role="page" data-theme="b">
+  <div data-role="content">
+    <%= simple_form_for(User.new, :url => new_user_session_path, :html => {:class => 'form-vertical' }) do |f| %>
+      <%= f.input :email, :autofocus => true %>
+      <%= f.input :password %>
+      <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
+    <% end %>
+  </div>
+</div>
+

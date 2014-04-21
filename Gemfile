@@ -12,6 +12,7 @@ end
 
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 4.2.0'
+gem 'jquery_mobile_rails'
 gem "thin", ">= 1.5.0"
 gem "pg", ">= 0.14.1"
 

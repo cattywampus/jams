@@ -18,4 +18,6 @@
 //= require cocoon
 //= require raphael
 //= require morris
-//= require_tree .
+//= require_tree ./desktop
+//= stub application.mobile
+

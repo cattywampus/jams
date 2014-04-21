@@ -76,5 +76,8 @@ module Jams
     
     # Speed things up by not loading Rails env
     config.assets.initialize_on_precompile = false
+
+    # Precomple mobile assets
+    config.assets.precompile += %w(application.mobile.js application.mobile.css)
   end
 end
