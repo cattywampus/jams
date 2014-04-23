@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Event do
-  def valid_attributes
-    FactoryGirl.attributes_for(:event).merge(game_id: FactoryGirl.create(:program).id)
-  end
+describe Event do 
+  let(:valid_attributes) { attributes_for(:event, game_id: create(:program).id) } 
+
+  it { should have_many :judge_teams } 
 
   it "should require name" do
     no_name = Event.new valid_attributes.merge(name: "")

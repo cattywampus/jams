@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Judge do
+  it { should have_one :judge_assignment } 
+  it { should have_one :judge_team } 
 
   def valid_attributes
     person = FactoryGirl.create(:person)

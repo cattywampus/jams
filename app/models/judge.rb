@@ -3,6 +3,8 @@ class Judge < ActiveRecord::Base
   
   belongs_to :person
   belongs_to :event
+  has_one :judge_assignment
+  has_one :judge_team, through: :judge_assignment
 
   attr_accessible :attending_dinner,
                   :biography, 

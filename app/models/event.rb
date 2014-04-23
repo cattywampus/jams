@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :game
   has_many :judges
+  has_many :judge_teams
   has_one :dinner, class_name: "DinnerEvent"
 
   default_scope order("begins_on ASC")
