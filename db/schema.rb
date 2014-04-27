@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20150118180514) do
     t.integer  "assistant_id"
     t.string   "suffix"
     t.string   "title"
+    t.string   "avatar"
   end
 
   create_table "phone_numbers", force: true do |t|

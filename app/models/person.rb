@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
   has_paper_trail
-  
+
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
   has_many :addresses
   has_many :phone_numbers
@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   default_scope { order("LOWER(first_name) ASC, LOWER(last_name) ASC") }
 
   enum_attr :gender, %w(male female)
-  enum_attr :shirt_size, %w(s m l xl xxl xxxl) do 
+  enum_attr :shirt_size, %w(s m l xl xxl xxxl) do
     label s: 'Small'
     label m: 'Medium'
     label l: 'Large'
@@ -21,7 +21,9 @@ class Person < ActiveRecord::Base
     label xxxl: '3XL'
   end
 
-  accepts_nested_attributes_for :addresses, 
+  mount_uploader :avatar, AvatarUploader
+
+  accepts_nested_attributes_for :addresses,
                                 :reject_if => proc { |a| a["street1"].blank? && a["city"].blank? && a["state"].blank? && a["zip"].blank? },
                                 :allow_destroy => true
   accepts_nested_attributes_for :phone_numbers, :reject_if => :all_blank, :allow_destroy => true
@@ -29,7 +31,7 @@ class Person < ActiveRecord::Base
   validate :must_provide_full_name
   validates :email, presence: true, format: { with: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i }
 
-  def self.suffixes 
+  def self.suffixes
     [
       "D.M.D.",
       "D.O.",
@@ -72,11 +74,11 @@ class Person < ActiveRecord::Base
   def shirt_size_label
     enums(:shirt_size).label(shirt_size)
   end
-  
+
   def to_s
     full_name
   end
-  
+
   private
 
   def must_provide_full_name

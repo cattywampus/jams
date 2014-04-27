@@ -1,6 +1,6 @@
 
   <%= f.input :title, as: :select, collection: Person.titles, input_wrapper_html: { class: 'col-sm-2' } %>
-    
+
   <div class="form-group">
     <%= f.label :name, class: 'control-label col-sm-3' %>
     <div class="col-sm-9">
@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  
+
   <%= f.input :suffix, as: :select, collection: Person.suffixes, input_wrapper_html: { class: 'col-xs-3 col-sm-3 col-md-3' } %>
   <%= f.input :email %>
   <%= f.input :company %>
@@ -25,6 +25,7 @@
   <%= f.association :assistant, label_method: :full_name %>
   <%= f.input :gender, as: :enum_select, input_wrapper_html: { class: 'col-xs-3 col-sm-3 col-md-3' } %>
   <%= f.input :shirt_size, as: :enum_select, input_wrapper_html: { class: 'col-xs-3 col-sm-3 col-md-3' } %>
+  <%= f.input :avatar, as: :image_preview, input_html: { preview_version: :profile } %>
 
   <fieldset>
     <legend>Phone numbers</legend>

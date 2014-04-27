@@ -89,23 +89,24 @@ class PeopleController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def person_params
     params.require(:person)
-          .permit(:assistant_id, 
-                  :company, 
-                  :email, 
-                  :first_name, 
-                  :gender, 
-                  :last_name, 
+          .permit(:assistant_id,
+                  :avatar,
+                  :company,
+                  :email,
+                  :first_name,
+                  :gender,
+                  :last_name,
                   :middle_name,
                   :position,
-                  :shirt_size, 
+                  :shirt_size,
                   :suffix,
                   :title,
-                  addresses_attributes: [:address_type, :city, :primary, :state, :street1, :street2, :zip], 
+                  addresses_attributes: [:address_type, :city, :primary, :state, :street1, :street2, :zip],
                   phone_numbers_attributes: [:phone_number, :primary, :phone_type])
   end
 end
