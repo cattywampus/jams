@@ -1,8 +1,13 @@
 <% content_for :content do %>
 
-<%= link_to @event.game do %>
-  <%= image_tag @event.game.logo_url(:medium), border: "0", class: "pull-right" %>
+<%= link_to @event.game, class: "pull-right" do %>
+	<% if @event.game.logo_url %>
+    <%= image_tag @event.game.logo_url(:medium), alt: @event.game.name, border: "0" %>
+	<% else %>
+		<%= @event.game.name %>
+	<% end %>
 <% end %>
+
 <h1>
   <%= image_tag @event.logo_url(:thumb) if @event.logo.present? %><%= @event.name %>
 </h1>
