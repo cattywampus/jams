@@ -22,12 +22,12 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec-rails", ">= 2.11.4"
-  gem "factory_girl_rails", ">= 4.1.0"
+  gem 'rspec-rails', '~> 3.0'
+  gem "factory_girl_rails", "~> 4.5"
   gem 'rb-fsevent', :require => false
   gem 'rb-inotify', :require => false
   gem 'rb-fchange', :require => false
-  gem 'guard-rspec'
+  gem 'guard-rspec', '~> 4.5'
   gem 'growl', :require => false
 end
 

@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe JudgeAssignment do
-  it { should belong_to :judge }
-  it { should belong_to :judge_team }
+  it { is_expected.to belong_to :judge }
+  it { is_expected.to belong_to :judge_team }
 
-  it { should validate_presence_of :judge }
-  it { should validate_presence_of :judge_team }
+  it { is_expected.to validate_presence_of :judge }
+  it { is_expected.to validate_presence_of :judge_team }
 
 end

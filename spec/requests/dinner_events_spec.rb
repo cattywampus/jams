@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "DinnerEvents" do
   login :admin
@@ -8,7 +8,7 @@ describe "DinnerEvents" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       dinner = FactoryGirl.create :dinner_event
       get event_dinner_path(dinner.event)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

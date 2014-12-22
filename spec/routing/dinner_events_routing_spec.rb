@@ -7,27 +7,27 @@ describe DinnerEventsController do
     let(:event) { dinner_event.event }
     let(:dinner_path) { "/events/#{event.to_param}/dinner"}
     it "routes to #new" do
-      get("#{dinner_path}/new").should route_to("dinner_events#new", :event_id => event.to_param)
+      expect(get("#{dinner_path}/new")).to route_to("dinner_events#new", :event_id => event.to_param)
     end
 
     it "routes to #show" do
-      get("#{dinner_path}").should route_to("dinner_events#show", :event_id => event.to_param)
+      expect(get("#{dinner_path}")).to route_to("dinner_events#show", :event_id => event.to_param)
     end
 
     it "routes to #edit" do
-      get("#{dinner_path}/edit").should route_to("dinner_events#edit", :event_id => event.to_param)
+      expect(get("#{dinner_path}/edit")).to route_to("dinner_events#edit", :event_id => event.to_param)
     end
 
     it "routes to #create" do
-      post("#{dinner_path}").should route_to("dinner_events#create", :event_id => event.to_param)
+      expect(post("#{dinner_path}")).to route_to("dinner_events#create", :event_id => event.to_param)
     end
 
     it "routes to #update" do
-      put("#{dinner_path}").should route_to("dinner_events#update", :event_id => event.to_param)
+      expect(put("#{dinner_path}")).to route_to("dinner_events#update", :event_id => event.to_param)
     end
 
     it "routes to #destroy" do
-      delete("#{dinner_path}").should route_to("dinner_events#destroy", :event_id => event.to_param)
+      expect(delete("#{dinner_path}")).to route_to("dinner_events#destroy", :event_id => event.to_param)
     end
 
   end

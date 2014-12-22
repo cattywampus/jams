@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Judge do
-  it { should have_one :judge_assignment } 
-  it { should have_one :judge_team } 
+  it { is_expected.to have_one :judge_assignment } 
+  it { is_expected.to have_one :judge_team } 
 
   def valid_attributes
     person = FactoryGirl.create(:person)
@@ -12,11 +12,11 @@ describe Judge do
 
   it "should require a person" do
     no_person = Judge.new valid_attributes.merge(person_id: nil)
-    no_person.should_not be_valid
+    expect(no_person).not_to be_valid
   end
 
   it "should require an event" do
     no_event = Judge.new valid_attributes.merge(event_id: nil)
-    no_event.should_not be_valid
+    expect(no_event).not_to be_valid
   end
 end

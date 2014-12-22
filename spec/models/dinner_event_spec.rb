@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe DinnerEvent do
   def valid_attributes
@@ -7,11 +7,11 @@ describe DinnerEvent do
 
   it "should require venue" do
     no_venue = FactoryGirl.build :dinner_event, venue: ""
-    no_venue.should_not be_valid
+    expect(no_venue).not_to be_valid
   end
 
   it "should require event_id" do
     no_event = FactoryGirl.build :dinner_event, event: nil
-    no_event.should_not be_valid
+    expect(no_event).not_to be_valid
   end
 end

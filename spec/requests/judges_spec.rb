@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Judges" do
   login :admin
@@ -8,7 +8,7 @@ describe "Judges" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       event = FactoryGirl.create :event
       get event_judges_path(event)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ProgramsController do
   login :admin
@@ -10,14 +10,14 @@ describe ProgramsController do
   describe "GET index" do
     it "should be successful for admins" do
       get 'index'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe "GET new" do
     it "should be successful" do
       get 'new'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -31,7 +31,7 @@ describe ProgramsController do
 
       it "redirects to the new program" do
         post :create, program: FactoryGirl.attributes_for(:program)
-        response.should redirect_to Program.last
+        expect(response).to redirect_to Program.last
       end
     end
 
@@ -43,7 +43,7 @@ describe ProgramsController do
       end
       it "re-renders the new method" do
         post :create, program: FactoryGirl.attributes_for(:invalid_program)
-        response.should render_template :new
+        expect(response).to render_template :new
       end
     end
   end
@@ -51,24 +51,24 @@ describe ProgramsController do
   describe "GET edit" do
     it "should be successful" do
       get 'edit', :id => @program.id
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should find the right program" do
       get 'edit', :id => @program.id
-      assigns(:program).should == @program
+      expect(assigns(:program)).to eq(@program)
     end
   end
 
   describe "GET show" do
     it "should be successful" do
       get 'show', :id => @program.id
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should find the right program" do
       get 'show', :id => @program.id
-      assigns(:program).should == @program
+      expect(assigns(:program)).to eq(@program)
     end
   end
 end
