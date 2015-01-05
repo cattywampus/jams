@@ -27,10 +27,8 @@ Jams::Application.routes.draw do
 
   resources :games
 
-  authenticated :user do
-    root :to => 'home#index'
-  end
   root :to => "home#index"
+
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}, skip: :registrations
   devise_scope :user do
     resource :registration,
