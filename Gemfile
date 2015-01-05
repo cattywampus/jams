@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '4.0.12'
+gem 'rails', '4.1.8'
 
 gem 'sass-rails',   '~> 4.0.5'
 gem 'coffee-rails', '~> 4.0.1'
@@ -19,6 +19,7 @@ group :development do
   gem 'binding_of_caller', '~> 0.7'
   gem 'byebug'
   gem 'sdoc'
+  gem 'spring'
 end
 
 group :development, :test do
