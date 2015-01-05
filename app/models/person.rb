@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
   has_many :attendees
   has_many :dinner_events, through: :attendees
 
-  default_scope order("LOWER(first_name) ASC, LOWER(last_name) ASC")
+  default_scope { order("LOWER(first_name) ASC, LOWER(last_name) ASC") }
 
   attr_accessible :addresses_attributes,
                   :assistant_id, 
@@ -62,7 +62,7 @@ class Person < ActiveRecord::Base
     if query.present?
       where("first_name ilike :q or last_name ilike :q", q: "%#{query}%")
     else
-      scoped
+      all
     end
   end
 

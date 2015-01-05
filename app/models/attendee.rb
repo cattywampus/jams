@@ -12,11 +12,20 @@ class Attendee < ActiveRecord::Base
   validates :person_id, uniqueness: { scope: :dinner_event_id, message: "is already invited" }
   validates_presence_of :status
 
-  scope :attending, includes(:person).where({status: :attending}).order("people.first_name ASC, people.last_name ASC")
-  scope :declined, includes(:person).where({status: :declined}).order("people.first_name ASC, people.last_name ASC")
-
   delegate :full_name, to: :person
   delegate :first_name, to: :person
   delegate :last_name, to: :person
   delegate :company, to: :person
+  
+  def self.attending
+    includes(:person)
+      .where({status: :attending})
+      .order("people.first_name ASC, people.last_name ASC")
+  end
+  
+  def self.declined
+    includes(:person)
+      .where({status: :declined})
+      .order("people.first_name ASC, people.last_name ASC")
+  end
 end

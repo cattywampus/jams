@@ -25,13 +25,13 @@ class Judge < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :event_id
 
-  scope :attending_dinner, where({attending_dinner: true})
-  scope :confirmed, where({status: :confirmed})
-  scope :judges, where({role: :judge})
-  scope :advisors, where({role: :advisor})
-  scope :assistants, where({role: :assistant})
-  scope :with_bio, where("biography IS NOT NULL AND biography NOT IN ('', ' ')")
-  scope :without_bio, where({biography: [nil, '', ' ']})
+  scope :attending_dinner, -> { where({attending_dinner: true}) }
+  scope :confirmed, -> { where({status: :confirmed}) }
+  scope :judges, -> { where({role: :judge}) }
+  scope :advisors, -> { where({role: :advisor}) }
+  scope :assistants, -> { where({role: :assistant}) }
+  scope :with_bio, -> { where("biography IS NOT NULL AND biography NOT IN ('', ' ')") }
+  scope :without_bio, -> { where({biography: [nil, '', ' ']}) }
 
   delegate :email, to: :person
   delegate :full_name, to: :person

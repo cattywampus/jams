@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :judge_teams
   has_one :dinner, class_name: "DinnerEvent"
 
-  default_scope order("begins_on ASC")
+  default_scope -> { order("begins_on ASC") }
 
   attr_accessible :begins_on, :city, :ends_on, :game_id, :logo, :name, :state, :street1, :street2, :venue, :zip
 
