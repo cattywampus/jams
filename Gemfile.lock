@@ -1,5 +1,6 @@
-PATH
-  remote: ~/code/cattywampus/enumerated_attribute
+GIT
+  remote: https://github.com/cattywampus/enumerated_attribute.git
+  revision: 67ca0d0c7ee3efa40234f29cf2dbeb07966a1564
   specs:
     enumerated_attribute (0.3.0.beta1)
       meta_programming (>= 0.2.1)

@@ -56,5 +56,5 @@ gem "figaro", ">= 0.5.0"
 gem "carrierwave"
 gem "rmagick"
 gem "select2-rails", '~> 3.5'
-gem "enumerated_attribute", path: '~/code/cattywampus/enumerated_attribute'
+gem 'enumerated_attribute', git: 'https://github.com/cattywampus/enumerated_attribute.git'
 gem 'unicorn', '~> 4.8'
