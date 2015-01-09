@@ -1,5 +1,6 @@
 set_default(:google_client_id) { Capistrano::CLI.ui.ask "Google Client ID: " }
 set_default(:google_client_secret) { Capistrano::CLI.password_prompt "Google Client Secret: " }
+set_default(:secret_key_base) { SecureRandom.hex(64) }
 
 namespace :app do
   desc "Install dependencies required for this application"
@@ -12,12 +13,14 @@ namespace :app do
   task :setup, roles: :app do
     run "mkdir -p #{shared_path}/config"
     template "application.yml.erb", "#{shared_path}/config/application.yml"
+    template "secrets.yml.erb", "#{shared_path}/config/secrets.yml"
   end
   after "deploy:setup", "app:setup"
 
   desc "Symlink the application.yml file into latest release"
   task :symlink, roles: :app do
     run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
   end
   after "deploy:finalize_update", "app:symlink"
 end
