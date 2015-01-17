@@ -3,8 +3,13 @@ class Tools::EmailBuilderController < ApplicationController
 
   def show
     @event = Event.find params[:event_id]
-    @people = Person.includes({:judge_history => :event})
-      .where({events: {id: @event.id}, judges: {status: status, role: role, completed_vims: vims, attending_dinner: dinner}})
+    @people = Person.joins(judge_history: :event)
+        .where(events: { id: @event.id }, 
+               judges: {
+                 status: status, 
+                 role: role, 
+                 completed_vims: vims, 
+                 attending_dinner: dinner})
   end
 
 private
