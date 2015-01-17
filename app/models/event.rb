@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
 
   def possible_judges
     judge_ids = judges.map { |j| j.person_id }
-    judge_ids.present? ? Person.where("id not in (?)", judge_ids) : Person.scoped
+    judge_ids.present? ? Person.where("id not in (?)", judge_ids) : Person.all
   end
 
   def confirmed_judges
