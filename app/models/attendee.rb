@@ -3,6 +3,9 @@ class Attendee < ActiveRecord::Base
   belongs_to :dinner_event
   belongs_to :entree
 
+  scope :attending, -> { where(status: :attending) }
+  scope :declined, -> { where(status: :delclined) }
+  
   attr_accessible :dinner_event_id, :entree_id, :person_id, :status
 
   enum_attr :status, %w(attending declined)
@@ -17,15 +20,4 @@ class Attendee < ActiveRecord::Base
   delegate :last_name, to: :person
   delegate :company, to: :person
   
-  def self.attending
-    includes(:person)
-      .where({status: :attending})
-      .order("people.first_name ASC, people.last_name ASC")
-  end
-  
-  def self.declined
-    includes(:person)
-      .where({status: :declined})
-      .order("people.first_name ASC, people.last_name ASC")
-  end
 end
