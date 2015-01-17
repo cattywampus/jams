@@ -33,8 +33,9 @@ describe EventsController do
   end
 
   describe "GET index" do
-    it "assigns all events as @events" do
+    it "assigns user events as @events" do
       event = Event.create! valid_attributes
+      @current_user.events << event
       get :index, {}
       expect(assigns(:events)).to eq([event])
     end

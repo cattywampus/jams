@@ -1,0 +1,20 @@
+  <tr>
+    <td><%= event.game.season %></td>
+    <td><%= link_to event, event %></td>
+    <td><%= event.venue %></td>
+    <td><%= event.location %></td>
+    <td><%= l event.begins_on, format: :short %> - <%= l event.ends_on, format: :short %></td>
+    <td>
+      <% if can? :update, event %>
+        <%= link_to 'Edit', edit_event_path(event), class: "btn btn-small btn-info" %>
+      <% end %>
+
+      <% if can? :destroy, event %>
+        <%= link_to 'Destroy', event, 
+                    method: :delete, 
+                    data: { confirm: 'Are you sure?' }, 
+                    class: "btn btn-small btn-danger" %>
+
+      <% end %>
+    </td>
+  </tr>

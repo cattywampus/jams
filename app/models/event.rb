@@ -5,6 +5,8 @@ class Event < ActiveRecord::Base
   has_one :dinner, class_name: "DinnerEvent"
 
   default_scope -> { order("begins_on ASC") }
+  scope :active, -> { includes(:game).where(games: { active: true }) }
+  scope :inactive, -> { includes(:game).where(games: { active: false }) }
 
   attr_accessible :begins_on, :city, :ends_on, :game_id, :logo, :name, :state, :street1, :street2, :venue, :zip
 
