@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.save!
     end
-    user || where(auth.slice(:provider, :uid).respond_to(:permitted?)).first
+    user || where(auth.slice(:provider, :uid).to_hash).first
   end
 
   def self.new_with_session(params, session)
