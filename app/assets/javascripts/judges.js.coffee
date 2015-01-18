@@ -8,7 +8,7 @@ $ ->
             url: $("#judge_person_id").data("query")
             dataType: "json"
             data: (term, page) -> { name: term, page: page }
-            results: (data, page) -> { results: data }
+            results: (data, page) -> { results: data["events"] }
         },
         initSelection: (element, callback) ->
             id = $(element).val()
