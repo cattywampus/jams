@@ -51,7 +51,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
@@ -70,7 +70,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -114,5 +114,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json { render json: @candidates.map { |c| {id: c.id, text: c.full_name} } }
     end
+  end
+  
+  private
+  
+  def event_params
+    params.require(:event).permit(:begins_on, :city, :ends_on, :game_id, :logo, :name, :state, :street1, :street2, :venue, :zip)
   end
 end

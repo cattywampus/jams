@@ -109,8 +109,8 @@ describe EventsController do
         # specifies that the Event created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Event).to receive(:update_attributes).with({ "game" => "" })
-        put :update, {:id => event.to_param, :event => { "game" => "" }}
+        expect_any_instance_of(Event).to receive(:update_attributes).with({ "game_id" => "" })
+        put :update, {:id => event.to_param, :event => { "game_id" => "" }}
       end
 
       it "assigns the requested event as @event" do
