@@ -3,8 +3,6 @@ class DinnerEvent < ActiveRecord::Base
   has_many :attendees
   has_many :people, through: :attendees
   has_many :entrees
-  
-  attr_accessible :begins_at, :city, :ends_at, :entrees_attributes, :room, :state, :street1, :street2, :venue, :zip
 
   accepts_nested_attributes_for :entrees
 

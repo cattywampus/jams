@@ -44,7 +44,7 @@ class DinnerEventsController < ApplicationController
   # POST /dinner_events
   # POST /dinner_events.json
   def create
-    @dinner_event = DinnerEvent.new params[:dinner_event]
+    @dinner_event = DinnerEvent.new dinner_event_params
     @dinner_event.event = @event
 
     authorize! :create, @dinner_event
@@ -68,7 +68,7 @@ class DinnerEventsController < ApplicationController
     authorize! :update, @dinner_event
 
     respond_to do |format|
-      if @dinner_event.update_attributes(params[:dinner_event])
+      if @dinner_event.update_attributes(dinner_event_params)
         format.html { redirect_to event_dinner_path(@event), notice: 'Dinner event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -114,5 +114,9 @@ private
   def load_event
     @event = Event.find params[:event_id]
     authorize! :read, @event
+  end
+  
+  def dinner_event_params
+    params.require(:dinner_event).permit(:begins_at, :city, :ends_at, :room, :state, :street1, :street2, :venue, :zip, entrees_attributes: [:description, :name, :protein])
   end
 end

@@ -1,8 +1,6 @@
 class PhoneNumber < ActiveRecord::Base
   belongs_to :person
 
-  attr_accessible :phone_number, :primary, :phone_type
-
   before_validation :clean_phone_number
 
   validates_presence_of :phone_number, if: lambda { |p| p.phone_type.present? || p.primary? }

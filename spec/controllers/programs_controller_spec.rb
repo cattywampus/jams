@@ -36,13 +36,16 @@ describe ProgramsController do
     end
 
     context "with invalid attributes" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:invalid_program) }
+      
       it "does not save a new program" do
         expect {
-          post :create, program: FactoryGirl.attributes_for(:invalid_program)
+          post :create, program: invalid_attributes
         }.not_to change(Program, :count)
       end
+      
       it "re-renders the new method" do
-        post :create, program: FactoryGirl.attributes_for(:invalid_program)
+        post :create, program: invalid_attributes
         expect(response).to render_template :new
       end
     end

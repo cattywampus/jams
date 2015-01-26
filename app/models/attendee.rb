@@ -5,8 +5,6 @@ class Attendee < ActiveRecord::Base
 
   scope :attending, -> { where(status: :attending) }
   scope :declined, -> { where(status: :delclined) }
-  
-  attr_accessible :dinner_event_id, :entree_id, :person_id, :status
 
   enum_attr :status, %w(attending declined)
 

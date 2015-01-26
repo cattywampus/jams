@@ -44,7 +44,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(params[:person])
+    @person = Person.new(person_params)
 
     if params[:event_id].present?
       @event = Event.find params[:event_id]
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
 
     respond_to do |format|
-      if @person.update_attributes(params[:person])
+      if @person.update_attributes(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
@@ -88,5 +88,24 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def person_params
+    params.require(:person)
+          .permit(:assistant_id, 
+                  :company, 
+                  :email, 
+                  :first_name, 
+                  :gender, 
+                  :last_name, 
+                  :middle_name,
+                  :position,
+                  :shirt_size, 
+                  :suffix,
+                  :title,
+                  addresses_attributes: [:address_type, :city, :primary, :state, :street1, :street2, :zip], 
+                  phone_numbers_attributes: [:phone_number, :primary, :phone_type])
   end
 end

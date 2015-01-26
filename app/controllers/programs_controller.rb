@@ -7,7 +7,7 @@ class ProgramsController < ApplicationController
   end
 
   def create
-    @program = Program.new params[:program]
+    @program = Program.new program_params
 
     respond_to do |format|
       if @program.save
@@ -30,7 +30,7 @@ class ProgramsController < ApplicationController
     @program = Program.find params[:id]
 
     respond_to do |format|
-      if @program.update_attributes params[:program]
+      if @program.update_attributes program_params
         format.html { redirect_to @program, notice: "#{@program.abbr} program updated successfully." }
       else
         format.html { render action: "edit" }
@@ -49,5 +49,11 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to programs_path, notice: "#{@program.abbr} program was deleted." }
     end
+  end
+  
+  private
+  
+  def program_params
+    params.require(:program).permit(:abbr, :icon, :logo, :name)
   end
 end

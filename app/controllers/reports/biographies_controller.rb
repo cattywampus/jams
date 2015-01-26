@@ -32,7 +32,7 @@ class Reports::BiographiesController < ApplicationController
     authorize! :update, @judge
 
     respond_to do |format|
-      if @judge.update_attributes params[:judge]
+      if @judge.update_attributes judge_params
         format.html { redirect_to event_biographies_path(@event), notice: "Update biography for #{@judge.full_name}" }
       else
         format.html { render "edit", alert: "Unable to update biography" }
@@ -45,5 +45,9 @@ private
   def load_event
     @event = Event.find params[:event_id]
     authorize! :read, @event
+  end
+  
+  def judge_params
+    params.require(:judge).permit(:biography, :biography_approved)
   end
 end

@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     @author = current_user
-    comment = @commentable.comments.new params[:comment]
+    comment = @commentable.comments.new comment_params
     comment.author = @author
 
     respond_to do |format|
@@ -28,5 +28,9 @@ private
   def load_commentable
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
+  end
+  
+  def comment_params
+    params.require(:comment).permit(:author_id, :body, :commentable_id, :commentable_type)
   end
 end

@@ -1,7 +1,5 @@
 class Address < ActiveRecord::Base
   belongs_to :person
-  
-  attr_accessible :address_type, :city, :primary, :state, :street1, :street2, :zip
 
   validate :must_provide_address, unless: lambda { |a| a.address_is_blank? }
 

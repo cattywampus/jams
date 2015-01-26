@@ -23,6 +23,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
   gem "factory_girl_rails", "~> 4.5"
   gem 'rb-fsevent', :require => false
@@ -47,9 +48,8 @@ gem 'devise', '~> 3.4'
 gem 'devise_invitable', '~> 1.4'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem "omniauth-openid", ">= 1.0.1"
-gem "cancan", ">= 1.6.8"
+gem 'cancancan', '~> 1.10'
 gem 'paper_trail', '~> 3.0'
-gem 'protected_attributes'
 gem 'rolify', '>= 3.4'
 gem 'simple_form', '~> 3.1'
 gem "figaro", ">= 0.5.0"

@@ -6,19 +6,6 @@ class Judge < ActiveRecord::Base
   has_one :judge_assignment
   has_one :judge_team, through: :judge_assignment
 
-  attr_accessible :attending_dinner,
-                  :biography, 
-                  :completed_vims, 
-                  :event_id,
-                  :needs_shirt, 
-                  :person_id,
-                  :provided_conflict, 
-                  :provided_consent, 
-                  :received_event_info, 
-                  :role, 
-                  :rookie, 
-                  :status
-
   enum_attr :status, %w(wait_list ^invited declined confirmed withdrew no_show)
   enum_attr :role, %w(^judge advisor assistant)
 

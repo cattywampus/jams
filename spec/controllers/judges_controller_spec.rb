@@ -110,8 +110,8 @@ describe JudgesController do
         # specifies that the Judge created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Judge).to receive(:update_attributes).with({ "person" => "" })
-        put :update, {:id => judge.to_param, :judge => { "person" => "" }}
+        expect_any_instance_of(Judge).to receive(:update_attributes).with({ "status" => "judge" })
+        put :update, {:id => judge.to_param, :judge => { "status" => "judge" }}
       end
 
       it "assigns the requested judge as @judge" do

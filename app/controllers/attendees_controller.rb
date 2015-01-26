@@ -12,7 +12,7 @@ class AttendeesController < ApplicationController
   def create
     @event = Event.find params[:event_id]
     @dinner = @event.dinner
-    @attendee = Attendee.new params[:attendee]
+    @attendee = Attendee.new attendee_params
     @attendee.dinner_event = @event.dinner
     @attendee.save
 
@@ -36,7 +36,7 @@ class AttendeesController < ApplicationController
     @dinner = @event.dinner
     @attendee = Attendee.find params[:id]
 
-    @attendee.update_attributes params[:attendee]
+    @attendee.update_attributes attendee_params
 
     respond_to do |format|
       format.js
@@ -52,5 +52,11 @@ class AttendeesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+  
+  private
+  
+  def attendee_params
+    params.require(:attendee).permit(:dinner_event_id, :entree_id, :person_id, :status)
   end
 end

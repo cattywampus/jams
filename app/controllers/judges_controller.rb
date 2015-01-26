@@ -64,7 +64,7 @@ class JudgesController < ApplicationController
   # POST /judges
   # POST /judges.json
   def create
-    @judge = Judge.new(params[:judge])
+    @judge = Judge.new(judge_params)
 
     respond_to do |format|
       if @judge.save
@@ -84,7 +84,7 @@ class JudgesController < ApplicationController
     @event = @judge.event
 
     respond_to do |format|
-      if @judge.update_attributes(params[:judge])
+      if @judge.update_attributes(judge_params)
         format.html { redirect_to [@event, @judge], notice: 'Judge was successfully updated.' }
         format.json { head :no_content }
       else
@@ -104,5 +104,23 @@ class JudgesController < ApplicationController
       format.html { redirect_to event_judges_path(@judge.event) }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def judge_params
+    params.require(:judge)
+          .permit(:attending_dinner,
+                  :biography, 
+                  :completed_vims, 
+                  :event_id,
+                  :needs_shirt, 
+                  :person_id,
+                  :provided_conflict, 
+                  :provided_consent, 
+                  :received_event_info, 
+                  :role, 
+                  :rookie, 
+                  :status)
   end
 end

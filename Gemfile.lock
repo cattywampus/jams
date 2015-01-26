@@ -56,7 +56,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
-    cancan (1.6.10)
+    cancancan (1.10.1)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -196,8 +196,6 @@ GEM
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
-    protected_attributes (1.0.8)
-      activemodel (>= 4.0.1, < 5.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -318,7 +316,7 @@ DEPENDENCIES
   binding_of_caller (~> 0.7)
   bootstrap-sass (~> 3.3.3)
   byebug
-  cancan (>= 1.6.8)
+  cancancan (~> 1.10)
   capistrano (~> 2.15.0)
   capybara (~> 2.4)
   carrierwave
@@ -339,7 +337,6 @@ DEPENDENCIES
   omniauth-openid (>= 1.0.1)
   paper_trail (~> 3.0)
   pg (>= 0.14.1)
-  protected_attributes
   quiet_assets (>= 1.0.1)
   rails (= 4.1.8)
   rb-fchange

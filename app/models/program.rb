@@ -1,6 +1,5 @@
 class Program < ActiveRecord::Base
   has_many :games
-  attr_accessible :abbr, :icon, :logo, :name
 
   mount_uploader :icon, LogoUploader
   mount_uploader :logo, LogoUploader
