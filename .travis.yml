@@ -4,7 +4,6 @@ rvm:
 
 env:
   SECRET_KEY_BASE="$(bundle exec rake secret)"
-  SECRET_TOKEN="$(bundle exec rake secret)"
 
 addons:
   postgresql: "9.3"
