@@ -1,14 +1,14 @@
 <h1><%= @person.full_name(true) %></h1>
 
 <div class="row">
-  <div class="span7">
+  <div class="col-md-7">
     <h3>
       <%= @person.company %><br>
       <small><%= @person.position %></small>
     </h3>
 
     <div class="row">
-      <div class="span4">
+      <div class="col-md-4">
         <p>
           <b>Email:</b>
           <%= mail_to @person.email %>
@@ -36,7 +36,7 @@
 
       </div>
 
-      <div class="span3">
+      <div class="col-md-3">
         <dl>
         <% @person.addresses.each do |address| %>
           <dt><%= address.address_type %><dt>
@@ -75,18 +75,18 @@
         <td><%= link_to judge.event, judge.event %></td>
         <td><%= judge.status %></td>
         <th>
-          <%= link_to [judge.event, judge], class: "btn btn-success btn-small" do %>
-            <i class="icon-user icon-white"></i> Show
+          <%= link_to [judge.event, judge], class: "btn btn-success btn-sm" do %>
+            <i class="glyphicon glyphicon-user icon-white"></i> Show
           <% end %>
         <td>
           <%= link_to edit_event_judge_path(judge.event, judge), 
-                      class: "btn btn-info btn-small" do %>
-          <i class="icon-pencil icon-white"></i> Edit
+                      class: "btn btn-info btn-sm" do %>
+          <i class="glyphicon glyphicon-pencil icon-white"></i> Edit
           <% end %>
         </td>
         <td>
-          <%= link_to [judge.event, judge], class: "btn btn-danger btn-small", method: :delete, confirm: "Are you sure?" do %>
-            <i class="icon-trash icon-white"></i> Delete
+          <%= link_to [judge.event, judge], class: "btn btn-danger btn-sm", method: :delete, confirm: "Are you sure?" do %>
+            <i class="glyphicon glyphicon-trash icon-white"></i> Delete
           <% end %>
         </td>
       </tr>
@@ -94,13 +94,11 @@
     </table>
   </div>
 
-  <div class="span5">
+  <div class="col-md-5">
     <h3>Comments</h3>
     <%= simple_form_for [@person, @comment] do |f| %>
-      <%= f.input :body, as: :text, label: false, input_html: {rows: 4, class: "span5"} %>
-      <div class="form-actions">
-        <%= f.submit "Add comment", class: "btn btn-info" %>
-      </div>
+      <%= f.input :body, as: :text, label: false, input_html: {rows: 4, class: "col-md-5"} %>
+      <%= f.submit "Add comment", class: "btn btn-info" %>
     <% end %>
 
     <%= render @person.comments.sorted %>

@@ -1,7 +1,7 @@
 
 <% if @judges.without_bio.size > 0 %>
   <h3>Missing Biographies <small><%= "(#{@judges.without_bio.size})" %></small></h3>
-  <ul class="unstyled">
+  <ul class="list-unstyled">
     <% @judges.without_bio.each do |judge| %>
       <li><%= judge.full_name %></li>
     <% end %>
@@ -9,12 +9,12 @@
 <% end %>
 
 <% @judges.with_bio.each do |judge| %>
-  <%= link_to "Edit", edit_event_biography_path(@event, judge), class: "btn btn-info btn-small pull-right" %>
+  <%= link_to "Edit", edit_event_biography_path(@event, judge), class: "btn btn-info btn-sm pull-right" %>
   <h3>
     <%= judge.full_name(true) %>
     <%= biography_badge judge.biography %>
     <% if judge.biography_approved? %>
-      <span class="label label-success">Approved</span>
+      <span class="label label-default label-success">Approved</span>
     <% end %>
   </h3>
   <p><%= judge.biography %></p>

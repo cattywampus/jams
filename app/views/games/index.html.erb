@@ -1,29 +1,28 @@
 <h1>Active games</h1>
 
-<ul class="thumbnails">
+<div class="row">
   <% @active_games.each do |game| %>
-  <li class="span4">
+  <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <%= link_to image_tag(game.logo_url(:medium)), game, class: "thumbnail" %>
       <h3><%= "#{game.name}, #{game.season}" %><br><small><%= game.program %></small></h3>
     </div>
-  </li>
+  </div>
   <% end %>
-</ul>
+</div>
 
 <h2>Past Games</h2>
 
-<ul class="thumbnails">
-  <% @past_games.each do |game| %>
-  <li class="span4">
-    <div class="thumbnail">
-      <%= link_to image_tag(game.logo_url(:medium)), game, class: "thumbnail" %>
-      <h3><%= "#{game.name}, #{game.season}" %><br><small><%= game.program %></small></h3>
+<div class="row">
+    <% @past_games.each do |game| %>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <%= link_to image_tag(game.logo_url(:medium)), game, class: "thumbnail" %>
+        <h3><%= "#{game.name}, #{game.season}" %><br><small><%= game.program %></small></h3>
+      </div>
     </div>
-  </li>
-  <% end %>
-</ul>
-
+    <% end %>
+</div>
 
 <br />
 

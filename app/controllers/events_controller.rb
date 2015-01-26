@@ -97,7 +97,7 @@ class EventsController < ApplicationController
     @judges = @event.confirmed_judges
 
     respond_to do |format|
-      format.html
+      format.html { render layout: 'event' }
       format.json { render json: [@event, @judges] }
     end
   end

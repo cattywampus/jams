@@ -1,66 +1,34 @@
+
 <% content_for :content do %>
 
-<%= link_to @event.game, class: "pull-right" do %>
-	<% if @event.game.logo_url %>
-    <%= image_tag @event.game.logo_url(:medium), alt: @event.game.name, border: "0" %>
-	<% else %>
-		<%= @event.game.name %>
-	<% end %>
-<% end %>
-
-<h1>
-  <%= image_tag @event.logo_url(:thumb) if @event.logo.present? %><%= @event.name %>
-</h1>
-
-<ul class="nav nav-pills">
-  <li>
-    <%= link_to 'Edit', edit_event_path(@event) %>
-  </li>
-  <li>
-    <%= link_to 'Back', events_path %>
-  </li>
-</ul>
-
-<ul class="nav nav-tabs">
-  <li class="<%= active_tab? 'events' %>">
-    <%= link_to "Status", @event %>
-  </li>
-  <li class="<%= active_tab? 'judges' %>">
-    <%= link_to "Judges", event_judges_path(@event) %>
-  </li>
-  <li>
-    <%= link_to "Roster", event_roster_path(@event) %>
-  </li>
-  <li class="<%= active_tab? 'shirts' %>">
-    <%= link_to "Shirts", event_shirts_path(@event) %>
-  </li>
-  <li class="<%= active_tab? 'dinner' %>">
-    <%= link_to "Dinner", event_dinner_path(@event) %>
-  </li>
-  <li class="<%= active_tab? 'biographies' %>">
-    <%= link_to "Biographies", event_biographies_path(@event) %>
-  </li>
-  <li class="dropdown <%= active_tab? 'reports' %>">
-    <%= link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do %>
-      Reports <b class="caret"></b>
-    <% end %>
-    <ul class="dropdown-menu">
-      <li><%= link_to 'Dinner name cards', event_name_cards_path(@event, cards_for: :dinner) %></li>
-      <li><%= link_to 'Judge name cards', event_name_cards_path(@event) %></li>
+  
+  <div class="col-sm-3 col-md-2 sidebar">
+    <h3>
+      <%= @event.name %><br>
+      <small><%= @event.game.season %> - <%= @event.game.name %></small>
+    </h3>
+    
+    <ul class="nav nav-sidebar">
+      <li class="<%= active_tab? 'events' %>"><%= link_to 'Overview', @event %></li>
+      <li class="<%= active_tab? 'judges' %>"><%= link_to 'Judges', event_judges_path(@event) %></li>
+      <li class="<%= active_tab? 'shirts' %>"><%= link_to 'Shirts', event_shirts_path(@event) %></li>
+      <li class="<%= active_tab? 'dinner' %>"><%= link_to 'Dinner', event_dinner_path(@event) %></li>
+      <li class="<%= active_tab? 'tools' %>"><%= link_to "Email Blast", event_email_builder_path(@event) %></li>
     </ul>
-  </li>
-  <li class="dropdown <%= active_tab? 'tools' %>">
-    <%= link_to "#", class: "dropdown-toggle", data: {toggle: "dropdown"} do %>
-      Tools <b class="caret"></b>
-    <% end %>
-    <ul class="dropdown-menu">
-      <li><%= link_to "Email Blast", event_email_builder_path(@event) %></li>
-    </uL>
-  </li>
-</ul>
+  
+    <h3>Reports</h3>
+    <ul class="nav nav-sidebar">
+      <li><%= link_to 'Judge Roster', event_roster_path(@event) %></li>
+      <li class="<%= active_tab?('namecards') if params[:cards_for] %> "><%= link_to 'Dinner name cards', event_name_cards_path(@event, cards_for: :dinner) %></li>
+      <li class="<%= active_tab? 'namecards' unless params[:cards_for] %>"><%= link_to 'Judge name cards', event_name_cards_path(@event) %></li>
+    </ul>
+  </div>
 
-<%= yield %>
-
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+  </div>
+  
 <% end %>
 
 <%= render file: "layouts/application" %>

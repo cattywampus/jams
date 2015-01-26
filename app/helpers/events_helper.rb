@@ -10,7 +10,7 @@ module EventsHelper
     when :invited, :wait_list
       "text-warning"
     when :declined, :withdrew, :no_show
-      "text-error"
+      "text-danger"
     else
       "text-info"
     end

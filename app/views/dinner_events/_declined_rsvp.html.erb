@@ -2,6 +2,6 @@
 <%= link_to [rsvp.dinner_event.event, 'dinner', rsvp], 
   method: :delete, 
   confirm: "Are you sure you want to delete #{rsvp.person.first_name}'s RSVP?", 
-  remote: true do %><i class="icon-trash"></i><% end %>
+  remote: true do %><i class="glyphicon glyphicon-trash"></i><% end %>
 <%= link_to rsvp.person.full_name, ['edit', rsvp.dinner_event.event, 'dinner', rsvp], remote: true %>
 </li>

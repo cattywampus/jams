@@ -4,7 +4,7 @@ module ApplicationHelper
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
     html = <<-HTML
-    <div class="alert alert-error alert-block">
+    <div class="alert alert-danger alert-block">
       <button type="button" class="close" data-dismiss="alert">&#215;</button>
       #{messages}
     </div>
@@ -16,14 +16,14 @@ module ApplicationHelper
     if nil_value.present?
       if value.nil?
         content = nil_value
-        emphasis = "text-error"
+        emphasis = "text-danger"
       else
         content = value ? "Yes" : "No"
         emphasis = value ? "text-success" : ""
       end
     else
       content = value ? "Yes" : "No"
-      emphasis = value ? "text-success" : "text-error"
+      emphasis = value ? "text-success" : "text-danger"
     end
 
     content_tag :span, content, class: emphasis

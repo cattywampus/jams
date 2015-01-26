@@ -1,8 +1,8 @@
-<p class="muted">
+<p class="text-muted">
   <%= comment.author.name %>
   <em><%= l comment.updated_at %></em>
   <%= link_to [comment.commentable, comment], method: :delete, confirm: "Are you sure?" do %>
-    <i class="icon-trash"></i>
+    <i class="glyphicon glyphicon-trash"></i>
   <% end %>
 </p>
 

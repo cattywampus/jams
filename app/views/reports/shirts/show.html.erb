@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="span6">
+  <div class="col-md-6">
 
     <div class="graph">
       <h3>Men's shirts</h3>
@@ -17,7 +17,7 @@
         <td>
           <%= link_to judge.person.full_name, [@event, judge] %>
           <% if judge.needs_shirt.nil? %>
-            <span class="text-error">*</span>
+            <span class="text-danger">*</span>
           <% end %>
         </td>
         <td><%= judge.person.shirt_size_label %></td>
@@ -26,7 +26,7 @@
     </table>
   </div>
 
-  <div class="span6">
+  <div class="col-md-6">
     <div class="graph">
       <h3>Women's shirts</h3>
       <div id="womens-shirts-graph" data-shirts="<%= @event.shirts_needed(:female).to_json %>"></div>
@@ -42,7 +42,7 @@
         <td>
           <%= link_to judge.person.full_name, [@event, judge] %>
           <% if judge.needs_shirt.nil? %>
-            <span class="text-error">*</span>
+            <span class="text-danger">*</span>
           <% end %>
         </td>
         <td><%= judge.person.shirt_size_label %></td>
@@ -53,5 +53,5 @@
 </div>
 
 <div style="text-align: center">
-  <span class="text-error">*</span> Has not indicated if they need a shirt or not
+  <span class="text-danger">*</span> Has not indicated if they need a shirt or not
 </div>

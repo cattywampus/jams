@@ -40,7 +40,7 @@ group :test do
 end
 
 gem 'active_model_serializers', '~> 0.9'
-gem "bootstrap-sass", "~> 2.2"
+gem 'bootstrap-sass', '~> 3.3.3'
 gem "capistrano", '~> 2.15.0'
 gem 'cocoon', '~> 1.2'
 gem 'devise', '~> 3.4'

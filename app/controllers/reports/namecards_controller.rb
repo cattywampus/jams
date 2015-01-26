@@ -1,4 +1,6 @@
 class Reports::NamecardsController < ApplicationController
+  layout 'event'
+  
   def show
     @event = Event.find params[:event_id]
 

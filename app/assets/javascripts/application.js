@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require select2
 //= require cocoon
 //= require raphael

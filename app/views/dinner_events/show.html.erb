@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <div class="span4">
+  <div class="col-md-4">
     <p>
       <address>
         <h3><%= @dinner_event.venue %></h3>
@@ -32,7 +32,7 @@
     </dl>
   </div>
 
-  <div class="span4">
+  <div class="col-md-4">
     <h3>
       Guest List 
       <small id="attending_guest_count">(<%= @dinner_event.attendees.attending.size %>)</small>
@@ -53,13 +53,13 @@
     </table>
   </div>
 
-  <div class="span3">
+  <div class="col-md-3">
     <h4>
       Declined
       <small id="declined_guest_count">(<%= @dinner_event.attendees.declined.size %>)</small>
     </h4>
 
-    <ul id="declined_reservations" class="unstyled">
+    <ul id="declined_reservations" class="list-unstyled">
       <%= render partial: 'declined_rsvp', collection: @dinner_event.attendees.declined, as: :rsvp %>
     </ul>
   </div>

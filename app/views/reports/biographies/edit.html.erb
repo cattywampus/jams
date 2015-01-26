@@ -6,9 +6,7 @@
 </h2>
 
 <%= form_for @judge, url: event_biography_url(@event, @judge), method: :put do |f| %>
-  <%= f.text_area :biography, rows: "10", class: "span8" %>
-  <div class="form-actions">
-    <%= f.submit "Save Biography", class: "btn btn-primary" %>
-    <%= link_to "Cancel", event_biographies_path(@event), class: "btn btn-danger" %>
-  </div>
+  <%= f.text_area :biography, rows: "10", class: "col-md-8" %>
+  <%= f.submit "Save Biography", class: "btn btn-primary" %>
+  <%= link_to "Cancel", event_biographies_path(@event), class: "btn btn-danger" %>
 <% end %>

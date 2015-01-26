@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="span6">
-    <h1>
+  <div class="col-md-6">
+    <h1 class="page-header">
       <%= @judge.person.full_name(true) %><br>
       <small><%= @judge.role %></small>
     </h1>
@@ -15,7 +15,7 @@
     </ul>
 
     <div class="row">
-      <div class="span3">
+      <div class="col-md-6">
 
         <dl class="dl-horizontal">
           <dt>Status:</dt>
@@ -25,7 +25,7 @@
 
           <% if @judge.rookie? %>
             <dt>Rookie:</dt>
-            <dd><i class="icon-check"></i></dd>
+            <dd><i class="glyphicon glyphicon-check"></i></dd>
           <% end %>
 
           <dt>Received event info?</dt>
@@ -66,7 +66,7 @@
         </dl>
       </div>
 
-      <div class="span3">
+      <div class="col-md-6">
         <h3>Actions</h3>
         <%= link_to_unless @judge.biography_approved?, "Approve Bio", event_biography_approved_path(@event, @judge), class: "btn btn-info", method: :put do %>
           
@@ -82,20 +82,20 @@
 
     <p>
       <b>Biography:</b><br>
-      <span class="span6">
+      <span class="col-md-6">
         <%= @judge.biography.present? ? @judge.biography : content_tag(:em, "Not provided", class: "text-warning") %>
       </span>
     </p>
   </div>
 
-  <div class="span6">
+  <div class="col-md-6">
 
     <div class="well">
-        <%= link_to edit_person_path(@judge.person), class: "btn btn-mini btn-info pull-right", id: "edit-profile" do %>
-          <i class="icon-pencil icon-white"></i> Edit
+        <%= link_to edit_person_path(@judge.person), class: "btn btn-xs btn-info pull-right", id: "edit-profile" do %>
+          <i class="glyphicon glyphicon-pencil icon-white"></i> Edit
         <% end %>
       <div class="row">
-        <div class="span5">
+        <div class="col-md-5">
           <h4>
             <%= @judge.person.company %>
             <small><%= @judge.person.position %></small>
@@ -162,7 +162,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
         <%= submit_tag "Submit RSVP", class: "btn btn-primary" %>
       </div>
     <% end %>

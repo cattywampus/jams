@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="span4">
-    <div class="accordion" id="judge-notices">
+  <div class="col-md-4">
+    <div class="panel-group" id="judge-notices">
       <% if @event.dinner.present? %>
       <%= render layout: "judge_accordion", 
               locals: {
@@ -38,8 +38,8 @@
     </div>
   </div>
 
-  <div class="span4">
-    <div class="accordion" id="event-notices">
+  <div class="col-md-4">
+    <div class="panel-group" id="event-notices">
       <%= render layout: "judge_accordion",
               locals: {
                 title: "#{pluralize @counts[:missing_consent], "Judge"} need to provide FIRST Consent",

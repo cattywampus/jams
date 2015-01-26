@@ -10,25 +10,26 @@
  *
  *= require_self
  *= require select2
+ *= require select2-bootstrap
  *= require morris
  *= require zocial
- *= require_tree .
 */
 
-.content {
-  background-color: white;
-  padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
-}
+@import 'variables';
 
-@media print {
-    tr {
-        page-break-after: auto;
-    }
-}
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import 'bootstrap_overrides';
+
+@import 'scaffolds';
+
+@import 'events';
+@import 'games';
+@import 'judges';
+@import 'people';
+
+@import 'reports/namecards';
+@import 'reports/shirts';
+
+
