@@ -184,6 +184,7 @@ GEM
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    newrelic_rpm (3.9.9.275)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     ntlm-http (0.1.1)
@@ -354,6 +355,7 @@ DEPENDENCIES
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 4.2.0)
   mechanize
+  newrelic_rpm
   omniauth-google-oauth2 (~> 0.2)
   omniauth-openid (>= 1.0.1)
   paper_trail (~> 3.0)

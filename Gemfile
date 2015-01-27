@@ -46,6 +46,7 @@ gem 'cocoon', '~> 1.2'
 gem 'devise', '~> 3.4'
 gem 'devise_invitable', '~> 1.4'
 gem 'mechanize'
+gem 'newrelic_rpm'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem "omniauth-openid", ">= 1.0.1"
 gem 'cancancan', '~> 1.10'
