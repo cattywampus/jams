@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
 
   mount_uploader :logo, LogoUploader
   
-  enum event_type: [ :regional, :district, :championship ]
+  enum event_type: [ :regional, :district_event, :district_championship, :championship ]
   
   validates_presence_of :name
   validates_presence_of :game_id

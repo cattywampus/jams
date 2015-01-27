@@ -5,11 +5,7 @@
     <%= f.association :game %>
     <%= f.input :name %>
     <%= f.input :venue %>
-    <%= f.input :street1 %>
-    <%= f.input :street2 %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :zip %>
+    <%= f.input :address, as: :text %>
     <%= f.input :begins_on %>
     <%= f.input :ends_on %>
     <%= f.input :logo, as: :image_preview, input_html: {preview_version: :medium} %>

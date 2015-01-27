@@ -5,11 +5,7 @@ FactoryGirl.define do
     game
     name "Virginia Regional"
     venue "VCU Siegel Center"
-    street1 "MyString"
-    street2 "MyString"
-    city "MyString"
-    state "MyString"
-    zip "MyString"
+    address "123 Main Street\nAnytown, State 98765\nUSA"
     begins_on "2013-01-10"
     ends_on "2013-01-10"
 
