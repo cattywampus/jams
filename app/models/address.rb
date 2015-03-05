@@ -4,11 +4,7 @@ class Address < ActiveRecord::Base
   validate :must_provide_address, unless: lambda { |a| a.address_is_blank? }
 
   def self.types
-    [
-      "home",
-      "work",
-      "other"
-    ]
+    %w(home work other)
   end
 
   def address_is_blank?
@@ -18,9 +14,12 @@ class Address < ActiveRecord::Base
 private
 
   def must_provide_address
-    fields = [:street1, :city, :state, :zip]
-    errors.add_on_blank(fields)
-
-    (errors.keys & fields).present?
+    if zip.present? || (city.present? && state.present?)
+      false
+    else
+      errors.add(:address, "must include a city and state or zip code")
+      errors.add_on_blank([:city, :state, :zip])
+      true
+    end
   end
 end

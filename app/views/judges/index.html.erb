@@ -1,16 +1,31 @@
+<h1 class="page-header">Judges <small>(<%= @judges.count %>)</small></h1>
+
 <div class="pull-right">
   <%= form_tag event_judges_path(@event), method: :get, class: 'form-inline' do %>
     <%= label_tag :status %>
     <% e = Judge.new.enums(:status) %>
-    <%= select_tag :status, options_for_select(e.select_options, params[:status]), prompt: "All" %>
+    <%= select_tag :status, options_for_select(e.select_options, params[:status]), prompt: "All", class: 'form-control' %>
     <%= submit_tag 'Filter', class: "btn btn-default" %>
   <% end %>
-  Export: <%= link_to "CSV", event_judges_path(@event, params.merge(format: :csv)) %> | <%= link_to "Excel", event_judges_path(@event, params.merge(format: :xls)) %>
 </div>
 
-<h1 class="page-header">Listing judges</h1>
+<%= link_to 'New Judge', new_event_judge_path(@event), class: 'btn btn-success' %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import_judges_modal">
+  <span class="glyphicon glyphicon-import"></span>
+  Import
+</button>
 
-<%= link_to 'New Judge', new_event_judge_path(@event) %><br>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <span class="glyphicon glyphicon-export"></span> Export <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><%= link_to "CSV", event_judges_path(@event, params.merge(format: :csv)) %></li>
+    <li><%= link_to "Excel", event_judges_path(@event, params.merge(format: :xls)) %></li>
+  </ul>
+</div>
+
+<br>
 
 <br>
 
@@ -18,13 +33,35 @@
   <tr>
     <th>Name</th>
     <th>Email</th>
+    <th>Company</th>
     <th>Status</th>
   </tr>
   <% @judges.each do |judge| %>
   <tr>
     <td><%= link_to judge.person.full_name, event_judge_path(@event, judge, status: params[:status]) %></td>
     <td><%= mail_to judge.person.email %></td>
+    <td><%= judge.company %>
     <td><%= judge.status %></td>
   </tr>
   <% end %>
 </table>
+
+<div class="modal fade" id="import_judges_modal" tabindex="-1" role="dialog" aria-labelledby="import_judges_label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="import_judges_label">Import Judges</h4>
+      </div>
+      <%= form_tag import_event_judges_path(@event), multipart: true do %>
+      <div class="modal-body">
+        <%= file_field_tag :file, class: 'form-control' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Import', class: 'btn btn-primary' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

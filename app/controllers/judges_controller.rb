@@ -94,6 +94,12 @@ class JudgesController < ApplicationController
     end
   end
 
+  def import
+    @event = Event.find params[:event_id]
+    FIRST::JudgeImporter.import_vms_report(params[:file], @event)
+    redirect_to event_judges_path(@event)
+  end
+  
   # DELETE /judges/1
   # DELETE /judges/1.json
   def destroy

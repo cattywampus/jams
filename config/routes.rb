@@ -6,7 +6,11 @@ Jams::Application.routes.draw do
   end
 
   resources :events do
-    resources :judges
+    resources :judges do
+      collection do
+        post :import
+      end
+    end
     get :roster
 
     resource :dinner, controller: "dinner_events" do 

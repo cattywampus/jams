@@ -168,6 +168,8 @@ GEM
       webrobots (>= 0.0.9, < 0.2)
     meta_programming (0.2.2)
     method_source (0.8.2)
+    migration_data (0.0.4)
+      rails (>= 4.0.0.rc1)
     mime-types (2.4.3)
     mini_portile (0.6.1)
     minitest (5.5.0)
@@ -253,6 +255,10 @@ GEM
       railties (>= 3.2, < 4.2)
     rmagick (2.13.4)
     rolify (3.4.1)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -273,7 +279,9 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
+    ruby-ole (1.2.11.8)
     ruby-openid (2.6.0)
+    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -291,6 +299,8 @@ GEM
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     slop (3.6.0)
+    spreadsheet (1.0.1)
+      ruby-ole (>= 1.0)
     spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -355,6 +365,7 @@ DEPENDENCIES
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 4.2.0)
   mechanize
+  migration_data
   newrelic_rpm
   omniauth-google-oauth2 (~> 0.2)
   omniauth-openid (>= 1.0.1)
@@ -367,6 +378,7 @@ DEPENDENCIES
   rb-inotify
   rmagick
   rolify (>= 3.4)
+  roo
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.5)
   sdoc

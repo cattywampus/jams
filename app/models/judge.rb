@@ -1,6 +1,6 @@
 class Judge < ActiveRecord::Base
   has_paper_trail
-  
+
   belongs_to :person
   belongs_to :event
   has_one :judge_assignment
@@ -12,8 +12,8 @@ class Judge < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :event_id
 
-  scope :attending_dinner, -> { 
-    where({attending_dinner: true}) 
+  scope :attending_dinner, -> {
+    where({attending_dinner: true})
   }
   scope :confirmed, -> { where({status: :confirmed}) }
   scope :judges, -> { where({role: :judge}) }
@@ -40,30 +40,30 @@ class Judge < ActiveRecord::Base
       csv << ["#", "Name", "Position", "Organization", "Email", "Status"]
       all.each_with_index do |judge, index|
         csv << [
-          index + 1, 
-          judge.person.full_name(true), 
-          judge.person.position, 
-          judge.person.company, 
-          judge.person.email, 
+          index + 1,
+          judge.person.full_name(true),
+          judge.person.position,
+          judge.person.company,
+          judge.person.email,
           judge.status
         ]
       end
     end
   end
-  
+
   def self.attending_dinner(dinner)
     guest_ids = dinner.attendees.attending.map(&:person_id) || []
     where(person_id: guest_ids)
   end
-  
+
   def self.declined_dinner(dinner)
     guest_ids = dinner.attendees.declined.map(&:person_id) || []
     where(person_id: guest_ids)
   end
-  
+
   def self.missing_dinner_rsvp(dinner)
     guest_ids = dinner.attendees.map(&:person_id) || []
     guest_ids.empty? ? all : where('person_id not in (?)', guest_ids)
   end
-  
+
 end

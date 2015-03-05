@@ -44,6 +44,7 @@ gem 'cocoon', '~> 1.2'
 gem 'devise', '~> 3.4'
 gem 'devise_invitable', '~> 1.4'
 gem 'mechanize'
+gem 'migration_data'
 gem 'newrelic_rpm'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem "omniauth-openid", ">= 1.0.1"
@@ -54,6 +55,7 @@ gem 'simple_form', '~> 3.1'
 gem "figaro", ">= 0.5.0"
 gem "carrierwave"
 gem "rmagick"
+gem 'roo'
 gem "select2-rails", '~> 3.5'
 gem 'enumerated_attribute', git: 'https://github.com/cattywampus/enumerated_attribute.git'
 gem 'unicorn', '~> 4.8'

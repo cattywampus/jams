@@ -12,13 +12,14 @@ class Person < ActiveRecord::Base
   default_scope { order("LOWER(first_name) ASC, LOWER(last_name) ASC") }
 
   enum_attr :gender, %w(male female)
-  enum_attr :shirt_size, %w(s m l xl xxl xxxl) do
+  enum_attr :shirt_size, %w(s m l xl 2xl 3xl 4xl) do
     label s: 'Small'
     label m: 'Medium'
     label l: 'Large'
     label xl: 'XL'
-    label xxl: '2XL'
-    label xxxl: '3XL'
+    label :'2xl' => '2XL'
+    label :'3xl' => '3XL'
+    label :'4xl' => '4XL'
   end
 
   mount_uploader :avatar, AvatarUploader
