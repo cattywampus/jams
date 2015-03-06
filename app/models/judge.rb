@@ -12,7 +12,9 @@ class Judge < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :event_id
 
-  scope :attending_dinner, -> { where({attending_dinner: true}) }
+  scope :attending_dinner, -> { 
+    where({attending_dinner: true}) 
+  }
   scope :confirmed, -> { where({status: :confirmed}) }
   scope :judges, -> { where({role: :judge}) }
   scope :advisors, -> { where({role: :advisor}) }
@@ -21,10 +23,13 @@ class Judge < ActiveRecord::Base
   scope :without_bio, -> { where({biography: [nil, '', ' ']}) }
 
   delegate :email, to: :person
+  delegate :primary_email, to: :person
   delegate :full_name, to: :person
   delegate :first_name, to: :person
   delegate :last_name, to: :person
   delegate :company, to: :person
+  delegate :position, to: :person
+  delegate :assistant, to: :person
 
   def dinner_rsvp
     event.dinner.attendees.find_by_person_id(person_id) if event.dinner.present?
@@ -44,6 +49,21 @@ class Judge < ActiveRecord::Base
         ]
       end
     end
+  end
+  
+  def self.attending_dinner(dinner)
+    guest_ids = dinner.attendees.attending.map(&:person_id) || []
+    where(person_id: guest_ids)
+  end
+  
+  def self.declined_dinner(dinner)
+    guest_ids = dinner.attendees.declined.map(&:person_id) || []
+    where(person_id: guest_ids)
+  end
+  
+  def self.missing_dinner_rsvp(dinner)
+    guest_ids = dinner.attendees.map(&:person_id) || []
+    guest_ids.empty? ? all : where('person_id not in (?)', guest_ids)
   end
   
 end

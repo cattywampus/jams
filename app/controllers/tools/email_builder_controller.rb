@@ -3,27 +3,26 @@ class Tools::EmailBuilderController < ApplicationController
 
   def show
     @event = Event.find params[:event_id]
-    @people = Person.joins(judge_history: :event)
-        .where(events: { id: @event.id }, 
-               judges: {
-                 status: status, 
-                 role: role, 
-                 completed_vims: vims, 
-                 attending_dinner: dinner})
+    
+    @people = @event.judges
+    
+    @people = @people.where(status: status, role: role, completed_vims: vims)
+    @people = filter_by_dinner(@people) if @event.dinner
   end
 
 private
 
-  def dinner
-    params[:attending_dinner] ||= "ignore"
-
-    if params[:attending_dinner] == "rsvp"
-      nil
-    elsif params[:attending_dinner] == "ignore"
-      [true, false, nil]
+  def filter_by_dinner(people)
+    case params[:attending_dinner]
+    when 'rsvp'
+      @people.missing_dinner_rsvp(@event.dinner)
+    when 'true'
+      @people.attending_dinner(@event.dinner)
+    when 'false'
+      @people.declined_dinner(@event.dinner)
     else
-      params[:attending_dinner]
-    end
+      people
+    end 
   end
 
   def role
