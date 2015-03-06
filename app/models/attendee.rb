@@ -4,7 +4,7 @@ class Attendee < ActiveRecord::Base
   belongs_to :entree
 
   scope :attending, -> { where(status: :attending) }
-  scope :declined, -> { where(status: :delclined) }
+  scope :declined, -> { where(status: :declined) }
 
   enum_attr :status, %w(attending declined)
 
