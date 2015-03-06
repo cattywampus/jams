@@ -68,7 +68,7 @@ class Person < ActiveRecord::Base
   end
 
   def primary_email
-    assistant.present? ? assistant.email : email
+    assistant.present? ? [email, assistant.email] : email
   end
 
   def shirt_size_label
