@@ -13,6 +13,5 @@ FactoryGirl.define do
     provided_consent false
     provided_conflict false
     received_event_info false
-    attending_dinner true
   end
 end
