@@ -25,6 +25,7 @@ module FIRST
         judge.rookie = is_rookie?(row)
         judge.provided_consent = consent_status(row['Consent Status'])
         judge.completed_vims = true
+        judge.needs_shirt = true if judge.rookie
         judge.save!
       end
     end
