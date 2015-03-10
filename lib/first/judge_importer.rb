@@ -1,5 +1,3 @@
-
-
 module FIRST
   module JudgeImporter
     def self.import_vms_report(file, event)
@@ -7,7 +5,7 @@ module FIRST
       header = spreadsheet.row(15)
       (16..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
-        person = Person.find_or_initialize_by(email: row["Email"]) do |person|
+        person = Person.find_or_create_by(email: row["Email"]) do |person|
           person.first_name = row['First Name']
           person.last_name = row['Last Name']
           person.addresses << address_from(row)
@@ -27,17 +25,28 @@ module FIRST
         judge.rookie = is_rookie?(row)
         judge.provided_consent = consent_status(row['Consent Status'])
         judge.completed_vims = true
-        person.save!
         judge.save!
       end
     end
     
-    def self.open_spreadsheet(file)
-      case File.extname(file.original_filename)
-      when ".csv" then Roo::CSV.new(file.path, file_warning: :ignore)
-      when ".xls" then Roo::Excelx.new(file.path, file_warning: :ignore)
-      when ".xlsx" then Roo::Excelx.new(file.path, file_warning: :ignore)
-      else raise "Unknown file type: #{file.original_filename}"
+    def self.open_spreadsheet(file_or_path)
+      if file_or_path.instance_of? String
+        file = File.open file_or_path
+      else
+        file = file_or_path
+      end
+      
+      if file.respond_to?(:original_filename)
+        filename = file.original_filename
+      else
+        filename = file.path
+      end
+      
+      case filename
+      when /.csv$/ then Roo::CSV.new(file.path, file_warning: :ignore)
+      when /.xls$/ then Roo::Excelx.new(file.path, file_warning: :ignore)
+      when /.xlsx$/ then Roo::Excelx.new(file.path, file_warning: :ignore)
+      else raise "Unknown file type: #{filename}"
       end
     end
     
