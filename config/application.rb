@@ -15,11 +15,11 @@ module Jams
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl
-      
-      
+
+
       g.view_specs false
       g.helper_specs false
     end
@@ -67,8 +67,11 @@ module Jams
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
+
     # Speed things up by not loading Rails env
     config.assets.initialize_on_precompile = false
+
+    # Ensure errors are thrown in `after_rollback` & `after_commit` callbacks
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

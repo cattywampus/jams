@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.5'
 
 gem 'sass-rails',   '~> 4.0.5'
 gem 'coffee-rails', '~> 4.0.1'
@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rb-fchange', :require => false
   gem 'guard-rspec', '~> 4.5'
   gem 'growl', :require => false
+  gem 'web-console'
 end
 
 group :test do
@@ -50,6 +51,7 @@ gem 'omniauth-google-oauth2', '~> 0.2'
 gem "omniauth-openid", ">= 1.0.1"
 gem 'cancancan', '~> 1.10'
 gem 'paper_trail', '~> 3.0'
+gem 'responders', '~> 2.1'
 gem 'rolify', '>= 3.4'
 gem 'simple_form', '~> 3.1'
 gem "figaro", ">= 0.5.0"
