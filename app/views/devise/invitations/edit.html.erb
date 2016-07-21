@@ -2,17 +2,16 @@
 
 <div class="row">
   <div class="col-md-offset-1 col-md-4">
-    <p>You can access JAMS by signing in with any one of the online services 
+    <p>You can access JAMS by signing in with any one of the online services
       below.
     </p>
-    <%= link_to "Sign in with Google", 
-                user_omniauth_authorize_path(:google_oauth2, invitation_token: params[:invitation_token]), 
+    <%= link_to "Sign in with Google",
+                user_google_oauth2_omniauth_authorize_path(invitation_token: params[:invitation_token]),
                 class: "zocial google" %><br>
     <br>
     <%= link_to "Sign in with Yahoo",
-                user_omniauth_authorize_path(:open_id, 
-                                             :openid_url => "http://me.yahoo.com",
-                                             invitation_token: params[:invitation_token]), 
+                user_open_id_omniauth_authorize_path(:openid_url => "http://me.yahoo.com",
+                                             invitation_token: params[:invitation_token]),
                 class: "zocial yahoo" %>
 
   </div>

@@ -7,10 +7,10 @@
 
     <ul class="nav nav-pills">
       <li>
-        <%= link_to "<- Back", event_judges_path(@event, status: params[:status]) %>
+        <%= link_to "<- Back", event_judges_path(event_id: @event, status: params[:status]) %>
       </li>
       <li>
-        <%= link_to "Edit", edit_event_judge_path(@event, @judge) %>
+        <%= link_to "Edit", edit_event_judge_path(@judge, event_id: @event) %>
       </li>
     </ul>
 
@@ -36,7 +36,7 @@
           <dt>Needs shirt?</dt>
           <dd>
             <%= display_yes_no @judge.needs_shirt, "Not indicated" %>
-          </dd> 
+          </dd>
 
           <dt>Completed VIMS?</dt>
           <dd>
@@ -69,7 +69,7 @@
       <div class="col-md-6">
         <h3>Actions</h3>
         <%= link_to_unless @judge.biography_approved?, "Approve Bio", event_biography_approved_path(@event, @judge), class: "btn btn-info", method: :put do %>
-          
+
         <% end %>
 
         <% if @event.dinner.nil? %>
@@ -166,6 +166,6 @@
         <%= submit_tag "Submit RSVP", class: "btn btn-primary" %>
       </div>
     <% end %>
-    
+
   </div>
 <% end %>

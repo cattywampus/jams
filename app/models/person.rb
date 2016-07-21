@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   has_paper_trail
 
   belongs_to :assistant, foreign_key: :assistant_id, class_name: "Person"
@@ -84,7 +84,8 @@ class Person < ActiveRecord::Base
 
   def must_provide_full_name
     fields = [:first_name, :last_name]
-    errors.add_on_blank(fields)
+    errors.add(:first_name, :empty) if self.first_name.blank?
+    errors.add(:last_name, :empty) if self.last_name.blank?
 
     invalid = (errors.keys & fields).present?
     if invalid

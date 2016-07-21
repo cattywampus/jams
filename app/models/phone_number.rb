@@ -1,4 +1,4 @@
-class PhoneNumber < ActiveRecord::Base
+class PhoneNumber < ApplicationRecord
   belongs_to :person
 
   before_validation :clean_phone_number
@@ -22,7 +22,7 @@ class PhoneNumber < ActiveRecord::Base
   end
 
 private
-  
+
   def clean_phone_number
     phone_number.gsub!(/[^0-9x+]/, '') if phone_number.present?
   end

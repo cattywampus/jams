@@ -1,4 +1,4 @@
-class Judge < ActiveRecord::Base
+class Judge < ApplicationRecord
   has_paper_trail
 
   belongs_to :person

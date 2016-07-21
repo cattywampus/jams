@@ -20,7 +20,7 @@ require 'rails_helper'
 
 describe JudgesController do
   login :admin
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Judge. As you add validations to Judge, be sure to
   # update the return value of this method accordingly.
@@ -37,7 +37,7 @@ describe JudgesController do
   describe "GET index" do
     it "assigns all judges as @judges" do
       judge = Judge.create! valid_attributes
-      get :index, {}
+      get :index
       expect(assigns(:judges)).to eq([judge])
     end
   end
@@ -45,14 +45,14 @@ describe JudgesController do
   describe "GET show" do
     it "assigns the requested judge as @judge" do
       judge = Judge.create! valid_attributes
-      get :show, {:id => judge.to_param}
+      get :show, params: { :id => judge.to_param }
       expect(assigns(:judge)).to eq(judge)
     end
   end
 
   describe "GET new" do
     it "assigns a new judge as @judge" do
-      get :new, {}
+      get :new
       expect(assigns(:judge)).to be_a_new(Judge)
     end
   end
@@ -60,7 +60,7 @@ describe JudgesController do
   describe "GET edit" do
     it "assigns the requested judge as @judge" do
       judge = Judge.create! valid_attributes
-      get :edit, {:id => judge.to_param}
+      get :edit, params: { :id => judge.to_param }
       expect(assigns(:judge)).to eq(judge)
     end
   end
@@ -69,18 +69,18 @@ describe JudgesController do
     describe "with valid params" do
       it "creates a new Judge" do
         expect {
-          post :create, {:judge => valid_attributes}
+          post :create, params: { :judge => valid_attributes }
         }.to change(Judge, :count).by(1)
       end
 
       it "assigns a newly created judge as @judge" do
-        post :create, {:judge => valid_attributes}
+        post :create, params: { :judge => valid_attributes }
         expect(assigns(:judge)).to be_a(Judge)
         expect(assigns(:judge)).to be_persisted
       end
 
       it "redirects to the created judge" do
-        post :create, {:judge => valid_attributes}
+        post :create, params: { :judge => valid_attributes }
         expect(response).to redirect_to(Judge.last)
       end
     end
@@ -89,14 +89,14 @@ describe JudgesController do
       it "assigns a newly created but unsaved judge as @judge" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:save).and_return(false)
-        post :create, {:judge => invalid_attributes}
+        post :create, params: { :judge => invalid_attributes }
         expect(assigns(:judge)).to be_a_new(Judge)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:save).and_return(false)
-        post :create, {:judge => invalid_attributes}
+        post :create, params: { :judge => invalid_attributes }
         expect(response).to render_template("new")
       end
     end
@@ -105,24 +105,21 @@ describe JudgesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested judge" do
-        judge = Judge.create! valid_attributes
-        # Assuming there are no other judges in the database, this
-        # specifies that the Judge created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(Judge).to receive(:update_attributes).with({ "status" => "judge" })
-        put :update, {:id => judge.to_param, :judge => { "status" => "judge" }}
+        judge = Judge.create! valid_attributes.merge(status: "invited")
+        put :update, params: { :id => judge.to_param, :judge => { "status" => "confirmed" } }
+        judge.reload
+        expect(judge.status).to eq :confirmed
       end
 
       it "assigns the requested judge as @judge" do
         judge = Judge.create! valid_attributes
-        put :update, {:id => judge.to_param, :judge => valid_attributes}
+        put :update, params: { :id => judge.to_param, :judge => valid_attributes }
         expect(assigns(:judge)).to eq(judge)
       end
 
       it "redirects to the judge" do
         judge = Judge.create! valid_attributes
-        put :update, {:id => judge.to_param, :judge => valid_attributes}
+        put :update, params: { :id => judge.to_param, :judge => valid_attributes }
         expect(response).to redirect_to([judge.event, judge])
       end
     end
@@ -132,7 +129,7 @@ describe JudgesController do
         judge = Judge.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:save).and_return(false)
-        put :update, {:id => judge.to_param, :judge => invalid_attributes}
+        put :update, params: { :id => judge.to_param, :judge => invalid_attributes }
         expect(assigns(:judge)).to eq(judge)
       end
 
@@ -140,7 +137,7 @@ describe JudgesController do
         judge = Judge.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:save).and_return(false)
-        put :update, {:id => judge.to_param, :judge => invalid_attributes}
+        put :update, params: { :id => judge.to_param, :judge => invalid_attributes }
         expect(response).to render_template("edit")
       end
     end
@@ -150,13 +147,13 @@ describe JudgesController do
     it "destroys the requested judge" do
       judge = Judge.create! valid_attributes
       expect {
-        delete :destroy, {:id => judge.to_param}
+        delete :destroy, params: { :id => judge.to_param }
       }.to change(Judge, :count).by(-1)
     end
 
     it "redirects to the previous page" do
       judge = Judge.create! valid_attributes
-      delete :destroy, {:id => judge.to_param}
+      delete :destroy, params: { :id => judge.to_param }
       expect(response).to redirect_to(event_judges_path(judge.event))
     end
   end

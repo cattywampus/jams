@@ -1,4 +1,4 @@
-class Attendee < ActiveRecord::Base
+class Attendee < ApplicationRecord
   belongs_to :person
   belongs_to :dinner_event
   belongs_to :entree
@@ -17,5 +17,5 @@ class Attendee < ActiveRecord::Base
   delegate :first_name, to: :person
   delegate :last_name, to: :person
   delegate :company, to: :person
-  
+
 end

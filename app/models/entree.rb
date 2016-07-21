@@ -1,3 +1,3 @@
-class Entree < ActiveRecord::Base
+class Entree < ApplicationRecord
   belongs_to :dinner_event
 end

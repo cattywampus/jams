@@ -1,7 +1,7 @@
-class JudgeAssignment < ActiveRecord::Base
+class JudgeAssignment < ApplicationRecord
   belongs_to :judge
   belongs_to :judge_team
-  
+
   validates :judge, presence: true
   validates :judge_team, presence: true
 end

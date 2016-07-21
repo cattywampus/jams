@@ -1,7 +1,7 @@
 class Reports::BiographiesController < ApplicationController
   layout "event"
-  before_filter :authenticate_user!
-  before_filter :load_event
+  before_action :authenticate_user!
+  before_action :load_event
 
   def index
     @judges = @event.confirmed_judges
@@ -46,7 +46,7 @@ private
     @event = Event.find params[:event_id]
     authorize! :read, @event
   end
-  
+
   def judge_params
     params.require(:judge).permit(:biography, :biography_approved)
   end

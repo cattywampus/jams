@@ -1,4 +1,4 @@
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   belongs_to :program
   has_many :events, -> { order "begins_on ASC" }
 

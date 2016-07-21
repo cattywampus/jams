@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /events
@@ -105,7 +105,7 @@ class EventsController < ApplicationController
   def candidates
     @event = Event.find params[:id]
     if params[:name].present?
-      @candidates = @event.possible_judges.where("lower(first_name) like ? or lower(last_name) like ?", 
+      @candidates = @event.possible_judges.where("lower(first_name) like ? or lower(last_name) like ?",
                     "%#{params[:name].downcase}%", "%#{params[:name].downcase}%")
     else
       @candidates = @event.possible_judges
@@ -115,9 +115,9 @@ class EventsController < ApplicationController
       format.json { render json: @candidates.map { |c| {id: c.id, text: c.full_name} } }
     end
   end
-  
+
   private
-  
+
   def event_params
     params.require(:event).permit(:address, :begins_on, :ends_on, :game_id, :logo, :name, :venue)
   end

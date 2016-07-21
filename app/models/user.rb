@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
 
   has_many :user_events
   has_many :events, through: :user_events
-  
+
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  
+
   validates_presence_of :name
 
   def self.from_omniauth(auth, token=nil)

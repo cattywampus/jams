@@ -1,8 +1,8 @@
-class JudgeTeam < ActiveRecord::Base
+class JudgeTeam < ApplicationRecord
   belongs_to :event
   has_many :judge_assignments
 
   validates :event, presence: true
 
-  enum_attr :type, %w(machine team_attribute deans_list chairmans) 
+  enum_attr :type, %w(machine team_attribute deans_list chairmans)
 end

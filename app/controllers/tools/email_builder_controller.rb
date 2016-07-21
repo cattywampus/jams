@@ -3,9 +3,9 @@ class Tools::EmailBuilderController < ApplicationController
 
   def show
     @event = Event.find params[:event_id]
-    
+
     @people = @event.judges
-    
+
     @people = @people.where(status: status, role: role, completed_vims: vims)
     @people = filter_by_dinner(@people) if @event.dinner
   end
@@ -22,7 +22,7 @@ private
       @people.declined_dinner(@event.dinner)
     else
       people
-    end 
+    end
   end
 
   def role

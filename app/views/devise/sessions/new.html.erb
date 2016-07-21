@@ -2,13 +2,12 @@
 
 <div class="row">
   <div class="col-md-offset-1 col-md-4">
-    <%= link_to "Sign in with Google", 
-                user_omniauth_authorize_path(:google_oauth2), 
+    <%= link_to "Sign in with Google",
+                user_google_oauth2_omniauth_authorize_path,
                 class: "zocial google" %><br>
     <br>
     <%= link_to "Sign in with Yahoo",
-                user_omniauth_authorize_path(:open_id, 
-                                             :openid_url => "http://me.yahoo.com"), 
+                user_open_id_omniauth_authorize_path(:openid_url => "http://me.yahoo.com"),
                 class: "zocial yahoo" %>
   </div>
 

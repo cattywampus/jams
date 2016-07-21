@@ -71,7 +71,7 @@ module Jams
     # Speed things up by not loading Rails env
     config.assets.initialize_on_precompile = false
 
-    # Ensure errors are thrown in `after_rollback` & `after_commit` callbacks
-    config.active_record.raise_in_transactional_callbacks = true
+    # Rails 5: Disable halting ActiveRecord callbacks when returning false
+    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end

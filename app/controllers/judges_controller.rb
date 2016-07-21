@@ -1,7 +1,7 @@
 class JudgesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   layout "event"
-  
+
   # GET /judges
   # GET /judges.json
   def index
@@ -22,7 +22,7 @@ class JudgesController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @judges }
       format.csv { render text: @judges.to_csv }
-      format.xls 
+      format.xls
     end
   end
 
@@ -99,7 +99,7 @@ class JudgesController < ApplicationController
     FIRST::JudgeImporter.import_vms_report(params[:file], @event)
     redirect_to event_judges_path(@event)
   end
-  
+
   # DELETE /judges/1
   # DELETE /judges/1.json
   def destroy
@@ -111,22 +111,22 @@ class JudgesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def judge_params
     params.require(:judge)
           .permit(:attending_dinner,
-                  :biography, 
-                  :completed_vims, 
+                  :biography,
+                  :completed_vims,
                   :event_id,
-                  :needs_shirt, 
+                  :needs_shirt,
                   :person_id,
-                  :provided_conflict, 
-                  :provided_consent, 
-                  :received_event_info, 
-                  :role, 
-                  :rookie, 
+                  :provided_conflict,
+                  :provided_consent,
+                  :received_event_info,
+                  :role,
+                  :rookie,
                   :status)
   end
 end

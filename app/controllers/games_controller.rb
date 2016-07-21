@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /games
@@ -84,9 +84,9 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def game_params
     params.require(:game).permit(:active, :logo, :name, :program_id, :season)
   end

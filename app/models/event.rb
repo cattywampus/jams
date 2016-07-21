@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   belongs_to :game
   has_many :judges
   has_many :judge_teams
@@ -9,9 +9,9 @@ class Event < ActiveRecord::Base
   scope :inactive, -> { includes(:game).where(games: { active: false }) }
 
   mount_uploader :logo, LogoUploader
-  
+
   enum event_type: [ :regional, :district_event, :district_championship, :championship ]
-  
+
   validates_presence_of :name
   validates_presence_of :game_id
 
@@ -26,8 +26,8 @@ class Event < ActiveRecord::Base
 
   def judges_without_shirts(gender)
     judges.joins(:person).where({
-      needs_shirt: [true, nil], 
-      status: :confirmed, 
+      needs_shirt: [true, nil],
+      status: :confirmed,
       role: [:advisor, :judge],
       people: {gender: gender}})
   end

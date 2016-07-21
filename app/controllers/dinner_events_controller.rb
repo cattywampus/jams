@@ -1,6 +1,6 @@
 class DinnerEventsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_event
+  before_action :authenticate_user!
+  before_action :load_event
   layout "event"
 
   # GET /dinner_events/1
@@ -13,7 +13,7 @@ class DinnerEventsController < ApplicationController
     respond_to do |format|
       if @dinner_event.nil?
         format.html { redirect_to new_event_dinner_path(@event) }
-      else 
+      else
         format.html # show.html.erb
         format.json { render json: @dinner_event }
       end
@@ -25,7 +25,7 @@ class DinnerEventsController < ApplicationController
   def new
     @dinner_event = DinnerEvent.new
     @dinner_event.event = @event
-    
+
     authorize! :create, @dinner_event
 
     respond_to do |format|
@@ -115,7 +115,7 @@ private
     @event = Event.find params[:event_id]
     authorize! :read, @event
   end
-  
+
   def dinner_event_params
     params.require(:dinner_event).permit(:begins_at, :city, :ends_at, :room, :state, :street1, :street2, :venue, :zip, entrees_attributes: [:description, :name, :protein])
   end

@@ -1,4 +1,4 @@
-class DinnerEvent < ActiveRecord::Base
+class DinnerEvent < ApplicationRecord
   belongs_to :event
   has_many :attendees
   has_many :people, through: :attendees

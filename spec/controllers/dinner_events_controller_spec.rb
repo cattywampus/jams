@@ -26,21 +26,21 @@ describe DinnerEventsController do
 
   describe "GET show" do
     it "assigns the requested dinner_event as @dinner_event" do
-      get :show, {:event_id => event.to_param}
+      get :show, params: { :event_id => event.to_param }
       expect(assigns(:dinner_event)).to eq(dinner_event)
     end
   end
 
   describe "GET new" do
     it "assigns a new dinner_event as @dinner_event" do
-      get :new, {:event_id => event.to_param}
+      get :new, params: { :event_id => event.to_param }
       expect(assigns(:dinner_event)).to be_a_new(DinnerEvent)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested dinner_event as @dinner_event" do
-      get :edit, {:event_id => event.to_param}
+      get :edit, params: { :event_id => event.to_param }
       expect(assigns(:dinner_event)).to eq(dinner_event)
     end
   end
@@ -50,8 +50,8 @@ describe DinnerEventsController do
       it "creates a new DinnerEvent" do
         event = create :event
         expect {
-          post :create, {
-            :event_id => event.to_param, 
+          post :create, params: {
+            :event_id => event.to_param,
             :dinner_event => attributes_for(:dinner_event)
           }
         }.to change(DinnerEvent, :count).by(1)
@@ -59,8 +59,8 @@ describe DinnerEventsController do
 
       it "assigns a newly created dinner_event as @dinner_event" do
         event = create :event
-        post :create, {
-          :event_id => event.to_param, 
+        post :create, params: {
+          :event_id => event.to_param,
           :dinner_event => attributes_for(:dinner_event)
         }
         expect(assigns(:dinner_event)).to be_a(DinnerEvent)
@@ -68,8 +68,8 @@ describe DinnerEventsController do
       end
 
       it "redirects to the created dinner_event" do
-        post :create, {
-          :event_id => event.to_param, 
+        post :create, params: {
+          :event_id => event.to_param,
           :dinner_event => attributes_for(:dinner_event)
         }
         expect(response).to redirect_to(event_dinner_path(event))
@@ -80,7 +80,7 @@ describe DinnerEventsController do
       it "assigns a newly created but unsaved dinner_event as @dinner_event" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(DinnerEvent).to receive(:save).and_return(false)
-        post :create, {
+        post :create, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:invalid_dinner_event)
         }
@@ -90,7 +90,7 @@ describe DinnerEventsController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(DinnerEvent).to receive(:save).and_return(false)
-        post :create, {
+        post :create, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:invalid_dinner_event)
         }
@@ -102,19 +102,17 @@ describe DinnerEventsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested dinner_event" do
-        # Assuming there are no other dinner_events in the database, this
-        # specifies that the DinnerEvent created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(DinnerEvent).to receive(:update_attributes).with({ "venue" => "MyString" })
-        put :update, {
+        put :update, params: {
           :event_id => event.to_param,
           :dinner_event => { "venue" => "MyString" }
         }
+        event.reload
+        expect(event.dinner).not_to be_nil
+        expect(event.dinner.venue).to eq "MyString"
       end
 
       it "assigns the requested dinner_event as @dinner_event" do
-        put :update, {
+        put :update, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:dinner_event)
         }
@@ -122,7 +120,7 @@ describe DinnerEventsController do
       end
 
       it "redirects to the dinner_event" do
-        put :update, {
+        put :update, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:dinner_event)
         }
@@ -134,7 +132,7 @@ describe DinnerEventsController do
       it "assigns the dinner_event as @dinner_event" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(DinnerEvent).to receive(:save).and_return(false)
-        put :update, {
+        put :update, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:invalid_dinner_event)
         }
@@ -144,7 +142,7 @@ describe DinnerEventsController do
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(DinnerEvent).to receive(:save).and_return(false)
-        put :update, {
+        put :update, params: {
           :event_id => event.to_param,
           :dinner_event => attributes_for(:invalid_dinner_event)
         }
@@ -157,12 +155,12 @@ describe DinnerEventsController do
     it "destroys the requested dinner_event" do
       dinner = create :dinner_event
       expect {
-        delete :destroy, {:event_id => dinner.event.to_param}
+        delete :destroy, params: { :event_id => dinner.event.to_param }
       }.to change(DinnerEvent, :count).by(-1)
     end
 
     it "redirects to the dinner_events list" do
-      delete :destroy, {:id => dinner_event.to_param, :event_id => event.to_param}
+      delete :destroy, params: { :id => dinner_event.to_param, :event_id => event.to_param }
       expect(response).to redirect_to(event_dinner_path(event))
     end
   end

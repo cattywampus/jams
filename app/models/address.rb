@@ -1,4 +1,4 @@
-class Address < ActiveRecord::Base
+class Address < ApplicationRecord
   belongs_to :person
 
   validate :must_provide_address, unless: lambda { |a| a.address_is_blank? }

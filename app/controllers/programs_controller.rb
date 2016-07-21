@@ -1,5 +1,5 @@
 class ProgramsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def new
@@ -50,9 +50,9 @@ class ProgramsController < ApplicationController
       format.html { redirect_to programs_path, notice: "#{@program.abbr} program was deleted." }
     end
   end
-  
+
   private
-  
+
   def program_params
     params.require(:program).permit(:abbr, :icon, :logo, :name)
   end

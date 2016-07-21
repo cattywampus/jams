@@ -1,4 +1,4 @@
-class Program < ActiveRecord::Base
+class Program < ApplicationRecord
   has_many :games
 
   mount_uploader :icon, LogoUploader
@@ -10,5 +10,5 @@ class Program < ActiveRecord::Base
   def to_s
     name
   end
-  
+
 end

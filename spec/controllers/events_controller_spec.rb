@@ -20,7 +20,7 @@ require 'rails_helper'
 
 describe EventsController do
   login :admin
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # update the return value of this method accordingly.
@@ -36,7 +36,7 @@ describe EventsController do
     it "assigns user events as @events" do
       event = Event.create! valid_attributes
       @current_user.events << event
-      get :index, {}
+      get :index
       expect(assigns(:events)).to eq([event])
     end
   end
@@ -44,14 +44,14 @@ describe EventsController do
   describe "GET show" do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
-      get :show, {:id => event.to_param}
+      get :show, params: { :id => event.to_param }
       expect(assigns(:event)).to eq(event)
     end
   end
 
   describe "GET new" do
     it "assigns a new event as @event" do
-      get :new, {}
+      get :new
       expect(assigns(:event)).to be_a_new(Event)
     end
   end
@@ -59,7 +59,7 @@ describe EventsController do
   describe "GET edit" do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
-      get :edit, {:id => event.to_param}
+      get :edit, params: { :id => event.to_param }
       expect(assigns(:event)).to eq(event)
     end
   end
@@ -68,18 +68,18 @@ describe EventsController do
     describe "with valid params" do
       it "creates a new Event" do
         expect {
-          post :create, {:event => valid_attributes}
+          post :create, params: { :event => valid_attributes }
         }.to change(Event, :count).by(1)
       end
 
       it "assigns a newly created event as @event" do
-        post :create, {:event => valid_attributes}
+        post :create, params: { :event => valid_attributes }
         expect(assigns(:event)).to be_a(Event)
         expect(assigns(:event)).to be_persisted
       end
 
       it "redirects to the created event" do
-        post :create, {:event => valid_attributes}
+        post :create, params: { :event => valid_attributes }
         expect(response).to redirect_to(Event.last)
       end
     end
@@ -88,14 +88,14 @@ describe EventsController do
       it "assigns a newly created but unsaved event as @event" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        post :create, {:event => invalid_attributes }
+        post :create, params: { :event => invalid_attributes }
         expect(assigns(:event)).to be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        post :create, {:event => invalid_attributes}
+        post :create, params: { :event => invalid_attributes }
         expect(response).to render_template("new")
       end
     end
@@ -104,24 +104,21 @@ describe EventsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested event" do
-        event = Event.create! valid_attributes
-        # Assuming there are no other events in the database, this
-        # specifies that the Event created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(Event).to receive(:update_attributes).with({ "game_id" => "" })
-        put :update, {:id => event.to_param, :event => { "game_id" => "" }}
+        event = Event.create! valid_attributes.merge(name: "Some event")
+        put :update, params: { :id => event.to_param, :event => { name: "Changed event" } }
+        event.reload
+        expect(event.name).to eq "Changed event"
       end
 
       it "assigns the requested event as @event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => valid_attributes}
+        put :update, params: { :id => event.to_param, :event => valid_attributes }
         expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => valid_attributes}
+        put :update, params: { :id => event.to_param, :event => valid_attributes }
         expect(response).to redirect_to(event)
       end
     end
@@ -131,7 +128,7 @@ describe EventsController do
         event = Event.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        put :update, {:id => event.to_param, :event => invalid_attributes}
+        put :update, params: { :id => event.to_param, :event => invalid_attributes }
         expect(assigns(:event)).to eq(event)
       end
 
@@ -139,7 +136,7 @@ describe EventsController do
         event = Event.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        put :update, {:id => event.to_param, :event => invalid_attributes}
+        put :update, params: { :id => event.to_param, :event => invalid_attributes }
         expect(response).to render_template("edit")
       end
     end
@@ -149,13 +146,13 @@ describe EventsController do
     it "destroys the requested event" do
       event = Event.create! valid_attributes
       expect {
-        delete :destroy, {:id => event.to_param}
+        delete :destroy, params: { :id => event.to_param }
       }.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
       event = Event.create! valid_attributes
-      delete :destroy, {:id => event.to_param}
+      delete :destroy, params: { :id => event.to_param }
       expect(response).to redirect_to(events_url)
     end
   end

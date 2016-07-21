@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_commentable
+  before_action :authenticate_user!
+  before_action :load_commentable
 
   def create
     @author = current_user
@@ -29,7 +29,7 @@ private
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
   end
-  
+
   def comment_params
     params.require(:comment).permit(:author_id, :body, :commentable_id, :commentable_type)
   end
