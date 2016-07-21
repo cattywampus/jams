@@ -20,10 +20,30 @@ user.add_role :admin
 # Build FIRST Programs
 puts 'FIRST PROGRAMS'
 programs = [
-  {name: "FIRST Robotics Competition", abbr: "FRC", icon: "public/images/FRCicon_RGB.jpeg", logo: "public/images/FRC_FlagColor_RGB.jpeg"},
-  {name: "FIRST Tech Challenge", abbr: "FTC", icon: "public/images/FTCicon_RGB.jpeg", logo: "public/images/FTC_FlagColor_RGB.jpeg"},
-  {name: "FIRST Lego League", abbr: "FLL", icon: "public/images/FLLicon_RGB.jpg", logo: "public/images/FLL_FlagColor_RGB.jpg"},
-  {name: "Jr. FIRST Lego League", abbr: "JrFLL", icon: "public/images/JrFLLicon_RGB.jpg", logo: "public/images/JrFLL_FlagColor_RGB.jpg"}
+  {
+    name: "FIRST Robotics Competition",
+    abbr: "FRC",
+    icon: "app/assets/images/FIRSTRobotics_IconVert_RGB.png",
+    logo: "app/assets/images/FIRSTRobotics_iconHorz_RGB.png"
+  },
+  {
+    name: "FIRST Tech Challenge",
+    abbr: "FTC",
+    icon: "app/assets/images/FIRSTTech_IconVert_RGB.png",
+    logo: "app/assets/images/FIRSTTech_iconHorz_RGB.png"
+  },
+  {
+    name: "FIRST Lego League",
+    abbr: "FLL",
+    icon: "app/assets/images/FIRSTLego_IconVert_RGB.png",
+    logo: "app/assets/images/FIRSTLego_iconHorz_RGB.png"
+  },
+  {
+    name: "FIRST Lego League Jr.",
+    abbr: "JrFLL",
+    icon: "app/assets/images/FIRSTLegoJR_IconVert_RGB.png",
+    logo: "app/assets/images/FIRSTLegoJr_iconHorz_RGB.png"
+  }
 ]
 programs.each do |program|
   p = Program.find_or_create_by_abbr(program[:abbr])
