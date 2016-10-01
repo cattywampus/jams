@@ -1,0 +1,11 @@
+<% content_for :base do %>
+  <%= render 'layouts/header' %>
+
+  <main>
+    <div class="container">
+      <%= content_for?(:content) ? yield(:content) :yield %>
+    </div>
+  </main>
+<% end %>
+
+<%= render template: "layouts/application" %>

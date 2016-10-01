@@ -1,0 +1,39 @@
+<header>
+  <nav class="top-nav blue">
+    <div class="nav-wrapper">
+      <div class="container">
+        <a href="#" data-activates="slide-out"
+           class="button-collapse top-nav full hide-on-large-only">
+          <i class="material-icons">menu</i>
+        </a>
+      </div>
+      <%= link_to "#", class: "brand-logo center" do %>
+        <%= image_tag "JAMS_HorizontalRGB.png", alt: "Judge Advisor Management System" %>
+      <% end %>
+      <ul class="right">
+        <% if user_signed_in? %>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">exit_to_app</i>
+          <% end %>
+        </li>
+        <% end%>
+      </ul>
+    </div>
+  </nav>
+
+
+  <ul id="slide-out" class="side-nav fixed">
+    <li class="logo"></li>
+    <li class="bold">
+      <%= link_to people_path do %>
+        <i class="material-icons">contacts</i> Rolodex
+      <% end %>
+    </li>
+    <li class="bold">
+      <%= link_to events_path do %>
+        <i class="material-icons">event</i> Events
+      <% end %>
+    </li>
+  </ul>
+</header>

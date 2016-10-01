@@ -10,17 +10,10 @@
  *
  *= require_self
  *= require select2
- *= require select2-bootstrap
  *= require morris
- *= require zocial
 */
 
-@import 'variables';
-
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-
-@import 'bootstrap_overrides';
+@import 'materialize';
 
 @import 'scaffolds';
 
@@ -31,5 +24,4 @@
 
 @import 'reports/namecards';
 @import 'reports/shirts';
-
 

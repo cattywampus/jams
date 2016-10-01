@@ -38,11 +38,11 @@ group :test do
 end
 
 gem 'active_model_serializers', '~> 0.9'
-gem 'bootstrap-sass', '~> 3.3'
 gem "capistrano", '~> 2.15'
 gem 'cocoon', '~> 1.2'
 gem 'devise', '~> 4.2'
 gem 'devise_invitable', '~> 1.4'
+gem 'materialize-sass'
 gem 'mechanize'
 gem 'migration_data'
 gem 'newrelic_rpm'

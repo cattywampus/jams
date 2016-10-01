@@ -1,4 +1,23 @@
-<div class="hero-unit">
-	<h2>Judge Advisor Management System</h2>
-	<p>Herding cats isnt' easy, you don't have to do it alone</p>
+<div class="login-fullscreen valign-wrapper">
+  <div class="row valign">
+    <div class="col s12 m6 l4">
+      <div class="valign-wraper">
+        <div class="card-panel valign">
+          <%= link_to "", user_google_oauth2_omniauth_authorize_path, class: "google-signin-dark" %>
+          <p>or</p>
+          <%= simple_form_for(:user, :url => session_path(:user), :html => {:class => 'form-vertical' }) do |f| %>
+            <%= f.input :email, required: false %>
+            <%= f.input :password, required: false %>
+            <%= f.input :remember_me, :as => :boolean, wrapper_html: { class: "" } %>
+            <button type="submit" class="btn btn-primary" name="action">
+              Sign in
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6 l8">
+      <h1>Welcome to the Judge Advisor Management System</h1>
+    </div>
+  </div>
 </div>

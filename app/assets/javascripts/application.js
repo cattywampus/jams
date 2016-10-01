@@ -12,9 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require materialize-sprockets
 //= require select2
 //= require cocoon
 //= require raphael
 //= require morris
 //= require_tree .
+
+$(document).ready(function() {
+  $(".button-collapse").sideNav();
+});

@@ -1,0 +1,29 @@
+.google-signin-dark {
+  background-image: image-url("btn_google_signin_dark_normal_web.png");
+  display: block;
+  height: 46px;
+  width: 191px;
+
+  &:focus {
+    background-image: image-url("btn_google_signin_dark_focus_web.png");
+  }
+
+  &:hover {
+    background-image: image-url("btn_google_signin_dark_pressed_web.png");
+  }
+}
+
+.google-signin-dark-lg {
+  background-image: image-url("btn_google_signin_dark_normal_web@2x.png");
+  display: block;
+  height: 92px;
+  width: 382px;
+
+  &:focus {
+    background-image: image-url("btn_google_signin_dark_focus_web@2x.png");
+  }
+
+  &:hover {
+    background-image: image-url("btn_google_signin_dark_pressed_web@2x.png");
+  }
+}
