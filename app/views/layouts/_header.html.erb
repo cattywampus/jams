@@ -35,5 +35,17 @@
         <i class="material-icons">event</i> Events
       <% end %>
     </li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Admin<i class="material-icons">keyboard_arrow_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><%= link_to "Teams", admin_teams_path %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
   </ul>
 </header>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require materialize-sprockets
+//= require materialize-form
 //= require select2
 //= require cocoon
 //= require raphael
@@ -21,4 +22,5 @@
 
 $(document).ready(function() {
   $(".button-collapse").sideNav();
+  $('.collapsible').collapsible();
 });

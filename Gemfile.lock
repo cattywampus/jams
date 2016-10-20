@@ -167,6 +167,7 @@ GEM
     lumberjack (1.0.10)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    materialize-form (1.0.6)
     materialize-sass (0.97.7)
       sass (~> 3.3)
     mechanize (2.7.5)
@@ -396,6 +397,7 @@ DEPENDENCIES
   growl
   guard-rspec (~> 4.5)
   jquery-rails (~> 4.0)
+  materialize-form
   materialize-sass
   mechanize
   migration_data

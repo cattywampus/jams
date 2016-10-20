@@ -1,7 +1,11 @@
 Jams::Application.routes.draw do
+  namespace :admin do
+    resources :teams
+  end
+
   resources :judges
 
-  resources :people do 
+  resources :people do
     resources :comments
   end
 
@@ -13,7 +17,7 @@ Jams::Application.routes.draw do
     end
     get :roster
 
-    resource :dinner, controller: "dinner_events" do 
+    resource :dinner, controller: "dinner_events" do
       resources :attendees
       post :rsvp
     end
@@ -22,7 +26,7 @@ Jams::Application.routes.draw do
     resources :biographies, controller: "reports/biographies" do
       put :approved
     end
-    
+
     scope module: "tools" do
       resource :email_builder, only: [:show], controller: "email_builder"
     end
