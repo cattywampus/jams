@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019052358) do
+ActiveRecord::Schema.define(version: 20161020012512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(version: 20161019052358) do
   create_table "judges", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "event_id"
-    t.string   "status",              limit: 255
-    t.string   "role",                limit: 255
+    t.string   "status",                  limit: 255
+    t.string   "role",                    limit: 255
     t.text     "biography"
     t.boolean  "rookie"
     t.boolean  "needs_shirt"
@@ -140,9 +140,13 @@ ActiveRecord::Schema.define(version: 20161019052358) do
     t.boolean  "provided_consent"
     t.boolean  "provided_conflict"
     t.boolean  "received_event_info"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "biography_approved"
+    t.boolean  "blacklisted"
+    t.boolean  "potential_judge_advisor"
+    t.boolean  "invite_to_championship"
+    t.integer  "rating"
     t.index ["event_id"], name: "index_judges_on_event_id", using: :btree
     t.index ["person_id"], name: "index_judges_on_person_id", using: :btree
   end

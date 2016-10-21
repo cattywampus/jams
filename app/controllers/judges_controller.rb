@@ -87,9 +87,11 @@ class JudgesController < ApplicationController
       if @judge.update_attributes(judge_params)
         format.html { redirect_to [@event, @judge], notice: 'Judge was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @judge.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -98,6 +100,11 @@ class JudgesController < ApplicationController
     @event = Event.find params[:event_id]
     FIRST::JudgeImporter.import_vms_report(params[:file], @event)
     redirect_to event_judges_path(@event)
+  end
+
+  def evaluate
+    @judge = Judge.find params[:id]
+    @judge.comments.build
   end
 
   # DELETE /judges/1
@@ -127,6 +134,11 @@ class JudgesController < ApplicationController
                   :received_event_info,
                   :role,
                   :rookie,
-                  :status)
+                  :status,
+                  :blacklisted,
+                  :potential_judge_advisor,
+                  :invite_to_championship,
+                  :rating,
+                  comments_attributes: [:id, :body])
   end
 end

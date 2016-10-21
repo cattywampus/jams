@@ -5,9 +5,12 @@ class Judge < ApplicationRecord
   belongs_to :event
   has_one :judge_assignment
   has_one :judge_team, through: :judge_assignment
+  has_many :comments, as: :commentable
 
   enum_attr :status, %w(wait_list ^invited declined confirmed withdrew no_show)
   enum_attr :role, %w(^judge advisor assistant)
+
+  accepts_nested_attributes_for :comments, reject_if: proc { |attr| attr["body"].blank? }
 
   validates_presence_of :person_id
   validates_presence_of :event_id

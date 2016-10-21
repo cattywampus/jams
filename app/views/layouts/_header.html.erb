@@ -38,10 +38,32 @@
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
         <li>
+        <a class="collapsible-header">
+          Reports<i class="material-icons">keyboard_arrow_down</i>
+        </a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+              <%= link_to reports_evaluations_path do %>
+                <i class="material-icons">feedback</i> Evaluations
+              <% end %>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
           <a class="collapsible-header">Admin<i class="material-icons">keyboard_arrow_down</i></a>
           <div class="collapsible-body">
             <ul>
-              <li><%= link_to "Teams", admin_teams_path %></li>
+              <li>
+              <%= link_to admin_teams_path do %>
+                <i class="material-icons">people</i> Teams
+              <% end %>
+              </li>
             </ul>
           </div>
         </li>

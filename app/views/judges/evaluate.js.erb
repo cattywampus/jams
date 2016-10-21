@@ -1,0 +1,14 @@
+$("body").append("<%=j render "evaluation_modal", judge: @judge %>");
+
+var checked_invite = $("#judge_invite_to_championship").is(":checked");
+var checked_ja = $("#judge_potential_judge_advisor").is(":checked");
+var blacklisted = $("#judge_blacklisted").is(":checked");
+$("#judge_blacklisted").prop("disabled", checked_invite || checked_ja)
+$("#judge_potential_judge_advisor").prop("disabled", blacklisted);
+$("#judge_invite_to_championship").prop("disabled", blacklisted);
+
+Materialize.updateTextFields();
+
+$("#judge_update_modal").openModal({
+  complete: function() { $("#judge_update_modal").remove(); }
+});

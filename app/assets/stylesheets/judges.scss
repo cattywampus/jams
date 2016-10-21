@@ -5,12 +5,16 @@
 .judges {
   #edit-profile {
     float: right;
-    margin-left: 10px; 
+    margin-left: 10px;
   }
 
   .well {
     dl {
       margin-bottom: 0;
     }
+  }
+
+  #judge_filter .row {
+    margin-bottom: 0;
   }
 }

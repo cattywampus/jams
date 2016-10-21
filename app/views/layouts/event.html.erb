@@ -1,33 +1,32 @@
 
 <% content_for :content do %>
 
+  <br>
 
-  <div class="col-sm-3 col-md-2 sidebar">
-    <h3>
-      <%= @event.name %><br>
-      <small><%= @event.game.season %> - <%= @event.game.name %></small>
-    </h3>
-
-    <ul class="nav nav-sidebar">
-      <li class="<%= active_tab? 'events' %>"><%= link_to 'Overview', @event %></li>
-      <li class="<%= active_tab? 'judges' %>"><%= link_to 'Judges', event_judges_path(@event) %></li>
-      <li class="<%= active_tab? 'shirts' %>"><%= link_to 'Shirts', event_shirts_path(@event) %></li>
-      <li class="<%= active_tab? 'dinner' %>"><%= link_to 'Dinner', event_dinner_path(@event) %></li>
-      <li class="<%= active_tab? 'tools' %>"><%= link_to "Email Blast", event_email_builder_path(@event) %></li>
-    </ul>
-
-    <h3>Reports</h3>
-    <ul class="nav nav-sidebar">
-      <li><%= link_to 'Judge Roster', event_roster_path(@event) %></li>
-      <li class="<%= active_tab?('namecards') if params[:cards_for] %> "><%= link_to 'Dinner name cards', event_name_cards_path(@event, cards_for: :dinner) %></li>
-      <li class="<%= active_tab? 'namecards' unless params[:cards_for] %>"><%= link_to 'Judge name cards', event_name_cards_path(@event) %></li>
-    </ul>
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s2">
+        <%= link_to "Judges", event_judges_path(@event), class: active_tab?("events"), target: "_self" %>
+        </li>
+        <li class="tab col s2">
+        <%= link_to "Shirts", event_shirts_path(@event), class: active_tab?("shirts"), target: "_self" %>
+        </li>
+        <li class="tab col s2">
+        <%= link_to "Tools", event_email_builder_path(@event), class: active_tab?("tools"), target: "_self" %>
+        </li>
+        <li class="tab col s2">
+        <%= link_to "Roster", event_roster_path(@event), class: active_tab?("roster"), target: "_self" %>
+        </li>
+        <li class="tab col s2">
+        <%= link_to "Namecards", event_name_cards_path(@event), class: active_tab?("namecards"), target: "_self" %>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <%= render 'layouts/messages' %>
-    <%= yield %>
-  </div>
+  <%= render 'layouts/messages' %>
+  <%= yield %>
 
 <% end %>
 

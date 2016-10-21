@@ -3,10 +3,18 @@ Jams::Application.routes.draw do
     resources :teams
   end
 
-  resources :judges
+  resources :judges do
+    member do
+      get :evaluate
+    end
+  end
 
   resources :people do
     resources :comments
+  end
+
+  namespace :reports do
+    resource :evaluations, only: [:show]
   end
 
   resources :events do
@@ -21,6 +29,7 @@ Jams::Application.routes.draw do
       resources :attendees
       post :rsvp
     end
+    resource :evaluations, only: [:show], controller: "reports/evaluations"
     resource :shirts, only: [:show], controller: "reports/shirts"
     resource :name_cards, only: [:show], controller: "reports/namecards"
     resources :biographies, controller: "reports/biographies" do
