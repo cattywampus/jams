@@ -1,4 +1,4 @@
-class Admin::TeamsController < ApplicationController
+class TeamsController < ApplicationController
   def index
     @teams = Team.all
   end
@@ -10,7 +10,7 @@ class Admin::TeamsController < ApplicationController
   def create
     @team = Team.new team_attributes
     if @team.save
-      redirect_to admin_teams_path, notice: "The #{@team.name} team has been created."
+      redirect_to teams_path, notice: "The #{@team.name} team has been created."
     else
       render :new
     end

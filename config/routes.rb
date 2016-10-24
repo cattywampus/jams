@@ -1,7 +1,5 @@
 Jams::Application.routes.draw do
-  namespace :admin do
-    resources :teams
-  end
+  resources :teams
 
   resources :judges do
     member do

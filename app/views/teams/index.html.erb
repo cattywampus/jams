@@ -14,13 +14,13 @@
 <% else %>
   <ul class="collection">
     <% @teams.each do |team| %>
-      <li class="collection-item"><%= link_to team.name, [:admin, team] %></li>
+      <li class="collection-item"><%= link_to team.name, team %></li>
     <% end %>
   </ul>
 <% end %>
 
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-  <%= link_to new_admin_team_path, class: "btn-floating btn-large waves-effect waves-light red" do %>
+  <%= link_to new_team_path, class: "btn-floating btn-large waves-effect waves-light red" do %>
     <i class="large material-icons">add</i>
   <% end %>
 </div>

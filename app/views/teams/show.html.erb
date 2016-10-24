@@ -2,8 +2,8 @@
 <div class="nav-wrapper">
   <div class="row">
     <div class="col s12">
-      <%= link_to "Teams", admin_teams_path, class: "breadcrumb" %>
-      <%= link_to @team.name, [:admin, @team], class: "breadcrum" %>
+      <%= link_to "Teams", teams_path, class: "breadcrumb" %>
+      <%= link_to @team.name, @team, class: "breadcrum" %>
     </div>
   </div>
 </div>
