@@ -1,8 +1,14 @@
 <h3>Users</h3>
-<ul class="users">
+<ul class="collection">
   <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %> signed up <%= user.created_at.to_date %>
+    <li class="collection-item">
+      <%= link_to user.name, user %>
     </li>
   <% end %>
 </ul>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <%= link_to new_user_invitation_path, class: "btn-floating btn-large waves-effect waves-light red" do %>
+    <i class="large material-icons">person_add</i>
+  <% end %>
+</div>

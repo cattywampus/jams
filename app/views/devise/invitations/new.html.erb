@@ -3,10 +3,22 @@
 <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
   <%= devise_error_messages! %>
 
+  <%= f.input :name, wrapper_html: { class: "col s12" } %>
+
 <% resource.class.invite_key_fields.each do |field| -%>
-  <%= f.input field %>
+  <%= f.input field, required: true, wrapper_html: { class: "col s12" } %>
 <% end -%>
 
-<%= f.submit t("devise.invitations.new.submit_button") %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= select_tag "roles[][team_id]", options_from_collection_for_select(Team.all, "id", "name") %>
+      <%= label_tag "role[][team_id]", "Team" %>
+    </div>
+    <div class="input-field col s6">
+      <%= select_tag "roles[][name]", options_for_select(Team::ROLES) %>
+      <%= label_tag "roles[][name]", "Role" %>
+    </div>
+  </div>
+  <%= f.submit t("devise.invitations.new.submit_button"), class: "btn" %>
 <% end %>
 

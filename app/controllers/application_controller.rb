@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  def after_invite_path_for(inviter, invitee)
+    if inviter.has_role?(:admin)
+      users_path
+    else
+      teams = Team.with_roles([:member, :owner], invitee)
+      team_path(teams.first)
+    end
+  end
 end

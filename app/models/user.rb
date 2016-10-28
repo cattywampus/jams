@@ -9,11 +9,11 @@ class User < ApplicationRecord
 
   has_many :user_events
   has_many :events, through: :user_events
+  has_many :teams, through: :roles, source: :resource, source_type: "Team"
 
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  accepts_nested_attributes_for :roles
 
-  validates_presence_of :name
+  validates :name, :email, presence: true
 
   def self.from_omniauth(auth, token=nil)
     if token.present?
