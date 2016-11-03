@@ -105,6 +105,7 @@ class JudgesController < ApplicationController
   def evaluate
     @judge = Judge.find params[:id]
     @judge.comments.build
+    @event = @judge.event
   end
 
   # DELETE /judges/1

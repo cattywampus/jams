@@ -1,0 +1,5 @@
+<%= simple_form_for judge do |f| %>
+  <%= render "evaluate_judge_fields", judge: judge, f: f %>
+
+  <%= f.button :submit %>
+<% end %>
