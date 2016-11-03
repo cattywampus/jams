@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
       team_path(teams.first)
     end
   end
+
+  def current_team
+    return nil unless user_signed_in?
+    current_user.teams.first
+  end
+  helper_method :current_team
 end
