@@ -27,6 +27,9 @@
     <li class="logo">
       <%= image_tag current_team.logo.medium, alt: current_team.name %>
     </li>
+    <li>
+      <%= link_to season, "#", class: "center-align" %>
+    </li>
     <li class="bold">
       <%= link_to people_path do %>
         <i class="material-icons">contacts</i> Rolodex

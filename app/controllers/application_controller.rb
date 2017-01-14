@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_game
+    Game.last
+  end
+  helper_method :current_game
+
   def current_team
     return nil unless user_signed_in?
     current_user.teams.first

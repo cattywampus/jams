@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020012512) do
+ActiveRecord::Schema.define(version: 20161125173832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 20161020012512) do
     t.string   "event_info_url",   limit: 255
     t.string   "address",          limit: 255
     t.integer  "first_event_id"
-    t.integer  "tournament_id"
     t.index ["first_event_id"], name: "index_events_on_first_event_id", unique: true, using: :btree
     t.index ["game_id"], name: "index_events_on_game_id", using: :btree
   end
@@ -202,14 +201,8 @@ ActiveRecord::Schema.define(version: 20161020012512) do
     t.string   "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "tournaments", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_tournaments_on_game_id", using: :btree
+    t.integer  "program_id"
+    t.index ["program_id"], name: "index_teams_on_program_id", using: :btree
   end
 
   create_table "user_events", force: :cascade do |t|
@@ -274,6 +267,5 @@ ActiveRecord::Schema.define(version: 20161020012512) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
 
-  add_foreign_key "events", "tournaments"
-  add_foreign_key "tournaments", "games"
+  add_foreign_key "teams", "programs"
 end
